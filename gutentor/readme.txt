@@ -4,9 +4,9 @@ Contributors: gutentor, acmeit, addonspress, codersantosh
 Donate link: https://www.gutentor.com/
 Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 5.6.20
-Stable tag: 3.3.8
+Stable tag: 3.3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -339,8 +339,15 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 
 == Changelog ==
 
+= 3.3.9 - 2024-10-31 =
+* Added: Tested with the latest WordPress
+* Added: Language folder
+* Fixed: Editor Design - WordPress latest compatibility
+* Fixed: Sidebar Settings Design - radio, range and input url
+* Fixed: Term Category Carousel
+
 = 3.3.8 - 2024-08-24 =
-* Fixed:    [Gutentor Post Type Query](https://wordpress.org/support/topic/post-type-in-3-3-7/)
+* Fixed:    [Gutentor Post Type Query](https://wordpress.org/support/topic/i-cant-turn-off-enable-button/)
 * Fixed:    Gutentor Term Query
 
 = 3.3.7 - 2024-08-24 =
@@ -382,96 +389,6 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 * Fixed: Enhanced rest api(Email report)
 * Fixed: Tabs Widget can't be edited (Email report)
 * Fixed: [Video popup widget bug](https://wordpress.org/support/topic/video-popup-widget-bug/)
-
-= 3.2.9 - 2024-04-04 =
-* Updated:  readme.txt for WordPress dot org
-* Fixed:  Image Slider Widget Link
-
-= 3.2.8 - 2024-04-04 =
-* Added:    WordPress latest compatibility
-* Updated:  WordPress deprecated JS functions
-* Updated:  More inbuilt  optimization
-* Updated:  Few design issue.
-* Fixed:  Minor issues on Gutentor settings.
-* Fixed: [This block has encountered an error and cannot be previewed](https://wordpress.org/support/topic/this-block-has-encountered-an-error-and-cannot-be-previewed-76/)
-
-= 3.2.7 - 2023-09-05 =
-* Fixed: [Last version of WordPress prevents Gallery Popups to work](https://wordpress.org/support/topic/problems-with-the-post-type-carousel-block/)
-* Fixed: [Post Type Problem with 3.2.6 version](https://wordpress.org/support/topic/problems-with-the-post-type-carousel-block/)
-
-= 3.2.7 - 2023-09-05 =
-* Fixed: [Last version of WordPress prevents Gallery Popups to work](https://wordpress.org/support/topic/problems-with-the-post-type-carousel-block/)
-* Fixed: [Post Type Problem with 3.2.6 version](https://wordpress.org/support/topic/problems-with-the-post-type-carousel-block/)
-
-= 3.2.6 - 2023-08-29 =
-* Added:    Enhanced compatibility with the latest WordPress version.
-* Updated:  Improved handling of deprecated WordPress functions.
-* Updated:  Further optimization of built-in features.
-* Fixed:    Accordion.
-* Fixed:    Gradient color.
-* Fixed:    Resolved an issue where changes were unintentionally applied to all duplicated blocks. Refer to the documentation for more details (Note: Documentation is now unnecessary for this issue).
-
-= 3.2.5 - 2022-11-28 =
-* Added: [Accessibility – Module tab and accordions](https://wordpress.org/support/topic/accessibility-not-possible-to-tab-to-accordions/)
-* Updated: Element Pricing label
-* Updated: Category Gutentor Widgets to lower priority
-* Fixed: Post type => Product: price element
-* Fixed: Advance Post type =>Product: filter
-* Fixed: [Post (Type) Carousel block](https://wordpress.org/support/topic/problems-with-the-post-type-carousel-block/)
-* Fixed: EDD: Button design issue at frontend
-
-= 3.2.4 - 2022-08-03 =
-* Updated: Some Gutentor block in FSE template parts
-* Updated: Dynamic CSS on inner blocks FSE template parts
-* Fixed: Import button on FSE template change
-* Fixed: Single item icon button on FSE template
-* Fixed: [Favorite Button](https://wordpress.org/support/topic/finally-327/) on [Templateberg](https://wordpress.org/plugins/templateberg/)
-* Fixed: Sticky Options
-
-= 3.2.3 - 2022-06-22 =
-* Added: [Collapsed by Default](https://wordpress.org/support/topic/toggle-panel-on-table-of-contents/#post-15757878)
-* Added: [FSE Editor Compatibility](https://wordpress.org/support/topic/anyone-elses-advanced-columns-get-stacked-instead-of-display-as-columns/)
-* Updated: FSE Editor Font Family
-* Updated: FSE Editor Dynamic CSS Support
-* Fixed: FSE current post id on Advanced Post Type
-* Fixed: Module : Gallery > Popup > Icon > Position > Custom Dynamic CSS
-* Fixed: [Js error in the Gutentor Settings page](https://wordpress.org/support/topic/js-error-in-the-gutentor-settings-page/#post-15758316)
-
-= 3.2.2 - 2022-06-10 =
-* Fixed: Unnecessary comma removed
-* Fixed: [Some missing color issue](https://wordpress.org/support/topic/crash-blocks/)
-
-= 3.2.1 - 2022-06-09 =
-* Added: WP Query support with ‘IN’, ‘NOT IN’, ‘AND’, ‘EXISTS’ and ‘NOT EXISTS’ for Taxonomy Terms
-* Added: [Width and Height properties on image](https://wordpress.org/support/topic/about-box-image-size/)
-* Added: [Enable/Disable Responsive Menu on Advanced Post Type](https://wordpress.org/support/topic/issues-with-advanced-post/)
-* Added: Placeholder text on Image element
-* Added: License information
-* Fixed: [No Tags in Advanced Post (Type) Block in Front-End](https://wordpress.org/support/topic/no-tags-in-advanced-post-type-block-in-front-end/)
-* Fixed: [Duplex Post (Type) , image link](https://wordpress.org/support/topic/duplex-post-type-image-link/)
-* Fixed: [Category term 2 and product categories](https://wordpress.org/support/topic/category-term-2-and-product-categories/)
-* Fixed: [ids setting not show in backend](https://wordpress.org/support/topic/ids-setting-not-show-in-backend/)
-* Fixed: [Post Type Read More button text visible on editing but not on site](https://wordpress.org/support/topic/post-type-read-more-button-text-visible-on-editing-but-not-on-site/)
-* Fixed: Term Category Features Block error on selecting none.
-* Fixed: Icon missing on Icon Picker.
-* Fixed: [CSS on FSE Template Parts](https://wordpress.org/support/topic/advanced-text-in-footer-not-work-google-fonts/)
-* Fixed: [Resources Load on some cases](https://wordpress.org/support/topic/anyone-elses-advanced-columns-get-stacked-instead-of-display-as-columns/)
-* Updated: [Social Links Widget](https://wordpress.org/support/topic/social-links-widget-not-working/)
-* Updated: Tags with separator
-* Updated: EDD and WooCommerce default image on frontend
-* Updated: Gallery Module Message
-* Updated: Divider: Height limited value
-* Updated: Advanced Text Position
-* Updated: Advanced > Block Shape > SVG options > Custom issue : correct html
-* Updated: [Gutentor loading unused scripts](https://wordpress.org/support/topic/gutentor-loading-unused-scripts)
-* Updated: Some editor design
-
-= 3.2.0 - 2022-02-11 =
-* Fixed: Importing some templates
-* Fixed: [Some blocks not working inside tabs](https://wordpress.org/support/topic/term-category-carousel-block-not-working-inside-tabs/)
-* Updated: Animation on FSE templates
-* Updated: Global settings some minor design
-* Updated: Content alignment on some modules
 
 = Previous updates =
 * [View Previous updates](https://www.gutentor.com/road-map/#changelog)
