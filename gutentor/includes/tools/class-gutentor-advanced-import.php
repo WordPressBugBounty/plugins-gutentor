@@ -266,7 +266,7 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 						$q_list['post_content']   = $p_list['content'] ? $p_list['content'] : '';
 						$q_list['type']           = 'pattern';
 						$q_list['keywords']       = explode( ' ', $q_list['title'] );
-						$q_list['categories']     = $p_list['categories'] ? $p_list['categories'] : array();
+						$q_list['categories']     = isset( $p_list['categories'] ) ? $p_list['categories'] : array();
 						$q_list['template_url']   = '';
 						$q_list['screenshot_url'] = '';
 						$q_list['demo_url']       = '';
@@ -276,7 +276,10 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 				}
 			}
 
-			return array_merge_recursive( $templates_list, $d_list );
+			if ( is_array( $templates_list ) ) {
+				return array_merge_recursive( $templates_list, $d_list );
+			}
+			return $d_list;
 		}
 
 		/**
