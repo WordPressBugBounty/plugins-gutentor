@@ -386,10 +386,10 @@
             let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Display the result in the element
-            gutentor_day.html(days);
-            gutentor_hour.html(hours);
-            gutentor_min.html(minutes);
-            gutentor_sec.html(seconds);
+            gutentor_day.text(days);
+            gutentor_hour.text(hours);
+            gutentor_min.text(minutes);
+            gutentor_sec.text(seconds);
             // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
