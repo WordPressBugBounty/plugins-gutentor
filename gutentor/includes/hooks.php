@@ -571,6 +571,10 @@ class Gutentor_Hooks {
 		$this->library_loaded = true;
 		if ( gutentor_is_edit_page() ) {
 			$this->load_last_scripts();
+		} else {
+			/* Check this TODO */
+			wp_enqueue_style( 'gutentor' );
+			wp_style_add_data( 'gutentor', 'rtl', 'replace' );
 		}
 	}
 	/**

@@ -1,30 +1,15 @@
 <?php
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * Allows plugins to use their own update API.
- *
- * @author Easy Digital Downloads
- * @version 1.9.1
+ * Allows plugins to show license field.
  */
-class Gutentor_Pro_Edd_License_Init {
-
-	public $api_url     = '';
-	public $api_data    = array();
-	public $plugin_file = '';
-
-	private $name      = '';
-	private $slug      = '';
-	private $version   = '';
-	private $item_id   = '';
-	private $item_name = '';
-
-	public $menu_slug   = '';
-	public $notice_type = 'upgrade';
+class Gutentor_Pro_License_Init {
+	private $slug     = '';
+	public $menu_slug = '';
 
 	/**
 	 * Gets an instance of this object.
@@ -56,34 +41,8 @@ class Gutentor_Pro_Edd_License_Init {
 	 */
 	public function run() {
 
-		/*Edit this*/
-		$this->api_url     = trailingslashit( 'https://premium.acmeit.org/' );
-		$this->plugin_file = WP_PLUGIN_DIR . '/gutentor-pro/gutentor-pro.php';
-		$this->slug        = basename( $this->plugin_file, '.php' );
-		$this->api_data    = array(
-			'version'   => '1.0.1',                    // current version number
-			'license'   => $this->get_license_key(),             // license key (used get_option above to retrieve from DB)
-			'item_id'   => '251',       // ID of the product
-			'item_name' => 'Gutentor Pro',       // ID of the product
-			'author'    => 'Gutentor', // author of this plugin
-			'beta'      => false,
-		);
-		/*Edit this end*/
-
-		$this->name      = plugin_basename( $this->plugin_file );
-		$this->version   = $this->api_data ['version'];
-		$this->item_id   = $this->api_data ['item_id'];
-		$this->item_name = $this->api_data ['item_name'];
+		$this->slug      = 'gutentor-pro';
 		$this->menu_slug = $this->slug . '-license';
-
-		if ( ! function_exists( 'gutentor_pro_edd_plugin_installer' ) ) {
-			include __DIR__ . '/Gutentor_Pro_Edd_Plugin_Installer.php';
-		}
-		gutentor_pro_edd_plugin_installer()->run(
-			$this->api_url,
-			$this->plugin_file,
-			$this->api_data
-		);
 
 		// Set up hooks.
 		$this->init();
@@ -98,8 +57,6 @@ class Gutentor_Pro_Edd_License_Init {
 
 		add_filter( 'admin_menu', array( $this, 'license_menu' ), 99 );
 		add_action( 'admin_init', array( $this, 'register_license_option' ), 10 );
-		add_action( 'admin_init', array( $this, 'activate_license' ), 10 );
-		add_action( 'admin_init', array( $this, 'deactivate_license' ), 10 );
 
 		add_action( 'admin_init', array( $this, 'upgrade_to_pro_notice' ), 10 );
 		add_action( 'admin_notices', array( $this, 'getting_started' ) );
@@ -197,12 +154,7 @@ class Gutentor_Pro_Edd_License_Init {
 	 * @return void
 	 */
 	function license_key_settings_section() {
-		$status = trim( get_option( $this->slug . '_license_status' ) );
-		if ( 'valid' === $status ) {
-			echo '';
-		} else {
-			printf( esc_html__( '%1$sGet your premium license%2$s for full features, premium Gutenberg templates, premium supports and many more.%3$s', 'gutentor' ), '<h4><a href="https://www.gutentor.com/pricing" target="_blank" rel="nofollow noopener">', '</a>', '</h4>' );
-		}
+		printf( esc_html__( '%1$sGet your premium license%2$s for full features, premium Gutenberg templates, premium supports and many more.%3$s', 'gutentor' ), '<h4><a href="https://www.gutentor.com/pricing" target="_blank" rel="nofollow noopener">', '</a>', '</h4>' );
 	}
 
 	/**
@@ -212,8 +164,6 @@ class Gutentor_Pro_Edd_License_Init {
 	 */
 	function license_key_settings_field() {
 		$license = $this->get_license_key();
-		$status  = trim( get_option( $this->slug . '_license_status' ) );
-
 		?>
 		<h4>
 			<?php esc_html_e( 'Enter your license key.', 'gutentor' ); ?>
@@ -234,39 +184,24 @@ class Gutentor_Pro_Edd_License_Init {
 				</a>
 			</p>
 			<?php
-		}
-		$button = array();
-		if ( 'valid' === $status ) {
-			$button        = array(
-				'name'  => $this->slug . '_license_deactivate',
-				'label' => __( 'Deactivate License', 'gutentor' ),
-			);
-			$check_license = gutentor_pro_edd_plugin_installer()->check_license();
+		} else {
 			?>
-			<p class="description"><?php echo gutentor_pro_edd_plugin_installer()->get_install_link(); ?></p>
-			<?php
-			if ( isset( $check_license->expires ) ) {
-				?>
-				<p class="description">
-					<?php
-					printf(
-						__( 'Your license key expires on %s.', 'gutentor' ),
-						date_i18n( get_option( 'date_format' ), strtotime( $check_license->expires, current_time( 'timestamp' ) ) )
-					);
-					?>
-				</p>
+			<p class="description">
 				<?php
-			}
-		} elseif ( ! empty( $license ) ) {
-			$button = array(
-				'name'  => $this->slug . '_license_activate',
-				'label' => __( 'Activate License', 'gutentor' ),
-			);
-		}
-		wp_nonce_field( $this->slug . '_license_nonce', $this->slug . '_license_nonce' );
-		if ( $button ) {
-			?>
-			<input type="submit" class="button-secondary" name="<?php echo esc_attr( $button['name'] ); ?>" value="<?php echo esc_attr( $button['label'] ); ?>"/>
+				$upload_url = admin_url( 'plugin-install.php?tab=upload' );
+				$pro_url    = 'https://www.gutentor.com/pricing';
+
+				// Use sprintf with wp_kses_post to allow HTML in the translation
+				printf(
+					wp_kses_post(
+						__( 'Please install Gutentor Pro zip from <a href="%1$s">Plugin install page</a> or get Gutentor Pro from <a href="%2$s" target="_blank">Gutentor Pro Pricing</a>', 'gutentor' )
+					),
+					esc_url( $upload_url ),
+					esc_url( $pro_url )
+				);
+				?>
+				
+			</p>
 			<?php
 		}
 	}
@@ -287,205 +222,7 @@ class Gutentor_Pro_Edd_License_Init {
 	 * @return string
 	 */
 	function sanitize_license( $new ) {
-		$old = $this->get_license_key();
-		if ( $old && $old !== $new ) {
-			delete_option( $this->slug . '_license_status' ); // new license has been entered, so must reactivate
-		}
-
 		return sanitize_text_field( $new );
-	}
-
-
-	/**
-	 * Activates the license key.
-	 *
-	 * @return void
-	 */
-	function activate_license() {
-
-		// listen for our activate button to be clicked
-		if ( ! isset( $_POST[ $this->slug . '_license_activate' ] ) ) {
-			return;
-		}
-
-		// run a quick security check
-		if ( ! check_admin_referer( $this->slug . '_license_nonce', $this->slug . '_license_nonce' ) ) {
-			return; // get out if we didn't click the Activate button
-		}
-
-		// retrieve the license from the database
-		$license = $this->get_license_key();
-		if ( ! $license ) {
-			$license = ! empty( $_POST[ $this->slug . '_license_key' ] ) ? sanitize_text_field( $_POST[ $this->slug . '_license_key' ] ) : '';
-		}
-		if ( ! $license ) {
-			return;
-		}
-
-		// data to send in our API request
-		$api_params = array(
-			'edd_action'  => 'activate_license',
-			'license'     => $license,
-			'item_id'     => $this->item_id,
-			'item_name'   => rawurlencode( $this->item_name ), // the name of our product in EDD
-			'url'         => home_url(),
-			'environment' => function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production',
-		);
-
-		// Call the custom API.
-		$response = wp_remote_post(
-			$this->api_url,
-			array(
-				'timeout'   => 15,
-				'sslverify' => false,
-				'body'      => $api_params,
-			)
-		);
-
-			// make sure the response came back okay
-		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-
-			if ( is_wp_error( $response ) ) {
-				$message = $response->get_error_message();
-			} else {
-				$message = __( 'An error occurred, please try again.', 'gutentor' );
-			}
-		} else {
-
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
-			if ( ! $license_data->success ) {
-
-				switch ( $license_data->error ) {
-
-					case 'expired':
-						$message = sprintf(
-						/* translators: the license key expiration date */
-							__( 'Your license key expired on %s.', 'gutentor' ),
-							date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) )
-						);
-						break;
-
-					case 'disabled':
-					case 'revoked':
-						$message = __( 'Your license key has been disabled.', 'gutentor' );
-						break;
-
-					case 'missing':
-						$message = __( 'Invalid license.', 'gutentor' );
-						break;
-
-					case 'invalid':
-					case 'site_inactive':
-						$message = __( 'Your license is not active for this URL.', 'gutentor' );
-						break;
-
-					case 'item_name_mismatch':
-						/* translators: the plugin name */
-						$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'gutentor' ), $this->item_name );
-						break;
-
-					case 'no_activations_left':
-						$message = __( 'Your license key has reached its activation limit.', 'gutentor' );
-						break;
-
-					default:
-						$message = __( 'An error occurred, please try again.', 'gutentor' );
-						break;
-				}
-			}
-		}
-
-		// Check if anything passed on a message constituting a failure
-		if ( ! empty( $message ) ) {
-			$redirect = add_query_arg(
-				array(
-					'page'          => $this->menu_slug,
-					'sl_activation' => 'false',
-					'g-message'     => $message,
-				),
-				admin_url( 'admin.php' )
-			);
-
-			wp_redirect( $redirect );
-			exit();
-		}
-		// $license_data->license will be either "valid" or "invalid"
-		if ( 'valid' === $license_data->license ) {
-			update_option( $this->slug . '_license_key', $license );
-		}
-		update_option( $this->slug . '_license_status', $license_data->license );
-		wp_safe_redirect( admin_url( 'admin.php?page=' . $this->menu_slug ) );
-		exit();
-	}
-
-	function deactivate_license() {
-
-		// listen for our activate button to be clicked
-		if ( isset( $_POST[ $this->slug . '_license_deactivate' ] ) ) {
-
-			// run a quick security check
-			if ( ! check_admin_referer( $this->slug . '_license_nonce', $this->slug . '_license_nonce' ) ) {
-				return; // get out if we didn't click the Activate button
-			}
-
-			// retrieve the license from the database
-			$license = $this->get_license_key();
-
-			// data to send in our API request
-			$api_params = array(
-				'edd_action'  => 'deactivate_license',
-				'license'     => $license,
-				'item_id'     => $this->item_id,
-				'item_name'   => rawurlencode( $this->item_name ), // the name of our product in EDD
-				'url'         => home_url(),
-				'environment' => function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production',
-			);
-
-			// Call the custom API.
-			$response = wp_remote_post(
-				$this->api_url,
-				array(
-					'timeout'   => 15,
-					'sslverify' => false,
-					'body'      => $api_params,
-				)
-			);
-
-			// make sure the response came back okay
-			if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-
-				if ( is_wp_error( $response ) ) {
-					$message = $response->get_error_message();
-				} else {
-					$message = __( 'An error occurred, please try again.' );
-				}
-
-				$redirect = add_query_arg(
-					array(
-						'page'          => $this->menu_slug,
-						'sl_activation' => 'false',
-						'g-message'     => $message,
-					),
-					admin_url( 'admin.php' )
-				);
-
-				wp_redirect( $redirect );
-				exit();
-			}
-
-			// decode the license data
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
-			// $license_data->license will be either "deactivated" or "failed"
-			if ( 'deactivated' === $license_data->license ) {
-				delete_option( $this->slug . '_license_status' );
-			}
-
-			wp_safe_redirect( admin_url( 'admin.php?page=' . $this->menu_slug ) );
-			exit();
-
-		}
 	}
 
 	public function get_installed_time() {
@@ -505,10 +242,6 @@ class Gutentor_Pro_Edd_License_Init {
 	}
 
 	public function can_show_notice() {
-		$license_data = gutentor_pro_edd_plugin_installer()->check_license();
-		if ( $license_data && isset( $license_data->license ) && 'valid' === $license_data->license ) {
-			return false;
-		}
 		global $current_user;
 		$user_id                  = $current_user->ID;
 		$ignored_notice           = get_user_meta( $user_id, $this->slug . '_upgrade_to_pro_notice', true );
@@ -626,8 +359,11 @@ class Gutentor_Pro_Edd_License_Init {
  * @since    1.0.0
  */
 function gutentor_pro_license_init() {
-	return Gutentor_Pro_Edd_License_Init::get_instance();
+	return Gutentor_Pro_License_Init::get_instance();
 }
-
-// setup the license
-gutentor_pro_license_init()->run();
+add_action( 'init', 'gutentor_pro_license_init_run' );
+function gutentor_pro_license_init_run() {
+	if ( is_admin() ) {
+		gutentor_pro_license_init()->run();
+	}
+}
