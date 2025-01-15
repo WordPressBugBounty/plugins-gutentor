@@ -11,6 +11,17 @@ class Gutentor_Pro_License_Init {
 	private $slug     = '';
 	public $menu_slug = '';
 
+	// for pro backward compatibility
+	public $api_url     = '';
+	public $api_data    = array();
+	public $plugin_file = '';
+
+	function __construct() {
+		$this->api_url     = '';
+		$this->plugin_file = '';
+		$this->api_data    = array();
+	}
+
 	/**
 	 * Gets an instance of this object.
 	 * Prevents duplicate instances which avoid artefacts and improves performance.
