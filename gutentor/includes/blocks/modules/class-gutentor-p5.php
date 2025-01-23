@@ -260,7 +260,7 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 			$the_query = new WP_Query( gutentor_get_query( $args ) );
 			if ( $the_query->have_posts() ) :
 				$tag     = gutentor_get_module_tag( $tag );
-				$output .= '<' . $tag . ' class="' . esc_attr( apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'gutentor-post-module', 'gutentor-post-module-p5', 'section-' . $gID, $template, $align, $default_class ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '' . gutentor_get_html_attr( apply_filters( 'gutentor_edit_news_ticker_data_attr', array(), $attributes ) ) . '>' . "\n";
+				$output .= '<' . esc_attr( $tag ) . ' class="' . esc_attr( apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'gutentor-post-module', 'gutentor-post-module-p5', 'section-' . $gID, $template, $align, $default_class ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '' . gutentor_get_html_attr( apply_filters( 'gutentor_edit_news_ticker_data_attr', array(), $attributes ) ) . '>' . "\n";
 				$output .= apply_filters( 'gutentor_post_module_before_container', '', $attributes );
 				$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_post_module_p5_newsticker_wrap_class', 'gutentor-news-ticker', $attributes ) ) . "'>";
 				$output .= apply_filters( 'gutentor_post_module_before_block_items', '', $attributes );
@@ -301,7 +301,7 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 				$output .= apply_filters( 'gutentor_post_module_after_block_items', '', $attributes );
 				$output .= '</div>';/*.grid-container*/
 				$output .= apply_filters( 'gutentor_post_module_after_container', '', $attributes );
-				$output .= '</' . $tag . '>';/*.gutentor-blog-post-wrapper*/
+				$output .= '</' . esc_attr( $tag ) . '>';/*.gutentor-blog-post-wrapper*/
 			endif;
 
 			// Restore original Post Data

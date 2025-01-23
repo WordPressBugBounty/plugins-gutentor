@@ -110,7 +110,7 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			$this->add_filter( 'gutentor_save_grid_column_class', $this, 'add_column_remove_space_classes', 15, 2 );
 			$this->add_filter( 'gutentor_save_before_container', $this, 'addAdvancedBlockShapeTop', 15, 2 );
 			$this->add_filter( 'gutentor_save_after_container', $this, 'addAdvancedBlockShapeBottom', 15, 2 );
-			$this->add_filter( 'gutentor_save_grid_row_class', $this, 'add_Item_wrap_animation_class', 15, 2 );
+			$this->add_filter( 'gutentor_save_grid_row_class', $this, 'add_item_wrap_animation_class', 15, 2 );
 			$this->add_filter( 'gutentor_save_item_image_display_data', $this, 'add_link_to_post_thumbnails', 15, 3 );
 			$this->add_filter( 'gutentor_save_grid_column_class', $this, 'add_column_class', 10, 2 );
 			$this->add_filter( 'gutentor_save_before_block_items', $this, 'add_block_save_header', 10, 2 );
@@ -196,6 +196,7 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			/*Concat Output with local data*/
 			$local_data = gutentor_concat_space( $output, $local_data );
 
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -319,6 +320,7 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			/*Concat Output with local data*/
 			$local_data = gutentor_concat_space( $output, $local_data );
 
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -364,6 +366,7 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 				$mobile_align_data = $mobile_v_align . '-mobile';
 				$output            = gutentor_concat_space( $output, $mobile_align_data );
 			}
+			/*Checked: escaped last*/
 			return $output;
 		}
 
@@ -394,6 +397,7 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			if ( $videoOutput ) {
 				$output = gutentor_concat_space( $output, $videoOutput );
 			}
+			/*Checked: escaped*/
 			return $output;
 		}
 
@@ -427,6 +431,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			$local_data = gutentor_concat_space( $local_data, $container_mobile );
 
 			$local_data = gutentor_concat_space( $output, $local_data );
+
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -461,6 +467,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			$local_data = gutentor_concat_space( $local_data, $row_mobile );
 
 			$local_data = gutentor_concat_space( $output, $local_data );
+
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -494,6 +502,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			$local_data = gutentor_concat_space( $local_data, $column_mobile );
 
 			$local_data = gutentor_concat_space( $output, $local_data );
+
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -507,6 +517,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 		public function add_animation_class( $output, $attributes ) {
 			$blockComponentAnimation = isset( $attributes['blockComponentAnimation'] ) ? $attributes['blockComponentAnimation'] : '';
 			$animation_class         = ( $blockComponentAnimation && $attributes['blockComponentAnimation']['Animation'] && 'none' != $attributes['blockComponentAnimation']['Animation'] ) ? gutentor_concat_space( 'wow animated ', $attributes['blockComponentAnimation']['Animation'] ) : '';
+
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $animation_class );
 		}
 
@@ -529,6 +541,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 				return $output;
 			}
 			$shape_data = '<div class="gutentor-block-shape-top"><span>' . $shape[ $attributes['blockShapeTopSelect'] ] . '</span></div>';
+
+			/*Checked: $shape[ $attributes['blockShapeTopSelect'] ] is predefined*/
 			return $output . $shape_data;
 		}
 
@@ -551,6 +565,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 				return $output;
 			}
 			$shape_data = '<div class="gutentor-block-shape-bottom"><span>' . $shape[ $attributes['blockShapeBottomSelect'] ] . '</span></div>';
+
+			/*Checked: $shape[ $attributes['blockShapeTopSelect'] ] is predefined*/
 			return $output . $shape_data;
 		}
 
@@ -561,9 +577,11 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 		 * @param {object} props
 		 * @return string
 		 */
-		public function add_Item_wrap_animation_class( $output, $attributes ) {
+		public function add_item_wrap_animation_class( $output, $attributes ) {
 			$blockItemsWrapAnimation = isset( $attributes['blockItemsWrapAnimation'] ) ? $attributes['blockItemsWrapAnimation'] : '';
 			$animation_class         = ( $blockItemsWrapAnimation && $attributes['blockItemsWrapAnimation']['Animation'] && 'none' != $attributes['blockItemsWrapAnimation']['Animation'] ) ? gutentor_concat_space( 'wow animated ', $attributes['blockItemsWrapAnimation']['Animation'] ) : '';
+
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $animation_class );
 		}
 
@@ -575,6 +593,7 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 		 * @return string
 		 */
 		public function add_link_to_post_thumbnails( $output, $url, $attributes ) {
+
 			$output_wrap = '';
 			$target      = '';
 			$class       = '';
@@ -599,9 +618,11 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 
 			}
 
-			$output_wrap .= '<a class="gutentor-single-item-image-link ' . $class . '" href="' . $url . '" ' . $target . ' ' . $rel . '>';
+			$output_wrap .= '<a class="gutentor-single-item-image-link ' . esc_attr( $class ) . '" href="' . esc_url( $url ) . '" ' . esc_attr( $target ) . ' ' . esc_attr( $rel ) . '>';
 			$output_wrap .= $output;
 			$output_wrap .= '</a>';
+
+			/*Checked: escaped*/
 			return $output_wrap;
 		}
 
@@ -623,6 +644,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			$local_data               = gutentor_concat_space( $local_data, $blockItemsColumn_tablet );
 			$blockItemsColumn_mobile  = ( isset( $attributes['blockItemsColumn']['mobile'] ) ) ? $attributes['blockItemsColumn']['mobile'] : '';
 			$local_data               = gutentor_concat_space( $local_data, $blockItemsColumn_mobile );
+
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -637,9 +660,11 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			if ( ! apply_filters( 'gutentor_save_block_header_data_enable', true, $attributes ) ) {
 				return $output;
 			}
-			$blockHeader  = '<div class="' . apply_filters( 'gutentor_save_block_header_class', 'gutentor-block-header', $attributes ) . '">';
+			$blockHeader  = '<div class="' . esc_attr( apply_filters( 'gutentor_save_block_header_class', 'gutentor-block-header', $attributes ) ) . '">';
 			$blockHeader .= apply_filters( 'gutentor_save_block_header_data', '', $attributes );
 			$blockHeader .= '</div>';
+
+			/*Checked: escaped*/
 			return $output . $blockHeader;
 		}
 
@@ -661,11 +686,13 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			if ( $relOptions ) {
 				$rel = ( $buttonLinkOptions['rel'] ) ? $buttonLinkOptions['rel'] : '';
 			}
-			$a_href     = ( $buttonLink ) ? 'href="' . $buttonLink . '"' : '';
-			$a_target   = ( $target ) ? 'target="' . $target . '" ' : '';
+			$a_href     = ( $buttonLink ) ? 'href="' . esc_url( $buttonLink ) . '"' : '';
+			$a_target   = ( $target ) ? 'target="' . esc_attr( $target ) . '" ' : '';
 			$local_data = gutentor_concat_space( $a_href, $a_target );
-			$a_rel      = ( $rel ) ? 'rel="' . $rel . '" ' : '';
+			$a_rel      = ( $rel ) ? 'rel="' . esc_attr( $rel ) . '" ' : '';
 			$local_data = gutentor_concat_space( $local_data, $a_rel );
+
+			/*Checked: escaped*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -690,6 +717,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			$outPutData .= '<div class="gutentor-button-wrap">';
 			$outPutData .= $output;
 			$outPutData .= '</div>';
+
+			/*Checked: escaped*/
 			return $outPutData;
 		}
 
@@ -732,14 +761,16 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 				$block_design_title = ( $attributes['blockComponentTitleDesignEnable'] && $attributes['blockComponentTitleSeperatorPosition'] ) ? $attributes['blockComponentTitleSeperatorPosition'] : 'seperator-bottom';
 			}
 
+			$block_title_tag           = gutentor_get_title_tag( $block_title_tag );
 			$blockComponentTitleEnable = isset( $attributes['blockComponentTitleEnable'] ) ? $attributes['blockComponentTitleEnable'] : false;
 			if ( $blockComponentTitleEnable ) {
-				$output .= '<div class="gutentor-section-title ' . gutentor_concat_space( $block_enable_design_title, $block_design_title ) . ' ' . gutentor_concat_space( $section_title_align, $section_title_animation_class ) . ' "  ' . GutentorAnimationOptionsDataAttr( $section_title_animation ) . '>' . "\n";
-				$output .= '<' . $block_title_tag . ' class="gutentor-title">' . "\n";
-				$output .= $block_title;
-				$output .= '</' . $block_title_tag . '>' . "\n";
+				$output .= '<div class="gutentor-section-title ' . esc_attr( gutentor_concat_space( $block_enable_design_title, $block_design_title ) ) . ' ' . esc_attr( gutentor_concat_space( $section_title_align, $section_title_animation_class ) ) . ' "  ' . GutentorAnimationOptionsDataAttr( $section_title_animation ) . '>' . "\n";
+				$output .= '<' . esc_attr( $block_title_tag ) . ' class="gutentor-title">' . "\n";
+				$output .= wp_kses_post( $block_title );
+				$output .= '</' . esc_attr( $block_title_tag ) . '>' . "\n";
 				$output .= '</div>' . "\n";
 			}
+			/*Checked: escaped*/
 			return $data . $output;
 		}
 
@@ -755,6 +786,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 				return $output;
 			}
 			$blog_style_class = $attributes['blockBlogStyle'] ? $attributes['blockBlogStyle'] : '';
+
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $blog_style_class );
 		}
 
@@ -773,6 +806,8 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			if ( ! $enable_height ) {
 				return $output;
 			}
+
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, 'gutentor-button-wrap' );
 		}
 
@@ -781,7 +816,7 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 		 *
 		 * @param {array} output
 		 * @param {object} attributes
-		 * @return string
+		 * @return mixed||boolean
 		 */
 		public function remove_column_class_blog_post( $output, $attributes ) {
 			if ( 'gutentor/blog-post' !== $attributes['gutentorBlockName'] ) {
@@ -790,6 +825,7 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			if ( $attributes['blockBlogStyle'] === 'blog-list' ) {
 				return false;
 			}
+			/*Checked: escaped last*/
 			return $output;
 		}
 
@@ -803,6 +839,7 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			if ( gutentor_get_options( 'dynamic-res-location' ) ) {
 				$gutentor_dynamic_style_location = gutentor_get_options( 'dynamic-res-location' );
 			}
+			/*Checked: escaped last*/
 			return $gutentor_dynamic_style_location;
 		}
 	}

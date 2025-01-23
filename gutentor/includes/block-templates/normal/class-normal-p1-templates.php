@@ -504,7 +504,7 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 				$output .= '</div>';/*.gutentor-post-content*/
 				$output .= '</div>';/*.gptm-bg-image*/
 			} else {
-				$output .= "<div class='" . apply_filters( 'gutentor_post_module_t5_item_height', 'gptm-item-height', $attributes ) . "'>";
+				$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_post_module_t5_item_height', 'gptm-item-height', $attributes ) ) . "'>";
 				if ( $enable_avatar && $this->avatar_on_image_condition( $avatar_pos ) ) {
 					$output .= $this->get_avatar_data( $post, $attributes );
 				}

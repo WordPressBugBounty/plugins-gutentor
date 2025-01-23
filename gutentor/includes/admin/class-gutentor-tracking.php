@@ -234,18 +234,30 @@ class Gutentor_Tracking {
 		if ( ! class_exists( 'WP_Debug_Data' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php';
 		}
+
+		// Ensure get_core_updates is available (needed by WP_Debug_Data::debug_data).
+		if ( ! function_exists( 'get_core_updates' ) ) {
+			include_once ABSPATH . 'wp-admin/includes/update.php';
+		}
+
 		$data = array();
 
-		if ( method_exists( 'WP_Debug_Data', 'debug_data' ) ) {
+		if ( method_exists( 'WP_Debug_Data', 'debug_data' ) && function_exists( 'get_core_updates' ) ) {
 			$data['data'] = WP_Debug_Data::debug_data();
 		} else {
 			$data['data'] = array();
 		}
 		$data['admin_email'] = get_bloginfo( 'admin_email' );
 		$user                = get_user_by( 'email', $data['admin_email'] );
-		$data['nicename']    = $user->data->user_nicename;
-		$data['site_url']    = get_bloginfo( 'url' );
-		$data['version']     = get_bloginfo( 'version' );
+
+		if ( $user && isset( $user->data->user_nicename ) ) {
+			$data['nicename'] = $user->data->user_nicename;
+		} else {
+			$data['nicename'] = 'Unknown';
+		}
+
+		$data['site_url'] = get_bloginfo( 'url' );
+		$data['version']  = get_bloginfo( 'version' );
 
 		$data['sender'] = $this->slug;
 

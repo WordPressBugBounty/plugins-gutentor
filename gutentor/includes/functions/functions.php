@@ -385,13 +385,13 @@ if ( ! function_exists( 'GutentorUpdatedBackgroundVideoOutput' ) ) {
 			$video_container = '<video 
 			playsinline
             autoplay
-            ' . $loop . '
-            ' . $muted . '
+            ' . esc_attr( $loop ) . '
+            ' . esc_attr( $muted ) . '
             class="gutentor-bg-video"
             >
 				<source
 					type="video/mp4"
-					src="' . $backgroundVideo_src . '"
+					src="' . esc_attr( $backgroundVideo_src ) . '"
 				/>
 			</video>';
 		}
@@ -416,7 +416,7 @@ if ( ! function_exists( 'GutentorUpdatedBackgroundVideoOutput' ) ) {
 				height="100%"
 				width="100%"
                 class="gutentor-bg-video"
-				src="' . $videoUrl . '"
+				src="' . esc_attr( $videoUrl ) . '"
 				frameborder="0"
 				allowfullscreen
 			>

@@ -469,7 +469,7 @@ if ( ! class_exists( 'Gutentor_Blog_Post' ) ) {
 			if ( $the_query->have_posts() ) :
 				$tag = gutentor_get_module_tag( $tag );
 
-				$output .= '<' . $tag . ' class="' . esc_attr( apply_filters( 'gutentor_save_section_class', 'gutentor-section gutentor-blog-post-wrapper ' . gutentor_concat_space( $template, $align, $default_class ) . '', $attributes ) ) . '" id="section-' . esc_attr( $blockID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
+				$output .= '<' . esc_attr( $tag ) . ' class="' . esc_attr( apply_filters( 'gutentor_save_section_class', 'gutentor-section gutentor-blog-post-wrapper ' . gutentor_concat_space( $template, $align, $default_class ) . '', $attributes ) ) . '" id="section-' . esc_attr( $blockID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 				$output .= apply_filters( 'gutentor_save_before_container', '', $attributes );
 				$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_save_container_class', 'grid-container', $attributes ) ) . "'>";
 				$output .= apply_filters( 'gutentor_save_before_block_items', '', $attributes );
@@ -489,7 +489,7 @@ if ( ! class_exists( 'Gutentor_Blog_Post' ) ) {
 				$output .= apply_filters( 'gutentor_save_after_block_items', '', $attributes );
 				$output .= '</div>';/*.grid-container*/
 				$output .= apply_filters( 'gutentor_save_after_container', '', $attributes );
-				$output .= '</' . $tag . '>';/*.gutentor-blog-post-wrapper*/
+				$output .= '</' . esc_attr( $tag ) . '>';/*.gutentor-blog-post-wrapper*/
 			endif;
 
 			// Restore original Post Data.

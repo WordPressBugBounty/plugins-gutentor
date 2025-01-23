@@ -338,7 +338,7 @@ if ( ! class_exists( 'Gutentor_P6' ) ) {
 			$single_post_class = $the_query->post_count === 1 ? 'gutentor-single-post' : '';
 
 			$tag     = gutentor_get_module_tag( $tag );
-			$output .= '<' . $tag . ' class="' . esc_attr( apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-post-module', 'gutentor-post-module-p6', $single_post_class, $template, $align, $default_class ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
+			$output .= '<' . esc_attr( $tag ) . ' class="' . esc_attr( apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-post-module', 'gutentor-post-module-p6', $single_post_class, $template, $align, $default_class ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 			$output .= apply_filters( 'gutentor_post_module_before_container', '', $attributes );
 			$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_post_module_container_class', 'grid-container', $attributes ) ) . "'>";
 			$output .= apply_filters( 'gutentor_post_module_before_block_items', '', $attributes );
@@ -354,7 +354,7 @@ if ( ! class_exists( 'Gutentor_P6' ) ) {
 			$output .= apply_filters( 'gutentor_post_module_after_block_items', '', $attributes );
 			$output .= '</div>';/*.grid-container*/
 			$output .= apply_filters( 'gutentor_post_module_after_container', '', $attributes );
-			$output .= '</' . $tag . '>';/*.gutentor-blog-post-wrapper*/
+			$output .= '</' . esc_attr( $tag ) . '>';/*.gutentor-blog-post-wrapper*/
 
 			// Restore original Post Data.
 			wp_reset_postdata();

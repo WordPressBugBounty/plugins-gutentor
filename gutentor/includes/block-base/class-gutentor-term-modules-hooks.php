@@ -23,15 +23,15 @@ if ( ! class_exists( 'Gutentor_Term_Modules_Hooks' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function get_instance() {
-			// Store the instance locally to avoid private static replication
+			// Store the instance locally to avoid private static replication.
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
+			// Only run these methods if they haven't been ran previously.
 			if ( null === $instance ) {
 				$instance = new self();
 			}
 
-			// Always return the instance
+			// Always return the instance.
 			return $instance;
 		}
 
@@ -107,6 +107,8 @@ if ( ! class_exists( 'Gutentor_Term_Modules_Hooks' ) ) {
 				$align_d_class = ( $align_desktop ) ? $align_desktop . '-desktop' : '';
 				$local_data    = gutentor_concat_space( $local_data, $align_d_class );
 			}
+
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 	}

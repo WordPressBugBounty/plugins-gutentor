@@ -85,7 +85,7 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 						$output .= '<div class="g-dynamic-el gutentor-categories ' . esc_attr( $selector ) . '">';
 						foreach ( $terms as $term ) {
 							if ( 0 <= $i ) {
-								$output .= '<a href="' . get_term_link( $term->term_id ) . ' " class="post-category gutentor-cat-' . esc_attr( $term->slug ) . '" ' . $rel . '>' . esc_html( $term->name ) . '</a>';
+								$output .= '<a href="' . get_term_link( $term->term_id ) . ' " class="post-category gutentor-cat-' . esc_attr( $term->slug ) . '" ' . esc_attr( $rel ) . '>' . esc_html( $term->name ) . '</a>';
 							}
 							$output .= ' ';
 							++$i;
@@ -798,7 +798,7 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 				$i   = 0;
 				foreach ( $terms as $badge ) {
 					if ( 0 <= $i ) {
-						$cat_list .= '<a href="' . esc_url( get_term_link( $badge->term_id ) ) . ' " class="post-featured-category gutentor-cat-' . esc_attr( $badge->slug ) . '" ' . $rel . '>' . esc_html( $badge->name ) . '</a>';
+						$cat_list .= '<a href="' . esc_url( get_term_link( $badge->term_id ) ) . ' " class="post-featured-category gutentor-cat-' . esc_attr( $badge->slug ) . '" ' . esc_attr( $rel ) . '>' . esc_html( $badge->name ) . '</a>';
 					}
 					$cat_list .= ' ';
 					++$i;
@@ -822,7 +822,7 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 				$i   = 0;
 				foreach ( $terms as $badge ) {
 					if ( 0 <= $i ) {
-						$cat_list .= '<a href="' . esc_url( get_term_link( $badge->term_id ) ) . ' " class="post-category gutentor-cat-' . esc_attr( $badge->slug ) . '" ' . $rel . '>' . esc_html( $badge->name ) . '</a>';
+						$cat_list .= '<a href="' . esc_url( get_term_link( $badge->term_id ) ) . ' " class="post-category gutentor-cat-' . esc_attr( $badge->slug ) . '" ' . esc_attr( $rel ) . '>' . esc_html( $badge->name ) . '</a>';
 					}
 					$cat_list .= ' ';
 					++$i;
@@ -848,7 +848,7 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 				$i   = 0;
 				foreach ( $terms as $badge ) {
 					if ( 0 <= $i ) {
-						$cat_list .= '<a href="' . esc_url( get_term_link( $badge->term_id ) ) . ' " class="g-wc-badge gutentor-cat-' . esc_attr( $badge->slug ) . '" ' . $rel . '>' . esc_html( $badge->name ) . '</a>';
+						$cat_list .= '<a href="' . esc_url( get_term_link( $badge->term_id ) ) . ' " class="g-wc-badge gutentor-cat-' . esc_attr( $badge->slug ) . '" ' . esc_attr( $rel ) . '>' . esc_html( $badge->name ) . '</a>';
 					}
 					$cat_list .= ' ';
 					++$i;
@@ -872,7 +872,7 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 			$output = '';
 			$data   = $this->get_featured_post_module_badge_data( $post->ID, $badge_type );
 			if ( $badge_type != -1 && $data ) {
-				$output = '<div class="gutentor-categories gutentor-featured-post-categories">' . $data . '</div>';
+				$output = '<div class="gutentor-categories gutentor-featured-post-categories">' . wp_kses_post( $data ) . '</div>';
 			}
 			return $output;
 		}
@@ -894,7 +894,7 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 
 			$data = $this->get_post_module_badge_data( $post->ID, $badge_type );
 			if ( $badge_type != -1 && $data ) {
-				$output = '<div class="gutentor-categories">' . $data . '</div>';
+				$output = '<div class="gutentor-categories">' . wp_kses_post( $data ) . '</div>';
 			}
 			return $output;
 		}

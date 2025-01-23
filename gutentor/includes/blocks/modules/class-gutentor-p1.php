@@ -382,7 +382,7 @@ if ( ! class_exists( 'Gutentor_P1' ) ) {
 			$the_query = new WP_Query( gutentor_get_query( $query_args ) );
 
 			$tag             = gutentor_get_module_tag( $tag );
-			$output         .= '<' . $tag . ' class="' . esc_attr( apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'gutentor-post-module', 'section-' . $gID, 'gutentor-post-module-p1', $template, $align, $default_class, $enable_equal_height ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
+			$output         .= '<' . esc_attr( $tag ) . ' class="' . esc_attr( apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'gutentor-post-module', 'section-' . $gID, 'gutentor-post-module-p1', $template, $align, $default_class, $enable_equal_height ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 			$output         .= apply_filters( 'gutentor_post_module_before_container', '', $attributes );
 			$output         .= "<div class='" . esc_attr( apply_filters( 'gutentor_post_module_container_class', 'grid-container', $attributes ) ) . "'>";
 			$output         .= apply_filters( 'gutentor_post_module_before_block_items', '', $attributes );
@@ -437,7 +437,7 @@ if ( ! class_exists( 'Gutentor_P1' ) ) {
 				$cat_style = gutentor_pm_post_dynamic_categories_color( array_unique( $post_categories ) );
 				$output   .= '<style>' . wp_strip_all_tags( $cat_style ) . '</style>';
 			}
-			$output .= '</' . $tag . '>';/*
+			$output .= '</' . esc_attr( $tag ) . '>';/*
 			.gutentor-blog-post-wrapper*/
 			// Restore original Post Data
 			wp_reset_postdata();

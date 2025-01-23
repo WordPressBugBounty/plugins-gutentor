@@ -23,15 +23,15 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function get_instance() {
-			// Store the instance locally to avoid private static replication
+			// Store the instance locally to avoid private static replication.
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
+			// Only run these methods if they haven't been ran previously.
 			if ( null === $instance ) {
 				$instance = new self();
 			}
 
-			// Always return the instance
+			// Always return the instance.
 			return $instance;
 		}
 
@@ -290,6 +290,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			/*Concat Output with local data*/
 			$local_data = gutentor_concat_space( $output, $local_data );
 
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -324,6 +325,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			}
 			/*Concat Output with local data*/
 			$local_data = gutentor_concat_space( $output, $local_data );
+
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -350,6 +353,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				return $output;
 			}
 			$output_wrap = gutentor_concat_space( $output, 'g-link-enabled' );
+
+			/*Checked: escaped last*/
 			return $output_wrap;
 		}
 
@@ -378,8 +383,10 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			if ( array_key_exists( 'pImgLinkRel', $attributes ) ) {
 				$rel = ( $attributes['pImgLinkRel'] ) ? 'rel="' . $attributes['pImgLinkRel'] . '"' : '';
 			}
-			$output_wrap = '<a class="gutentor-link" href="' . esc_url( get_permalink() ) . '" ' . $target . ' ' . $rel . '></a>';
+			$output_wrap = '<a class="gutentor-link" href="' . esc_url( get_permalink() ) . '" ' . esc_attr( $target ) . ' ' . ess_attr( $rel ) . '></a>';
 			$output_wrap = gutentor_concat_space( $output, $output_wrap );
+
+			/*Checked: escaped*/
 			return $output_wrap;
 		}
 
@@ -475,6 +482,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			/*Concat Output with local data*/
 			$local_data = gutentor_concat_space( $output, $local_data );
 
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -505,6 +513,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			if ( $videoOutput ) {
 				$output = gutentor_concat_space( $output, $videoOutput );
 			}
+			/*Checked: escaped*/
 			return $output;
 		}
 
@@ -539,6 +548,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			}
 
 			$local_data = gutentor_concat_space( $output, $local_data );
+
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -574,6 +585,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			}
 
 			$local_data = gutentor_concat_space( $output, $local_data );
+
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -609,6 +622,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			}
 
 			$local_data = gutentor_concat_space( $output, $local_data );
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -643,6 +657,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			}
 
 			$local_data = gutentor_concat_space( $output, $local_data );
+
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -683,18 +699,20 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			$shape            = $this->blockShapeDividerSvgArray();
 			$shape_local_data = '';
 			if ( $blockShapeTopShapeOpt === 'gb-image' && $blockShapeTopImage ) {
-				$shape_local_data = '<img class="normal-image" src="' . $mTShapeImgUrl . '" />';
+				$shape_local_data = '<img class="normal-image" src="' . esc_url( $mTShapeImgUrl ) . '" />';
 			}
 			if ( $blockShapeTopShapeOpt === 'gb-svg' && $blockShapeTopSvgOpt === 'gb-svg-default' && $blockShapeTopSelect && $attributes['mTShape'] ) {
 				$shape_local_data = '<span>' . $shape[ $attributes['mTShape'] ] . '</span>';
 			}
 			if ( $blockShapeTopShapeOpt === 'gb-svg' && $blockShapeTopSvgOpt === 'gb-svg-custom' && $blockShapeTopCustomSvg ) {
-				$shape_local_data = '<span>' . $blockShapeTopCustomSvg . '</span>';
+				$shape_local_data = '<span>' . gutentor_esc_svg( $blockShapeTopCustomSvg ) . '</span>';
 			}
 			if ( ! $shape_local_data ) {
 				return $output;
 			}
 			$shape_data = '<div class="gutentor-block-shape-top">' . $shape_local_data . '</div>';
+
+			/*Checked: escaped*/
 			return $output . $shape_data;
 		}
 
@@ -734,18 +752,20 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			$shape            = $this->blockShapeDividerSvgArray();
 			$shape_local_data = '';
 			if ( $blockShapeBShapeOpt === 'gb-image' && $blockShapeBImage ) {
-				$shape_local_data = '<img class="normal-image" src="' . $mTShapeImgUrl . '" />';
+				$shape_local_data = '<img class="normal-image" src="' . esc_url( $mTShapeImgUrl ) . '" />';
 			}
 			if ( $blockShapeBShapeOpt === 'gb-svg' && $blockShapeBSvgOpt === 'gb-svg-default' && $blockShapeBSelect ) {
 				$shape_local_data = '<span>' . $shape[ $attributes['mBShape'] ] . '</span>';
 			}
 			if ( $blockShapeBShapeOpt === 'gb-svg' && $blockShapeBSvgOpt === 'gb-svg-custom' && $blockShapeBCustomSvg ) {
-				$shape_local_data = '<span>' . $blockShapeBCustomSvg . '</span>';
+				$shape_local_data = '<span>' . gutentor_esc_svg( $blockShapeBCustomSvg ) . '</span>';
 			}
 			if ( ! $shape_local_data ) {
 				return $output;
 			}
 			$shape_data = '<div class="gutentor-block-shape-bottom">' . $shape_local_data . '</div>';
+
+			/*Checked: escaped*/
 			return $output . $shape_data;
 		}
 
@@ -782,9 +802,11 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				$link_class = ( $attributes['pImgClass'] ) ? sanitize_html_class( $attributes['pImgClass'] ) : '';
 
 			}
-			$output_wrap .= '<a class="gutentor-post-image-link ' . gutentor_concat_space( $link_class ) . '" href="' . $url . '" ' . $target . ' ' . $rel . '>';
+			$output_wrap .= '<a class="gutentor-post-image-link ' . esc_attr( gutentor_concat_space( $link_class ) ) . '" href="' . esc_url( $url ) . '" ' . esc_attr( $target ) . ' ' . esc_attr( $rel ) . '>';
 			$output_wrap .= $output;
 			$output_wrap .= '</a>';
+
+			/*Checked: escaped*/
 			return $output_wrap;
 		}
 
@@ -820,9 +842,11 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				$link_class = ( $attributes['tImgClass'] ) ? sanitize_html_class( $attributes['tImgClass'] ) : '';
 
 			}
-			$output_wrap .= '<a class="gutentor-term-image-link ' . gutentor_concat_space( $link_class ) . '" href="' . $url . '" ' . $target . ' ' . $rel . '>';
+			$output_wrap .= '<a class="gutentor-term-image-link ' . esc_attr( gutentor_concat_space( $link_class ) ) . '" href="' . esc_url( $url ) . '" ' . esc_attr( $target ) . ' ' . esc_attr( $rel ) . '>';
 			$output_wrap .= $output;
 			$output_wrap .= '</a>';
+
+			/*Checked: escaped*/
 			return $output_wrap;
 		}
 
@@ -858,6 +882,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			$blockItemsColumn_mobile  = ( isset( $attributes['blockItemsColumn']['mobile'] ) ) ? $attributes['blockItemsColumn']['mobile'] : '';
 			$local_data               = gutentor_concat_space( $local_data, $blockItemsColumn_mobile );
 
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -893,6 +918,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			$blockItemsColumn_mobile  = ( isset( $attributes['blockItemsColumn']['mobile'] ) ) ? $attributes['blockItemsColumn']['mobile'] : '';
 			$local_data               = gutentor_concat_space( $local_data, $blockItemsColumn_mobile );
 
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -932,6 +958,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				$align_d_class = ( $align_desktop ) ? $align_desktop . '-desktop' : '';
 				$local_data    = gutentor_concat_space( $local_data, $align_d_class );
 			}
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -970,6 +997,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				$align_d_class = ( $align_desktop ) ? $align_desktop . '-desktop' : '';
 				$local_data    = gutentor_concat_space( $local_data, $align_d_class );
 			}
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -1009,6 +1037,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				$align_d_class = $align_desktop . '-desktop';
 				$local_data    = gutentor_concat_space( $local_data, $align_d_class );
 			}
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -1024,12 +1053,14 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		public function addButtonLinkAttr( $output, $buttonLink, $buttonLinkOptions ) {
 			$target     = $buttonLinkOptions['openInNewTab'] ? '_blank' : '';
 			$rel        = ( $buttonLinkOptions['rel'] ) ? $buttonLinkOptions['rel'] : '';
-			$a_href     = ( $buttonLink ) ? 'href="' . $buttonLink . '"' : '';
-			$a_target   = ( $target ) ? 'target="' . $target . '" ' : '';
+			$a_href     = ( $buttonLink ) ? 'href="' . esc_url( $buttonLink ) . '"' : '';
+			$a_target   = ( $target ) ? 'target="' . esc_attr( $target ) . '" ' : '';
 			$local_data = gutentor_concat_space( $a_href, $a_target );
 			$rel        = ( $target ) ? gutentor_concat_space( 'noopener noreferrer', $rel ) : $rel;
-			$a_rel      = ( $rel ) ? 'rel="' . $rel . '" ' : '';
+			$a_rel      = ( $rel ) ? 'rel="' . esc_attr( $rel ) . '" ' : '';
 			$local_data = gutentor_concat_space( $local_data, $a_rel );
+
+			/*Checked: escaped*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -1046,6 +1077,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				return $output;
 			}
 			$blog_style_class = $attributes['gStyle'] ? $attributes['gStyle'] : '';
+
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $blog_style_class );
 		}
 
@@ -1064,6 +1097,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				return $output;
 			}
 
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, 'gutentor-reverse-list' );
 		}
 
@@ -1101,6 +1135,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				$cont_pos_d_class = ( $cont_pos_desktop ) ? $cont_pos_desktop . '-cont-d' : '';
 				$local_data       = gutentor_concat_space( $local_data, $cont_pos_d_class );
 			}
+
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -1134,6 +1170,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				$cont_pos_d_class = ( $cont_pos_desktop ) ? $cont_pos_desktop . '-cont-d' : '';
 				$local_data       = gutentor_concat_space( $local_data, $cont_pos_d_class );
 			}
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -1166,6 +1203,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			if ( $cont_post_mobile ) {
 				$local_data = gutentor_concat_space( $local_data, $cont_post_mobile . '-cont-m' );
 			}
+			/*Checked: escaped last*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 
@@ -1174,7 +1212,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		 *
 		 * @param {array} output
 		 * @param {object} attributes
-		 * @return string
+		 * @return mixed||boolean
 		 */
 		public function remove_column_class_blog_post( $output, $attributes ) {
 			if ( 'gutentor/p1' !== $attributes['gName'] ) {
@@ -1183,6 +1221,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			if ( $attributes['gStyle'] === 'gutentor-blog-list' && ! $attributes['pOnColInList'] ) {
 				return false;
 			}
+			/*Checked: escaped last*/
 			return $output;
 		}
 
@@ -1191,7 +1230,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		 *
 		 * @param {array} output
 		 * @param {object} attributes
-		 * @return string
+		 * @return mixed||boolean
 		 */
 		public function term_remove_column_class( $output, $attributes ) {
 			if ( 'gutentor/t1' !== $attributes['gName'] ) {
@@ -1200,6 +1239,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			if ( $attributes['termStyle'] === 'gtf-list' && ! $attributes['tOnCol'] ) {
 				return false;
 			}
+			/*Checked: escaped last*/
 			return $output;
 		}
 
@@ -1233,6 +1273,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			if ( isset( $attributes['p5PauseOnHover'] ) ) {
 				$local_data['data-pauseOnHover'] = $attributes['p5PauseOnHover'];
 			}
+
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 
@@ -1246,8 +1288,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		 */
 		public function edd_favorites_css_class( $args ) {
 			if ( gutentor_is_edd_favorites_active() ) {
-				$args['class'] = gutentor_concat_space( $args['class'], 'g-edd-wl' );
+				$args['class'] = esc_attr( gutentor_concat_space( $args['class'], 'g-edd-wl' ) );
 			}
+			/*Checked: escaped*/
 			return $args;
 		}
 
@@ -1277,6 +1320,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				}
 			}
 			$local_data = gutentor_concat_space( $output, $local_data );
+
+			/*Checked: escaped last*/
 			return $local_data;
 		}
 	}

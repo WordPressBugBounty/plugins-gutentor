@@ -174,7 +174,7 @@ if ( ! class_exists( 'Gutentor_T2' ) ) {
 			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 				$tag = gutentor_get_module_tag( $tag );
 
-				$output .= '<' . $tag . ' id="' . esc_attr( $blockID ) . '" class="' . esc_attr( apply_filters( 'gutentor_term_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-module', 'gtf-module', 'gutentor-term-module', 'gutentor-term-module-t2', $align, 'g-loop-' . $number, 'g-template-' . $template, $default_class ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
+				$output .= '<' . esc_attr( $tag ) . ' id="' . esc_attr( $blockID ) . '" class="' . esc_attr( apply_filters( 'gutentor_term_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-module', 'gtf-module', 'gutentor-term-module', 'gutentor-term-module-t2', $align, 'g-loop-' . $number, 'g-template-' . $template, $default_class ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 				$output .= apply_filters( 'gutentor_term_module_before_container', '', $attributes );
 				$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_term_module_container_class', 'grid-container', $attributes ) ) . "'>";
 				$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_term_module_grid_row_class', 'grid-row', $attributes ) ) . "'>";
@@ -187,7 +187,7 @@ if ( ! class_exists( 'Gutentor_T2' ) ) {
 				$output .= '</div>';/*.grid-row*/
 				$output .= '</div>';/*.grid-container*/
 				$output .= apply_filters( 'gutentor_term_module_after_container', '', $attributes );
-				$output .= '</' . $tag . '>';/*.gutentor-blog-term-wrapper*/
+				$output .= '</' . esc_attr( $tag ) . '>';/*.gutentor-blog-term-wrapper*/
 			}
 
 			return $output;

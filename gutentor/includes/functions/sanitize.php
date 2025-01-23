@@ -206,3 +206,106 @@ if ( ! function_exists( 'gutentor_get_module_tag' ) ) :
 		}
 	}
 endif;
+
+
+
+if ( ! function_exists( 'gutentor_esc_svg' ) ) :
+
+	/**
+	 * Escape for SVG HTML
+	 *
+	 * @since 3.4.4
+	 * @param string $svg_html HTML.
+	 * @return string escaped HTML
+	 * @author codersantosh <codersantosh@gmail.com>
+	 */
+	function gutentor_esc_svg( $svg_html ) {
+
+		$allowed_html = array(
+			'svg'            => array(
+				'xmlns'       => array(),
+				'fill'        => array(),
+				'viewbox'     => array(),
+				'role'        => array(),
+				'aria-hidden' => array(),
+				'focusable'   => array(),
+				'height'      => array(),
+				'width'       => array(),
+				'xmlns:xlink' => array(),
+				'id'          => array(),
+				'class'       => array(),
+				'style'       => array(),
+				'transform'   => array(),
+				'opacity'     => array(),
+			),
+			'path'           => array(
+				'd'               => array(),
+				'fill'            => array(),
+				'stroke'          => array(),
+				'stroke-width'    => array(),
+				'stroke-linecap'  => array(),
+				'stroke-linejoin' => array(),
+				'id'              => array(),
+				'class'           => array(),
+				'style'           => array(),
+				'transform'       => array(),
+				'opacity'         => array(),
+			),
+			'lineargradient' => array(
+				'gradientunits'     => array(),
+				'gradienttransform' => array(),
+				'spreadmethod'      => array(),
+				'x1'                => array(),
+				'y1'                => array(),
+				'x2'                => array(),
+				'y2'                => array(),
+				'id'                => array(),
+				'class'             => array(),
+				'style'             => array(),
+				'transform'         => array(),
+				'opacity'           => array(),
+			),
+			'stop'           => array(
+				'offset'       => array(),
+				'stop-color'   => array(),
+				'stop-opacity' => array(),
+				'id'           => array(),
+				'class'        => array(),
+				'style'        => array(),
+				'transform'    => array(),
+				'opacity'      => array(),
+			),
+			'g'              => array(
+				'id'        => array(),
+				'class'     => array(),
+				'style'     => array(),
+				'transform' => array(),
+				'opacity'   => array(),
+			),
+			'text'           => array(
+				'x'           => array(),
+				'y'           => array(),
+				'dy'          => array(),
+				'text-anchor' => array(),
+				'font-family' => array(),
+				'font-size'   => array(),
+				'font-weight' => array(),
+				'fill'        => array(),
+				'id'          => array(),
+				'class'       => array(),
+				'style'       => array(),
+				'transform'   => array(),
+				'opacity'     => array(),
+			),
+			'tspan'          => array(
+				'id'        => array(),
+				'class'     => array(),
+				'style'     => array(),
+				'transform' => array(),
+				'opacity'   => array(),
+			),
+		);
+
+		return wp_kses( $svg_html, $allowed_html );
+	}
+endif;
