@@ -383,7 +383,7 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			if ( array_key_exists( 'pImgLinkRel', $attributes ) ) {
 				$rel = ( $attributes['pImgLinkRel'] ) ? 'rel="' . $attributes['pImgLinkRel'] . '"' : '';
 			}
-			$output_wrap = '<a class="gutentor-link" href="' . esc_url( get_permalink() ) . '" ' . esc_attr( $target ) . ' ' . ess_attr( $rel ) . '></a>';
+			$output_wrap = '<a class="gutentor-link" href="' . esc_url( get_permalink() ) . '" ' . esc_attr( $target ) . ' ' . esc_attr( $rel ) . '></a>';
 			$output_wrap = gutentor_concat_space( $output, $output_wrap );
 
 			/*Checked: escaped*/
