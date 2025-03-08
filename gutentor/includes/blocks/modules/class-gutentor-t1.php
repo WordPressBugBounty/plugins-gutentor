@@ -148,23 +148,23 @@ if ( ! class_exists( 'Gutentor_T1' ) ) {
 					'default' => array(
 						array(
 							'itemValue' => 'featured-image',
-							'itemLabel' => __( 'Featured Image' ),
+							'itemLabel' => __( 'Featured Image', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'title',
-							'itemLabel' => __( 'Title' ),
+							'itemLabel' => __( 'Title', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'count',
-							'itemLabel' => __( 'Count' ),
+							'itemLabel' => __( 'Count', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'description',
-							'itemLabel' => __( 'Description/Excerpt' ),
+							'itemLabel' => __( 'Description/Excerpt', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'button',
-							'itemLabel' => __( 'Button' ),
+							'itemLabel' => __( 'Button', 'gutentor' ),
 						),
 					),
 

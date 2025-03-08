@@ -61,7 +61,7 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 			if ( get_option( '__gutentor_do_redirect' ) ) {
 				update_option( '__gutentor_do_redirect', false );
 				if ( ! is_multisite() ) {
-					exit( wp_redirect( admin_url( 'admin.php?page=' . self::$page_slug ) ) );
+					exit( wp_redirect( esc_url( admin_url( 'admin.php?page=' . self::$page_slug ) ) ) );
 				}
 			}
 		}
@@ -398,7 +398,7 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 			// Update blocks.
 			self::block_action( 'update', $blocks );
 
-			echo $block_id;
+			echo esc_html( $block_id );
 
 			die();
 		}

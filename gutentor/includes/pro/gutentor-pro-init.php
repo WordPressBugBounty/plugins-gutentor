@@ -127,7 +127,7 @@ class Gutentor_Pro_License_Init {
 		}
 		?>
 		
-		<div class="wrap" id="<?php esc_attr_e( $this->slug ); ?>-license-wrap">
+		<div class="wrap" id="<?php echo esc_attr( $this->slug ); ?>-license-wrap">
 			<h2><?php esc_html_e( 'Gutentor License Options', 'gutentor' ); ?></h2>
 			<form method="post" action="options.php" id="<?php echo esc_attr( $this->slug ) . '-options-form'; ?>">
 				<?php
@@ -165,7 +165,13 @@ class Gutentor_Pro_License_Init {
 	 * @return void
 	 */
 	function license_key_settings_section() {
-		printf( esc_html__( '%1$sGet your premium license%2$s for full features, premium Gutenberg templates, premium supports and many more.%3$s', 'gutentor' ), '<h4><a href="https://www.gutentor.com/pricing" target="_blank" rel="nofollow noopener">', '</a>', '</h4>' );
+		printf(
+			// translators: %1$s is an opening HTML link tag with a specific URL, %2$s is the closing HTML link tag, and %3$s is the closing HTML heading tag.
+			esc_html__( '%1$sGet your premium license%2$s for full features, premium Gutenberg templates, premium supports and many more.%3$s', 'gutentor' ),
+			'<h4><a href="https://www.gutentor.com/pricing" target="_blank" rel="nofollow noopener">',
+			'</a>',
+			'</h4>'
+		);
 	}
 
 	/**
@@ -202,9 +208,10 @@ class Gutentor_Pro_License_Init {
 				$upload_url = admin_url( 'plugin-install.php?tab=upload' );
 				$pro_url    = 'https://www.gutentor.com/pricing';
 
-				// Use sprintf with wp_kses_post to allow HTML in the translation
+				// Use sprintf with wp_kses_post to allow HTML in the translation.
 				printf(
 					wp_kses_post(
+						// translators: %1$s is the URL for the plugin install page, %2$s is the URL for the Gutentor Pro pricing page.
 						__( 'Please install Gutentor Pro zip from <a href="%1$s">Plugin install page</a> or get Gutentor Pro from <a href="%2$s" target="_blank">Gutentor Pro Pricing</a>', 'gutentor' )
 					),
 					esc_url( $upload_url ),

@@ -159,7 +159,7 @@ if ( ! class_exists( 'Gutentor_Blog_Post' ) ) {
 				),
 				'buttonText'                      => array(
 					'type'    => 'string',
-					'default' => __( 'Read More' ),
+					'default' => __( 'Read More', 'gutentor' ),
 				),
 
 				'imageDisplayOptions'             => array(
@@ -331,7 +331,7 @@ if ( ! class_exists( 'Gutentor_Blog_Post' ) ) {
 					'value' => 'fas fa-book',
 					'code'  => 'f108',
 				),
-				'buttonText'                      => __( 'Read More' ),
+				'buttonText'                      => __( 'Read More', 'gutentor' ),
 				'imageDisplayOptions'             => 'normal-image',
 				'bgImageOptions'                  => array(
 					'backgroundImage'      => '',

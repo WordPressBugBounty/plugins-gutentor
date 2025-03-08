@@ -1280,7 +1280,7 @@ function gutentor_set_product_order_order_by( $orderby, $order, $args ) {
 /**
  * Function to create query args
  *
- * @param  [array] $attr
+ * @param  array $attr query args.
  * @return array
  */
 function gutentor_get_query( $attr ) {
@@ -1381,6 +1381,7 @@ function gutentor_get_query( $attr ) {
 			$query_args['tag__and'] = explode( $attr['tag__and'] );
 		}
 	}
+
 	if ( isset( $attr['tag__in'] ) && $attr['tag__in'] ) {
 		if ( is_string( $attr['tag__in'] ) ) {
 			$query_args['tag__in'] = explode( ',', $attr['tag__in'] );
@@ -1538,6 +1539,16 @@ function gutentor_get_query( $attr ) {
 	}
 	if ( isset( $attr['date_query_relation'] ) && $attr['date_query_relation'] ) {
 		$query_args['date_query']['relation'] = $attr['date_query_relation'];
+	}
+
+	// Polylang compatibility
+	if ( function_exists( 'pll_current_language' ) ) {
+		$query_args['lang'] = pll_current_language( 'slug' );
+	}
+
+	// WPML compatibility
+	if ( class_exists( 'Sitepress' ) ) {
+		$query_args['suppress_filters'] = 0;
 	}
 
 	return apply_filters( 'gutentor_get_query', $query_args );
@@ -1715,7 +1726,7 @@ function gutentor_pagination( $paged = false, $max_num_pages = false ) {
 			if ( $max_num_pages >= $i ) {
 				$is_active = $paged === $i ? ' gutentor-pagination-active' : '';
 				$phtml    .= '<li class="gutentor-pagination-item' . $is_active . '">
-                    <a class="gutentor-pagination-link" href="#" data-gpage="' . $i . '">' . __( $i, 'gutentor' ) . '</a>
+                    <a class="gutentor-pagination-link" href="#" data-gpage="' . $i . '">' . $i . '</a>
                 </li>';
 			}
 		}
@@ -1725,7 +1736,7 @@ function gutentor_pagination( $paged = false, $max_num_pages = false ) {
 			}
 			if ( $max_num_pages > 3 ) {
 				$phtml .= '<li class="gutentor-pagination-item">
-                    <a class="gutentor-pagination-link" href="#" data-gpage="' . $max_num_pages . '">' . __( $max_num_pages, 'gutentor' ) . '</a>
+                    <a class="gutentor-pagination-link" href="#" data-gpage="' . $max_num_pages . '">' . $max_num_pages . '</a>
                 </li>';
 			}
 		}

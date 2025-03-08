@@ -52,8 +52,8 @@ if ( ! class_exists( 'Gutentor_WP_Block_Widget' ) ) {
 
 			printf(
 				'<h3><a href="%1$s" target="_blank">%2$s</a></h3>',
-				admin_url( 'edit.php?post_type=wp_block' ),
-				__( 'Go to here to add Block', 'gutentor' )
+				esc_url( admin_url( 'edit.php?post_type=wp_block' ) ),
+				esc_html__( 'Go to here to add Block', 'gutentor' )
 			);
 			?>
 			<p>
@@ -72,16 +72,16 @@ if ( ! class_exists( 'Gutentor_WP_Block_Widget' ) ) {
 				printf(
 					'<p><label for="%1$s">%2$s</label><br/><small>%4$s</small>' .
 					'<select class="widefat" id="%1$s" name="%3$s">',
-					$this->get_field_id( 'wp_block_id' ),
-					__( 'Select Block:', 'gutentor' ),
-					$this->get_field_name( 'wp_block_id' ),
+					esc_attr( $this->get_field_id( 'wp_block_id' ) ),
+					esc_html__( 'Select Block:', 'gutentor' ),
+					esc_attr( $this->get_field_name( 'wp_block_id' ) ),
 					esc_html__( 'Select block and its content will display in the frontend.', 'gutentor' )
 				);
 				printf(
 					'<option value="%1$s" %2$s>%3$s</option>',
 					0,
 					selected( 0, $wp_block_id, false ),
-					__( 'Select Block', 'gutentor' )
+					esc_html__( 'Select Block', 'gutentor' )
 				);
 				while ( $item_query->have_posts() ) :
 					$item_query->the_post();
@@ -89,7 +89,7 @@ if ( ! class_exists( 'Gutentor_WP_Block_Widget' ) ) {
 						'<option value="%1$s" %2$s>%3$s</option>',
 						absint( get_the_ID() ),
 						selected( get_the_ID(), $wp_block_id, false ),
-						get_the_title()
+						esc_html( get_the_title() )
 					);
 				endwhile;
 				wp_reset_postdata();

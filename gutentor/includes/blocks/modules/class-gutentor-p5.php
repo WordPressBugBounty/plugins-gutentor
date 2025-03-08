@@ -171,7 +171,7 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 				),
 				'p5NewsTxt'                       => array(
 					'type'    => 'string',
-					'default' => __( 'News' ),
+					'default' => __( 'News', 'gutentor' ),
 				),
 				'p5Speed'                         => array(
 					'type'    => 'number',

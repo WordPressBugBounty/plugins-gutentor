@@ -146,7 +146,7 @@ if ( ! class_exists( 'Gutentor_Custom_Meta_Box' ) ) :
 			// site layout.
 			if ( isset( $_POST['gutentor_edd_demo_url'] ) ) {
 				$old = get_post_meta( $post_id, 'gutentor_edd_demo_url', true );
-				$new = esc_attr( $_POST['gutentor_edd_demo_url'] );
+				$new = esc_url_raw( $_POST['gutentor_edd_demo_url'] );
 				if ( $new && $new != $old ) {
 					update_post_meta( $post_id, 'gutentor_edd_demo_url', $new );
 				} elseif ( '' == $new && $old ) {

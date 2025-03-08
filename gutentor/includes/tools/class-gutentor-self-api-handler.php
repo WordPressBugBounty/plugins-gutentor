@@ -492,20 +492,24 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 */
 		public function get_authors( \WP_REST_Request $request ) {
 			$post_type = $request->get_param( 'post_type' );
-			global $wpdb;
 
-			$all_authors = $wpdb->get_results(
-				"
-                select
-    A.*, COUNT(*) as post_count
-from
-    $wpdb->users A
-inner join $wpdb->posts B
-    on A.ID = B.post_author
-WHERE ( ( B.post_type = '$post_type' AND ( B.post_status = 'publish' OR B.post_status = 'private' ) ) )
-GROUP BY A.ID
-ORDER BY post_count DESC"
+			if ( ! post_type_exists( $post_type ) ) {
+				return new WP_Error( 'invalid_post_type', __( 'Invalid post type', 'gutentor' ), array( 'status' => 400 ) );
+			}
+
+			global $wpdb;
+			$query = $wpdb->prepare(
+				"SELECT A.*, COUNT(*) as post_count
+                FROM $wpdb->users A
+                INNER JOIN $wpdb->posts B ON A.ID = B.post_author
+                WHERE B.post_type = %s 
+                AND ( B.post_status = 'publish' OR B.post_status = 'private' )
+                GROUP BY A.ID
+                ORDER BY post_count DESC",
+				$post_type
 			);
+
+			$all_authors = $wpdb->get_results( $query );
 
 			$final_data = array();
 			if ( $all_authors ) {
@@ -523,24 +527,20 @@ ORDER BY post_count DESC"
 
 		/**
 		 * Function to fetch authors.
-		 *
-		 * T
 		 */
 		public function get_all_author( \WP_REST_Request $request ) {
 			global $wpdb;
 
-			$all_authors = $wpdb->get_results(
-				"
-                select
-    A.*, COUNT(*) as post_count
-from
-    $wpdb->users A
-inner join $wpdb->posts B
-    on A.ID = B.post_author
-WHERE (  ( B.post_status = 'publish' OR B.post_status = 'private'  ) )
-GROUP BY A.ID
-ORDER BY post_count DESC"
-			);
+			$query = "
+                SELECT A.ID, A.display_name, COUNT(*) as post_count
+                FROM $wpdb->users A
+                INNER JOIN $wpdb->posts B ON A.ID = B.post_author
+                WHERE B.post_status IN ('publish', 'private')
+                GROUP BY A.ID
+                ORDER BY post_count DESC
+            ";
+
+			$all_authors = $wpdb->get_results( $query );
 
 			$final_data = array();
 			if ( $all_authors ) {
@@ -554,6 +554,7 @@ ORDER BY post_count DESC"
 
 			return rest_ensure_response( $final_data );
 		}
+
 
 		/**
 		 * Function to fetch tax terms.
@@ -745,7 +746,7 @@ ORDER BY post_count DESC"
 			if ( 'edit' === $request['context'] && ! current_user_can( $post_type->cap->edit_posts ) ) {
 				return new WP_Error(
 					'rest_forbidden_context',
-					__( 'Sorry, you are not allowed to edit posts in this post type.' ),
+					__( 'Sorry, you are not allowed to edit posts in this post type.', 'gutentor' ),
 					array( 'status' => rest_authorization_required_code() )
 				);
 			}
@@ -1444,7 +1445,7 @@ ORDER BY post_count DESC"
 			if ( $page > $max_pages && $total_posts > 0 ) {
 				return new WP_Error(
 					'rest_post_invalid_page_number',
-					__( 'The page number requested is larger than the number of pages available.' ),
+					__( 'The page number requested is larger than the number of pages available.', 'gutentor' ),
 					array( 'status' => 400 )
 				);
 			}
@@ -1667,29 +1668,28 @@ ORDER BY post_count DESC"
 		public function get_all_metas( \WP_REST_Request $request ) {
 			$post_type = $request->get_param( 'post_type' );
 
+			if ( ! post_type_exists( $post_type ) ) {
+				return new WP_Error( 'invalid_post_type', __( 'Invalid post type', 'gutentor' ), array( 'status' => 400 ) );
+			}
+
 			$meta_keys = array();
 			global $wpdb;
 			$query = "
-            SELECT DISTINCT($wpdb->postmeta.meta_key) 
-            FROM $wpdb->posts 
-            LEFT JOIN $wpdb->postmeta 
-            ON $wpdb->posts.ID = $wpdb->postmeta.post_id 
-            WHERE $wpdb->posts.post_type = '%s' 
-            AND $wpdb->postmeta.meta_key != '' 
-            AND $wpdb->postmeta.meta_key != 'enclosure' 
-            AND $wpdb->postmeta.meta_key != 'gutentor_gfont_url' 
-            AND $wpdb->postmeta.meta_key != 'gutentor_dynamic_css' 
-            AND $wpdb->postmeta.meta_key != 'gutentor_css_info' 
-            AND $wpdb->postmeta.meta_key != 'gutentor_meta_video_src_option' 
-            AND $wpdb->postmeta.meta_key != 'gutentor_meta_video_url' 
-            AND $wpdb->postmeta.meta_key != 'gutentor_meta_video_id' 
-            AND $wpdb->postmeta.meta_key != 'cosmoswp_site_layout' 
-            AND $wpdb->postmeta.meta_key != 'cosmoswp_sidebar_options' 
-            AND $wpdb->postmeta.meta_key != 'cosmoswp_header_layout' 
-            AND $wpdb->postmeta.meta_key != 'cosmoswp_footer_layout' 
-            AND $wpdb->postmeta.meta_key != 'cosmoswp_banner_options_layout' 
-            AND $wpdb->postmeta.meta_key NOT RegExp '(^[_0-9].+$)' 
-            AND $wpdb->postmeta.meta_key NOT RegExp '(^[0-9]+$)'";
+                SELECT DISTINCT meta_key
+                FROM $wpdb->postmeta
+                WHERE post_id IN (
+                    SELECT ID FROM $wpdb->posts WHERE post_type = %s
+                )
+                AND meta_key != ''
+                AND meta_key NOT IN (
+                    'enclosure', 'gutentor_gfont_url', 'gutentor_dynamic_css', 'gutentor_css_info',
+                    'gutentor_meta_video_src_option', 'gutentor_meta_video_url', 'gutentor_meta_video_id',
+                    'cosmoswp_site_layout', 'cosmoswp_sidebar_options', 'cosmoswp_header_layout',
+                    'cosmoswp_footer_layout', 'cosmoswp_banner_options_layout'
+                )
+                AND meta_key NOT REGEXP BINARY '(^[_0-9].+$)'
+                AND meta_key NOT REGEXP BINARY '(^[0-9]+$)'
+            ";
 
 			$normal_meta = $wpdb->get_col( $wpdb->prepare( $query, $post_type ) );
 
@@ -1713,7 +1713,6 @@ ORDER BY post_count DESC"
 
 			return rest_ensure_response( $meta_keys );
 		}
-
 
 		/**
 		 * Function to get all term meta
@@ -1723,10 +1722,14 @@ ORDER BY post_count DESC"
 		 * @since 3.1.4
 		 */
 		public function get_all_term_metas( \WP_REST_Request $request ) {
-			$post_type = $request->get_param( 'tax' );
+			$taxonomy = sanitize_text_field( $request->get_param( 'tax' ) );
+			if ( ! taxonomy_exists( $taxonomy ) ) {
+				return new WP_Error( 'invalid_taxonomy', __( 'The taxonomy does not exist.', 'gutentor' ), array( 'status' => 404 ) );
+			}
 
 			$meta_keys = array();
 			global $wpdb;
+
 			$query = "
             SELECT DISTINCT($wpdb->termmeta.meta_key) 
             FROM $wpdb->termmeta
@@ -1736,23 +1739,17 @@ ORDER BY post_count DESC"
                 ON $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id 
             WHERE $wpdb->term_taxonomy.taxonomy = '%s' 
             AND $wpdb->termmeta.meta_key != '' 
-            AND $wpdb->termmeta.meta_key != 'enclosure' 
-            AND $wpdb->termmeta.meta_key != 'gutentor_dynamic_css' 
-            AND $wpdb->termmeta.meta_key != 'gutentor_css_info' 
-            AND $wpdb->termmeta.meta_key != 'gutentor_meta_video_src_option' 
-            AND $wpdb->termmeta.meta_key != 'gutentor_meta_video_id' 
-            AND $wpdb->termmeta.meta_key != 'cosmoswp_site_layout' 
-            AND $wpdb->termmeta.meta_key != 'cosmoswp_sidebar_options' 
-            AND $wpdb->termmeta.meta_key != 'cosmoswp_header_layout' 
-            AND $wpdb->termmeta.meta_key != 'cosmoswp_footer_layout' 
-            AND $wpdb->termmeta.meta_key != 'cosmoswp_banner_options_layout' 
-            AND $wpdb->termmeta.meta_key NOT RegExp '(^[_0-9].+$)' 
-            AND $wpdb->termmeta.meta_key NOT RegExp '(^[0-9]+$)'";
+            AND $wpdb->termmeta.meta_key NOT IN (
+                'enclosure', 'gutentor_dynamic_css', 'gutentor_css_info', 'gutentor_meta_video_src_option', 'gutentor_meta_video_id', 
+                'cosmoswp_site_layout', 'cosmoswp_sidebar_options', 'cosmoswp_header_layout', 'cosmoswp_footer_layout', 'cosmoswp_banner_options_layout'
+            )
+            AND $wpdb->termmeta.meta_key NOT REGEXP '(^[_0-9].+$)' 
+            AND $wpdb->termmeta.meta_key NOT REGEXP '(^[0-9]+$)'";
 
-			$normal_meta = $wpdb->get_col( $wpdb->prepare( $query, $post_type ) );
+			$normal_meta = $wpdb->get_col( $wpdb->prepare( $query, $taxonomy ) );
 
 			if ( function_exists( 'gutentor_get_acf_fields_by_location' ) ) {
-				$acf_fields       = gutentor_get_acf_fields_by_location( $post_type );
+				$acf_fields       = gutentor_get_acf_fields_by_location( $taxonomy );
 				$meta_keys['acf'] = $acf_fields;
 				$names            = array_column( $acf_fields, 'name' );
 				if ( is_array( $normal_meta ) && is_array( $names ) ) {
@@ -1767,10 +1764,11 @@ ORDER BY post_count DESC"
 			$meta_keys['normal'] = $normal_meta;
 
 			/* create 1 Day Expiration TODO*/
-			set_transient( 'gutentor_meta_keys_' . $post_type, $meta_keys, 60 * 60 * 24 );
+			set_transient( 'gutentor_meta_keys_' . $taxonomy, $meta_keys, 60 * 60 * 24 );
 
 			return rest_ensure_response( $meta_keys );
 		}
+
 		/**
 		 * Function to popup.
 		 *

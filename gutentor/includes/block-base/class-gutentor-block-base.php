@@ -1446,27 +1446,27 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 					'default' => array(
 						array(
 							'itemValue' => 'featured-image',
-							'itemLabel' => __( 'Featured Image' ),
+							'itemLabel' => __( 'Featured Image', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'title',
-							'itemLabel' => __( 'Title' ),
+							'itemLabel' => __( 'Title', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'primary-entry-meta',
-							'itemLabel' => __( 'Primary Entry Meta' ),
+							'itemLabel' => __( 'Primary Entry Meta', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'description',
-							'itemLabel' => __( 'Description/Excerpt' ),
+							'itemLabel' => __( 'Description/Excerpt', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'button',
-							'itemLabel' => __( 'Button' ),
+							'itemLabel' => __( 'Button', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'secondary-entry-meta',
-							'itemLabel' => __( 'Secondary Entry Meta' ),
+							'itemLabel' => __( 'Secondary Entry Meta', 'gutentor' ),
 						),
 					),
 				),
@@ -1475,23 +1475,23 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 					'default' => array(
 						array(
 							'itemValue' => 'meta-author',
-							'itemLabel' => __( 'Author' ),
+							'itemLabel' => __( 'Author', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-date',
-							'itemLabel' => __( 'Date' ),
+							'itemLabel' => __( 'Date', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-category',
-							'itemLabel' => __( 'Category' ),
+							'itemLabel' => __( 'Category', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-comment',
-							'itemLabel' => __( 'Comments' ),
+							'itemLabel' => __( 'Comments', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-tag',
-							'itemLabel' => __( 'Tag' ),
+							'itemLabel' => __( 'Tag', 'gutentor' ),
 						),
 					),
 				),
@@ -1500,23 +1500,23 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 					'default' => array(
 						array(
 							'itemValue' => 'meta-author',
-							'itemLabel' => __( 'Author' ),
+							'itemLabel' => __( 'Author', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-date',
-							'itemLabel' => __( 'Date' ),
+							'itemLabel' => __( 'Date', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-category',
-							'itemLabel' => __( 'Category' ),
+							'itemLabel' => __( 'Category', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-comment',
-							'itemLabel' => __( 'Comments' ),
+							'itemLabel' => __( 'Comments', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-tag',
-							'itemLabel' => __( 'Tag' ),
+							'itemLabel' => __( 'Tag', 'gutentor' ),
 						),
 					),
 				),
@@ -1651,7 +1651,7 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 				),
 				'pBtnText'           => array(
 					'type'    => 'string',
-					'default' => __( 'Read More' ),
+					'default' => __( 'Read More', 'gutentor' ),
 				),
 				'pBtnCName'          => array(
 					'type'    => 'string',
@@ -1737,7 +1737,7 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 				),
 				'q1BtnTxt'           => array(
 					'type'    => 'string',
-					'default' => __( 'Preview' ),
+					'default' => __( 'Preview', 'gutentor' ),
 				),
 				'q1BtnCName'         => array(
 					'type'    => 'string',
@@ -1766,7 +1766,7 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 				),
 				'wooFreeTxt'         => array(
 					'type'    => 'string',
-					'default' => __( 'Free' ),
+					'default' => __( 'Free', 'gutentor' ),
 				),
 				'eOnWl'              => array(
 					'type'    => 'boolean',
@@ -1818,23 +1818,23 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 					'default' => array(
 						array(
 							'itemValue' => 'title',
-							'itemLabel' => __( 'Title' ),
+							'itemLabel' => __( 'Title', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'primary-entry-meta',
-							'itemLabel' => __( 'Primary Entry Meta' ),
+							'itemLabel' => __( 'Primary Entry Meta', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'description',
-							'itemLabel' => __( 'Description/Excerpt' ),
+							'itemLabel' => __( 'Description/Excerpt', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'button',
-							'itemLabel' => __( 'Button' ),
+							'itemLabel' => __( 'Button', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'secondary-entry-meta',
-							'itemLabel' => __( 'Secondary Entry Meta' ),
+							'itemLabel' => __( 'Secondary Entry Meta', 'gutentor' ),
 						),
 					),
 				),
@@ -1843,23 +1843,23 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 					'default' => array(
 						array(
 							'itemValue' => 'meta-author',
-							'itemLabel' => __( 'Author' ),
+							'itemLabel' => __( 'Author', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-date',
-							'itemLabel' => __( 'Date' ),
+							'itemLabel' => __( 'Date', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-category',
-							'itemLabel' => __( 'Category' ),
+							'itemLabel' => __( 'Category', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-comment',
-							'itemLabel' => __( 'Comments' ),
+							'itemLabel' => __( 'Comments', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-tag',
-							'itemLabel' => __( 'Tag' ),
+							'itemLabel' => __( 'Tag', 'gutentor' ),
 						),
 					),
 				),
@@ -1868,23 +1868,23 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 					'default' => array(
 						array(
 							'itemValue' => 'meta-author',
-							'itemLabel' => __( 'Author' ),
+							'itemLabel' => __( 'Author', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-date',
-							'itemLabel' => __( 'Date' ),
+							'itemLabel' => __( 'Date', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-category',
-							'itemLabel' => __( 'Category' ),
+							'itemLabel' => __( 'Category', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-comment',
-							'itemLabel' => __( 'Comments' ),
+							'itemLabel' => __( 'Comments', 'gutentor' ),
 						),
 						array(
 							'itemValue' => 'meta-tag',
-							'itemLabel' => __( 'Tag' ),
+							'itemLabel' => __( 'Tag', 'gutentor' ),
 						),
 					),
 				),
@@ -2011,7 +2011,7 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 				),
 				'pFPBtnText'           => array(
 					'type'    => 'string',
-					'default' => __( 'Read More' ),
+					'default' => __( 'Read More', 'gutentor' ),
 				),
 				'pFPImgOnLink'         => array(
 					'type'    => 'boolean',
@@ -2254,7 +2254,7 @@ if ( ! class_exists( 'Gutentor_Block_Base' ) ) {
 				),
 				'tBtnTxt'            => array(
 					'type'    => 'string',
-					'default' => __( 'Read More' ),
+					'default' => __( 'Read More', 'gutentor' ),
 				),
 				'tBtnLink'           => array(
 					'type'    => 'object',
