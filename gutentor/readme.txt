@@ -4,9 +4,9 @@ Contributors: gutentor, acmeit, addonspress, codersantosh
 Donate link: https://www.gutentor.com/
 Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 5.6.20
-Stable tag: 3.4.7
+Stable tag: 3.4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,10 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 3.4.8 - 2025-04-17 =
+* Added: Tested with the latest WordPress.
+* Fixed: Resolved issue with translation function preload
 
 = 3.4.7 - 2025-03-09 =
 * Added: Implemented compatibility with the WPML multilingual plugin.

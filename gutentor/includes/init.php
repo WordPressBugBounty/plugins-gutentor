@@ -107,7 +107,7 @@ class Gutentor {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name      = GUTENTOR_PLUGIN_NAME;
-		$this->plugin_full_name = esc_html__( 'Gutentor', 'gutentor' );
+		$this->plugin_full_name = 'Gutentor';
 
 		if ( function_exists( 'register_block_type' ) ) {
 			$this->load_dependencies();
