@@ -6,7 +6,7 @@ Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 5.6.20
-Stable tag: 3.4.8
+Stable tag: 3.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ https://www.youtube.com/watch?v=bGMi7L78hVk
 
 === You might be surprised by all the features onboard at first. but once you get used to them you won't be able to live without them. ===
 
-It’s time for [Gutentor - Page Builder for Gutenberg](https://www.gutentor.com/). Try it now, It's Free!!!
+Itâ€™s time for [Gutentor - Page Builder for Gutenberg](https://www.gutentor.com/). Try it now, It's Free!!!
 
 Gutentor is a WordPress Page Building Gutenberg Blocks collections with unlimited possibilities to design a webpage. Building professional elegant websites using the new WordPress editor Gutenberg with very ease and with no absolute codes is what Gutentor is designed for. A page builder experience that brings advanced capabilities and graceful design never seen before on any Page Builder. Work with any theme, create any design.
 
@@ -288,7 +288,7 @@ Absolutely NOT. All the features in the free version will always remains in it. 
 
 =  How can you say Gutentor makes the site faster? =
 
-It is not Marketing words. Gutentor creates a single minified CSS file for only used Gutentor blocks in the editor, for normal to advanced landing pages it is less than 50kb, for a simple page it is less than 20kb. Less CSS ∝ Faster Loading Sites.
+It is not Marketing words. Gutentor creates a single minified CSS file for only used Gutentor blocks in the editor, for normal to advanced landing pages it is less than 50kb, for a simple page it is less than 20kb. Less CSS âˆ Faster Loading Sites.
 
 = Can I use Gutentor with any WordPress theme? =
 
@@ -339,6 +339,9 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 
 == Changelog ==
 
+= 3.4.9 - 2025-07-01 =
+* Security Fix: Security improvements.
+
 = 3.4.8 - 2025-04-17 =
 * Added: Tested with the latest WordPress.
 * Fixed: Resolved issue with translation function preload
@@ -346,7 +349,6 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 = 3.4.7 - 2025-03-09 =
 * Added: Implemented compatibility with the WPML multilingual plugin.
 * Added: Implemented compatibility with the Polylang multilingual plugin.
-* Security Fix: Security improvements implemented in the API.
 
 = 3.4.6 - 2025-02-06 =
 * Fixed:  [Corrected function name](https://wordpress.org/support/topic/gutentor-bug/).
@@ -422,6 +424,7 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 * Fixed: Enhanced rest api(Email report)
 * Fixed: Tabs Widget can't be edited (Email report)
 * Fixed: [Video popup widget bug](https://wordpress.org/support/topic/video-popup-widget-bug/)
+
 
 = Previous updates =
 * [View Previous updates](https://www.gutentor.com/road-map/#changelog)

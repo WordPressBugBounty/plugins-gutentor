@@ -2298,14 +2298,15 @@ if ( ! function_exists( 'gutentor_is_valid_url' ) ) {
 	}
 }
 
-/**
- * Update installed time
- *
- * @since    3.2.1
 
- * @return void
- */
 if ( ! function_exists( 'gutentor_add_installed_time' ) ) {
+	/**
+	 * Update installed time
+	 *
+	 * @since    3.2.1
+
+	 * @return void
+	 */
 	function gutentor_add_installed_time() {
 		$helper_options = json_decode( get_option( '__gutentor_helper_options' ), true );
 		if ( ! isset( $helper_options['installed_time'] ) || ! $helper_options['installed_time'] ) {
@@ -2317,3 +2318,93 @@ if ( ! function_exists( 'gutentor_add_installed_time' ) ) {
 		}
 	}
 }
+
+if ( ! function_exists( 'gutentor_strip_malicious_html' ) ) {
+	/**
+	 * Sanitizes HTML content by removing potentially malicious attributes and scripts.
+	 *
+	 * @since 3.4.9
+	 * @param string $html The HTML content to sanitize.
+	 * @return string Sanitized HTML content.
+	 */
+	function gutentor_strip_malicious_html( $html ) {
+		if ( empty( $html ) ) {
+			return $html;
+		}
+
+		// Cache regex patterns for performance.
+		static $patterns = array(
+			'event'     => '/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]+)/i',
+			'uri'       => '/\s+(href|src)\s*=\s*(["\'])\s*(javascript:|data:)/i',
+			'style'     => '/expression|javascript:|data:|url\s*\(\s*[\'"]?\s*(javascript:|data:)|@import|behavior/i',
+			'svg_start' => '/^<svg\b/i',
+		);
+
+		$risky_attributes = apply_filters(
+			'gutentor_risky_attributes',
+			array( 'autofocus', 'srcdoc', 'formaction', 'tabindex', 'style' )
+		);
+
+		return preg_replace_callback(
+			'/<[^>]+>/',
+			function ( $matches ) use ( $risky_attributes, $patterns ) {
+				$tag = $matches[0];
+
+				// Handle SVG with dedicated function.
+				if ( preg_match( $patterns['svg_start'], $tag ) ) {
+					return gutentor_esc_svg( $tag );
+				}
+
+				// Process non-SVG tags with standard protection.
+				$tag = preg_replace( $patterns['event'], '', $tag );
+				$tag = preg_replace( $patterns['uri'], ' $1=$2#', $tag );
+
+				if ( ! empty( $risky_attributes ) ) {
+					$tag = preg_replace_callback(
+						'/\s+(' . implode( '|', array_map( 'preg_quote', $risky_attributes ) ) . ')\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/i',
+						function ( $attr_matches ) use ( $patterns ) {
+							$attr_name  = strtolower( $attr_matches[1] );
+							$attr_value = $attr_matches[2] ?? $attr_matches[3] ?? $attr_matches[4] ?? '';
+
+							if ( 'tabindex' === $attr_name ) {
+								return in_array( (int) $attr_value, array( 0, -1 ), true )
+									? ' tabindex="' . (int) $attr_value . '"'
+									: '';
+							}
+
+							if ( 'style' === $attr_name ) {
+								return preg_match( $patterns['style'], $attr_value )
+									? ''
+									: ' style="' . esc_attr( $attr_value ) . '"';
+							}
+
+							return '';
+						},
+						$tag
+					);
+				}
+
+				return $tag;
+			},
+			$html
+		);
+	}
+}
+
+if ( ! function_exists( 'gutentor_clean_rendered_block' ) ) {
+	/**
+	 * Filters rendered block content to remove malicious HTML.
+	 *
+	 * @since 3.4.9
+	 * @param string $block_content The block content about to be appended.
+	 * @param array  $block The full block, including name and attributes.
+	 * @return string Filtered block content.
+	 */
+	function gutentor_clean_rendered_block( $block_content, $block ) {
+		if ( isset( $block['blockName'] ) && str_starts_with( $block['blockName'], 'gutentor' ) ) {
+			$block_content = gutentor_strip_malicious_html( $block_content );
+		}
+		return $block_content;
+	}
+}
+add_filter( 'render_block', 'gutentor_clean_rendered_block', 10, 2 );
