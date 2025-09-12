@@ -743,6 +743,24 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		public function get_posts_permissions_check( $request ) {
 			$post_type = get_post_type_object( $request->get_param( 'post_type' ) );
 
+			if ( ! $post_type ) {
+				return new WP_Error(
+					'rest_invalid_post_type',
+					__( 'Invalid post type.', 'gutentor' ),
+					array( 'status' => 404 )
+				);
+			}
+
+			// Check if user can read this post type.
+			if ( ! current_user_can( $post_type->cap->read ) ) {
+				return new WP_Error(
+					'rest_forbidden_context',
+					__( 'Sorry, you are not allowed to read posts in this post type.', 'gutentor' ),
+					array( 'status' => rest_authorization_required_code() )
+				);
+			}
+
+			// Additional check for edit context.
 			if ( 'edit' === $request['context'] && ! current_user_can( $post_type->cap->edit_posts ) ) {
 				return new WP_Error(
 					'rest_forbidden_context',
