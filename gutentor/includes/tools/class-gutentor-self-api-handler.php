@@ -741,9 +741,13 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @since 2.1.3
 		 */
 		public function get_posts_permissions_check( $request ) {
-			$post_type = get_post_type_object( $request->get_param( 'post_type' ) );
 
-			if ( ! $post_type ) {
+			$post_type   = $request->get_param( 'post_type' ) ? $request->get_param( 'post_type' ) : 'post';
+			$post_status = $request->get_param( 'post_status' ) ? $request->get_param( 'post_status' ) : 'publish';
+
+			$post_type_obj = get_post_type_object( $post_type );
+
+			if ( ! $post_type_obj ) {
 				return new WP_Error(
 					'rest_invalid_post_type',
 					__( 'Invalid post type.', 'gutentor' ),
@@ -751,8 +755,8 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 				);
 			}
 
-			// Check if user can read this post type.
-			if ( ! current_user_can( $post_type->cap->read ) ) {
+			// Check if user can read this post type at all.
+			if ( ! current_user_can( $post_type_obj->cap->read ) ) {
 				return new WP_Error(
 					'rest_forbidden_context',
 					__( 'Sorry, you are not allowed to read posts in this post type.', 'gutentor' ),
@@ -760,10 +764,50 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 				);
 			}
 
+			// Handle different post statuses with appropriate capability checks.
+			switch ( $post_status ) {
+				case 'private':
+					if ( ! current_user_can( $post_type_obj->cap->read_private_posts ) ) {
+						return new WP_Error(
+							'rest_cannot_read_private',
+							__( 'Sorry, you are not allowed to read private posts.', 'gutentor' ),
+							array( 'status' => rest_authorization_required_code() )
+						);
+					}
+					break;
+
+				case 'draft':
+				case 'pending':
+				case 'future':
+					// For non-published posts, users need edit_posts capability.
+					if ( ! current_user_can( $post_type_obj->cap->edit_posts ) ) {
+						return new WP_Error(
+							'rest_cannot_read_draft',
+							__( 'Sorry, you are not allowed to read non-published posts.', 'gutentor' ),
+							array( 'status' => rest_authorization_required_code() )
+						);
+					}
+					break;
+
+				case 'publish':
+					// No additional checks needed beyond basic 'read' capability.
+					break;
+
+				default:
+					// For custom statuses, be conservative - require edit_posts capability.
+					if ( ! current_user_can( $post_type_obj->cap->edit_posts ) ) {
+						return new WP_Error(
+							'rest_cannot_read_custom_status',
+							__( 'Sorry, you are not allowed to read posts with this status.', 'gutentor' ),
+							array( 'status' => rest_authorization_required_code() )
+						);
+					}
+			}
+
 			// Additional check for edit context.
-			if ( 'edit' === $request['context'] && ! current_user_can( $post_type->cap->edit_posts ) ) {
+			if ( 'edit' === $request['context'] && ! current_user_can( $post_type_obj->cap->edit_posts ) ) {
 				return new WP_Error(
-					'rest_forbidden_context',
+					'rest_forbidden_edit_context',
 					__( 'Sorry, you are not allowed to edit posts in this post type.', 'gutentor' ),
 					array( 'status' => rest_authorization_required_code() )
 				);

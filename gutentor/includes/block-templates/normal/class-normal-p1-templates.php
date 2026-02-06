@@ -406,7 +406,7 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 				}
 				$url     = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $attributes['pFImgSize'] );
 				$overlay = $enable_overlayImage ? 'g-overlay' : '';/*gutentor-overlay for bc*/
-				$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_post_module_t5_item_height', gutentor_concat_space( 'gptm-bg-image', 'gptm-item-height', $overlay ), $attributes ) ) . "' style='background-image:url(" . esc_url( is_array( $url ) && ! empty( $url ) ? $url[0] : '' ) . ")'>";
+				$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_post_module_t5_item_height', gutentor_concat_space( 'gptm-bg-image', 'gptm-item-height', $overlay ), $attributes ) ) . "' style=\"background-image:url('" . esc_url( is_array( $url ) && ! empty( $url ) ? $url[0] : '' ) . "');\">";
 				if ( $enable_avatar && $this->avatar_on_image_condition( $avatar_pos ) ) {
 					$output .= $this->get_avatar_data( $post, $attributes );
 				}

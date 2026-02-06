@@ -674,7 +674,9 @@ class Gutentor_Hooks {
 	 * @return void
 	 */
 	public function block_editor_assets() { // phpcs:ignore
-
+		if ( ! is_admin() ) {
+			return;
+		}
 		// edd wishlist scripts loads in backend
 		if ( function_exists( 'edd_wl_print_scripts' ) ) {
 			edd_wl_print_scripts();
@@ -827,6 +829,7 @@ class Gutentor_Hooks {
 			array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 			GUTENTOR_VERSION // Version: File modification time.
 		);
+
 		wp_style_add_data( 'gutentor-editor', 'rtl', 'replace' );
 	}
 

@@ -4,9 +4,9 @@ Contributors: gutentor, acmeit, addonspress, codersantosh
 Donate link: https://www.gutentor.com/
 Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 5.6.20
-Stable tag: 3.5.2
+Stable tag: 3.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Advanced yet easy, Gutenberg editor page builder blocks. Create a masterpiece, p
 
 == Description ==
 
-Gutetor's direct family members encompass [CosmosWP](https://wordpress.org/themes/cosmoswp/), a WordPress theme, and the [Templateberg plugin](https://wordpress.org/plugins/templateberg/), which offers Gutenberg templates.
+Gutentor's direct family members encompass [CosmosWP](https://wordpress.org/themes/cosmoswp/), a WordPress theme, and the [Templateberg plugin](https://wordpress.org/plugins/templateberg/), which offers Gutenberg templates.
 
 [Gutentor](https://www.gutentor.com/) | [Documentation](https://www.gutentor.com/documentation/) | [Video Tutorials](https://www.youtube.com/watch?v=noppoc1zLIk&list=PLDLpZS3H6SMnpUnrU84LwFs9AAzTYcbmA) | [Gutenberg Templates](https://templateberg.com/gutenberg-templates/)
 
@@ -22,7 +22,7 @@ https://www.youtube.com/watch?v=bGMi7L78hVk
 
 === You might be surprised by all the features onboard at first. but once you get used to them you won't be able to live without them. ===
 
-Itâ€™s time for [Gutentor - Page Builder for Gutenberg](https://www.gutentor.com/). Try it now, It's Free!!!
+It's time for [Gutentor - Page Builder for Gutenberg](https://www.gutentor.com/). Try it now, It's Free!!!
 
 Gutentor is a WordPress Page Building Gutenberg Blocks collections with unlimited possibilities to design a webpage. Building professional elegant websites using the new WordPress editor Gutenberg with very ease and with no absolute codes is what Gutentor is designed for. A page builder experience that brings advanced capabilities and graceful design never seen before on any Page Builder. Work with any theme, create any design.
 
@@ -339,6 +339,19 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 
 == Changelog ==
 
+= 3.5.5 - 2025-02-05 =
+* Fixed:  [Issue with “Post (Type)” Widget – Not Displaying on Frontend](https://wordpress.org/support/topic/issue-with-post-type-widget-not-displaying-on-frontend/).
+* Fixed: Dynamic CSS not being generated for Gutentor blocks inside FSE templates, core template parts and reusable blocks.
+* Fixed: Broken media issues on blocks.
+* Updated:  Dynamic CSS
+
+= 3.5.4 - 2025-12-17 =
+* Fixed:  [ReferenceError for sprintf when clicking “Background”](https://wordpress.org/support/topic/referenceerror-for-sprintf-when-clicking-background/).
+* Updated:  More inbuilt  optimization
+
+= 3.5.3 - 2025-10-16 =
+* Security Fix: Security improvements.
+
 = 3.5.2 - 2025-09-13 =
 * Security Fix: Security improvements.
 
@@ -404,7 +417,7 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 = 3.3.6 - 2024-08-02 =
 * Added:    Validation of text tag
 * Added:    Validation of module tag
-* Fixed:    Full code reviewd and fix some issues
+* Fixed:    Full code reviewed and fix some issues
 
 = 3.3.5 - 2024-07-31 =
 * Fixed:    [Duplicate block same CSS on some blocks](https://wordpress.org/support/topic/section-having-same-section-and-class-id/)
