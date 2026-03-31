@@ -51,9 +51,11 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 						},
 						'args'                => array(
 							'reset' => array(
-								'type'        => 'boolean',
-								'required'    => false,
-								'description' => __( 'Reset True or False', 'gutentor' ),
+								'type'              => 'boolean',
+								'required'          => false,
+								'description'       => __( 'Reset True or False', 'gutentor' ),
+								'sanitize_callback' => array( $this, 'sanitize_boolean_param' ),
+								'validate_callback' => array( $this, 'validate_boolean_param' ),
 							),
 						),
 
@@ -73,14 +75,78 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 						},
 						'args'                => array(
 							'url' => array(
-								'type'        => 'string',
-								'required'    => true,
-								'description' => __( 'URL of the JSON file.', 'gutentor' ),
+								'type'              => 'string',
+								'required'          => true,
+								'description'       => __( 'URL of the JSON file.', 'gutentor' ),
+								'sanitize_callback' => array( $this, 'sanitize_url_param' ),
+								'validate_callback' => array( $this, 'validate_import_url_param' ),
 							),
 						),
 					),
 				)
 			);
+		}
+
+		/**
+		 * Sanitize boolean param.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return bool
+		 */
+		public function sanitize_boolean_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			return rest_sanitize_boolean( $value );
+		}
+
+		/**
+		 * Validate boolean param.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return bool
+		 */
+		public function validate_boolean_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			return rest_is_boolean( $value );
+		}
+
+		/**
+		 * Sanitize URL param.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return string
+		 */
+		public function sanitize_url_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			return esc_url_raw( (string) $value );
+		}
+
+		/**
+		 * Validate import URL against unsafe targets.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return bool
+		 */
+		public function validate_import_url_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			if ( ! is_string( $value ) || ! gutentor_is_valid_url( $value ) ) {
+				return false;
+			}
+
+			$host = wp_parse_url( $value, PHP_URL_HOST );
+			if ( empty( $host ) ) {
+				return false;
+			}
+
+			$host = strtolower( $host );
+			if ( in_array( $host, array( 'localhost', '127.0.0.1', '::1' ), true ) ) {
+				return false;
+			}
+
+			if ( filter_var( $host, FILTER_VALIDATE_IP ) && ! filter_var( $host, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+				return false;
+			}
+
+			return true;
 		}
 
 		/**

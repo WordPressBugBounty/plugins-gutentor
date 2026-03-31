@@ -2321,6 +2321,152 @@ if ( ! function_exists( 'gutentor_add_installed_time' ) ) {
 
 if ( ! function_exists( 'gutentor_strip_malicious_html' ) ) {
 	/**
+	 * Returns the unified allowed HTML schema for Gutentor render sanitization.
+	 *
+	 * @since 3.4.9
+	 * @return array Allowed HTML tags and attributes.
+	 */
+	function gutentor_get_allowed_html() {
+		static $allowed_html = null;
+
+		if ( null !== $allowed_html ) {
+			return $allowed_html;
+		}
+
+		$allowed_html = wp_kses_allowed_html( 'post' );
+
+		$add_tag_attrs = static function ( $tag, $attrs ) use ( &$allowed_html ) {
+			$current_attrs = array();
+
+			if ( isset( $allowed_html[ $tag ] ) ) {
+				if ( true === $allowed_html[ $tag ] ) {
+					$current_attrs = array();
+				} elseif ( is_array( $allowed_html[ $tag ] ) ) {
+					$current_attrs = $allowed_html[ $tag ];
+				}
+			}
+
+			$allowed_html[ $tag ] = array_merge( $current_attrs, $attrs );
+		};
+
+		$svg_attrs = array(
+			'xmlns'               => true,
+			'xmlns:xlink'         => true,
+			'xml:space'           => true,
+			'viewbox'             => true,
+			'viewBox'             => true,
+			'preserveaspectratio' => true,
+			'preserveAspectRatio' => true,
+			'focusable'           => true,
+			'transform'           => true,
+			'transform-origin'    => true,
+			'opacity'             => true,
+			'fill'                => true,
+			'fill-opacity'        => true,
+			'fill-rule'           => true,
+			'stroke'              => true,
+			'stroke-width'        => true,
+			'stroke-linecap'      => true,
+			'stroke-linejoin'     => true,
+			'stroke-miterlimit'   => true,
+			'd'                   => true,
+			'points'              => true,
+			'offset'              => true,
+			'stop-color'          => true,
+			'stop-opacity'        => true,
+			'gradientunits'       => true,
+			'gradienttransform'   => true,
+			'spreadmethod'        => true,
+			'x'                   => true,
+			'y'                   => true,
+			'x1'                  => true,
+			'y1'                  => true,
+			'x2'                  => true,
+			'y2'                  => true,
+			'dy'                  => true,
+			'cx'                  => true,
+			'cy'                  => true,
+			'r'                   => true,
+			'rx'                  => true,
+			'ry'                  => true,
+			'text-anchor'         => true,
+			'font-family'         => true,
+			'font-size'           => true,
+			'font-weight'         => true,
+			'href'                => true,
+			'xlink:href'          => true,
+			'width'               => true,
+			'height'              => true,
+			'version'             => true,
+			'data-name'           => true,
+			'id'                  => true,
+			'class'               => true,
+			'style'               => true,
+			'role'                => true,
+			'aria-hidden'         => true,
+			'data-*'              => true,
+		);
+
+		$add_tag_attrs( 'svg', $svg_attrs );
+		$add_tag_attrs( 'path', $svg_attrs );
+		$add_tag_attrs( 'g', $svg_attrs );
+		$add_tag_attrs( 'text', $svg_attrs );
+		$add_tag_attrs( 'tspan', $svg_attrs );
+		$add_tag_attrs( 'lineargradient', $svg_attrs );
+		$add_tag_attrs( 'stop', $svg_attrs );
+		$add_tag_attrs( 'polygon', $svg_attrs );
+		$add_tag_attrs( 'rect', $svg_attrs );
+		$add_tag_attrs( 'circle', $svg_attrs );
+		$add_tag_attrs( 'defs', $svg_attrs );
+		$add_tag_attrs( 'use', $svg_attrs );
+		$add_tag_attrs( 'symbol', $svg_attrs );
+
+		$media_attrs = array(
+			'src'             => true,
+			'srcset'          => true,
+			'sizes'           => true,
+			'type'            => true,
+			'poster'          => true,
+			'preload'         => true,
+			'controls'        => true,
+			'controlslist'    => true,
+			'autoplay'        => true,
+			'muted'           => true,
+			'loop'            => true,
+			'playsinline'     => true,
+			'width'           => true,
+			'height'          => true,
+			'loading'         => true,
+			'decoding'        => true,
+			'fetchpriority'   => true,
+			'frameborder'     => true,
+			'allow'           => true,
+			'allowfullscreen' => true,
+			'referrerpolicy'  => true,
+			'sandbox'         => true,
+			'name'            => true,
+			'id'              => true,
+			'class'           => true,
+			'style'           => true,
+			'role'            => true,
+			'aria-label'      => true,
+			'aria-hidden'     => true,
+			'data-*'          => true,
+		);
+
+		$add_tag_attrs( 'video', $media_attrs );
+		$add_tag_attrs( 'source', $media_attrs );
+		$add_tag_attrs( 'audio', $media_attrs );
+		$add_tag_attrs( 'picture', $media_attrs );
+		$add_tag_attrs( 'iframe', $media_attrs );
+		$add_tag_attrs( 'canvas', $media_attrs );
+
+		$allowed_html = apply_filters( 'gutentor_allowed_html', $allowed_html );
+
+		return $allowed_html;
+	}
+
+	/**
 	 * Sanitizes HTML content by removing potentially malicious attributes and scripts.
 	 *
 	 * @since 3.4.9
@@ -2329,65 +2475,10 @@ if ( ! function_exists( 'gutentor_strip_malicious_html' ) ) {
 	 */
 	function gutentor_strip_malicious_html( $html ) {
 		if ( empty( $html ) ) {
-			return $html;
+			return '';
 		}
 
-		// Cache regex patterns for performance.
-		static $patterns = array(
-			'event'     => '/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]+)/i',
-			'uri'       => '/\s+(href|src)\s*=\s*(["\'])\s*(javascript:|data:)/i',
-			'style'     => '/expression|javascript:|data:|url\s*\(\s*[\'"]?\s*(javascript:|data:)|@import|behavior/i',
-			'svg_start' => '/^<svg\b/i',
-		);
-
-		$risky_attributes = apply_filters(
-			'gutentor_risky_attributes',
-			array( 'autofocus', 'srcdoc', 'formaction', 'tabindex', 'style' )
-		);
-
-		return preg_replace_callback(
-			'/<[^>]+>/',
-			function ( $matches ) use ( $risky_attributes, $patterns ) {
-				$tag = $matches[0];
-
-				// Handle SVG with dedicated function.
-				if ( preg_match( $patterns['svg_start'], $tag ) ) {
-					return gutentor_esc_svg( $tag );
-				}
-
-				// Process non-SVG tags with standard protection.
-				$tag = preg_replace( $patterns['event'], '', $tag );
-				$tag = preg_replace( $patterns['uri'], ' $1=$2#', $tag );
-
-				if ( ! empty( $risky_attributes ) ) {
-					$tag = preg_replace_callback(
-						'/\s+(' . implode( '|', array_map( 'preg_quote', $risky_attributes ) ) . ')\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/i',
-						function ( $attr_matches ) use ( $patterns ) {
-							$attr_name  = strtolower( $attr_matches[1] );
-							$attr_value = $attr_matches[2] ?? $attr_matches[3] ?? $attr_matches[4] ?? '';
-
-							if ( 'tabindex' === $attr_name ) {
-								return in_array( (int) $attr_value, array( 0, -1 ), true )
-									? ' tabindex="' . (int) $attr_value . '"'
-									: '';
-							}
-
-							if ( 'style' === $attr_name ) {
-								return preg_match( $patterns['style'], $attr_value )
-									? ''
-									: ' style="' . esc_attr( $attr_value ) . '"';
-							}
-
-							return '';
-						},
-						$tag
-					);
-				}
-
-				return $tag;
-			},
-			$html
-		);
+		return wp_kses( $html, gutentor_get_allowed_html() );
 	}
 }
 

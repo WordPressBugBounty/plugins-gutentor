@@ -240,7 +240,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 				$blocks = parse_blocks( $_wp_current_template_content );
 
 				// Include the helper class for template info
-				require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-tempalte-info.php';
+				require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-template-info.php';
 
 				// Setup WordPress filesystem if not already initialized
 				global $wp_filesystem;
@@ -422,10 +422,34 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 					array(
 						'methods'             => 'POST',
 						'callback'            => array( $this, 'save_dynamic_css' ),
-						'permission_callback' => function () {
-							return current_user_can( 'edit_posts' );
-						},
-						'args'                => array(),
+						'permission_callback' => array( $this, 'save_dynamic_css_permissions_check' ),
+						'args'                => array(
+							'post_id'     => array(
+								'type'              => 'integer',
+								'required'          => false,
+								'sanitize_callback' => 'absint',
+								'validate_callback' => array( $this, 'validate_post_id_param' ),
+							),
+							'dynamic_css' => array(
+								'type'              => 'object',
+								'required'          => true,
+								'sanitize_callback' => array( $this, 'sanitize_dynamic_css_param' ),
+								'validate_callback' => array( $this, 'validate_dynamic_css_param' ),
+							),
+							'blocks'      => array(
+								'type'              => 'array',
+								'required'          => false,
+								'default'           => array(),
+								'sanitize_callback' => array( $this, 'sanitize_blocks_param' ),
+								'validate_callback' => array( $this, 'validate_blocks_param' ),
+							),
+							'widgets'     => array(
+								'type'              => 'object',
+								'required'          => false,
+								'sanitize_callback' => array( $this, 'sanitize_widgets_param' ),
+								'validate_callback' => array( $this, 'validate_widgets_param' ),
+							),
+						),
 					),
 				)
 			);
@@ -439,9 +463,202 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 						'permission_callback' => function () {
 							return current_user_can( 'edit_posts' );
 						},
+						'args'                => array(
+							'tax_terms' => array(
+								'type'              => 'object',
+								'required'          => true,
+								'sanitize_callback' => array( $this, 'sanitize_tax_terms_param' ),
+								'validate_callback' => array( $this, 'validate_tax_terms_param' ),
+							),
+						),
 					),
 				)
 			);
+		}
+
+		/**
+		 * Permission callback for saving dynamic CSS.
+		 *
+		 * @since 3.5.6
+		 * @param \WP_REST_Request $request Request object.
+		 * @return true|WP_Error
+		 */
+		public function save_dynamic_css_permissions_check( \WP_REST_Request $request ) {
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				return new WP_Error( 'rest_forbidden', __( 'Sorry, you are not allowed to save dynamic CSS.', 'gutentor' ), array( 'status' => rest_authorization_required_code() ) );
+			}
+
+			$post_id     = absint( $request->get_param( 'post_id' ) );
+			$has_widgets = $request->has_param( 'widgets' ) && is_array( $request->get_param( 'widgets' ) );
+
+			if ( ! $post_id && ! $has_widgets ) {
+				return new WP_Error( 'rest_invalid_param', __( 'A valid post_id or widgets payload is required.', 'gutentor' ), array( 'status' => 400 ) );
+			}
+
+			if ( $post_id && ! current_user_can( 'edit_post', $post_id ) ) {
+				return new WP_Error( 'rest_forbidden', __( 'Sorry, you are not allowed to edit this post.', 'gutentor' ), array( 'status' => rest_authorization_required_code() ) );
+			}
+
+			return true;
+		}
+
+		/**
+		 * Validate post ID input.
+		 *
+		 * @since 3.5.6
+		 * @param mixed            $value   Request value.
+		 * @param \WP_REST_Request $request Request object.
+		 * @return bool
+		 */
+		public function validate_post_id_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			if ( null === $value || '' === $value ) {
+				return true;
+			}
+
+			$post_id = absint( $value );
+			if ( ! $post_id ) {
+				return false;
+			}
+
+			return (bool) get_post( $post_id );
+		}
+
+		/**
+		 * Validate dynamic CSS payload.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return bool
+		 */
+		public function validate_dynamic_css_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			return is_array( $value ) && isset( $value['css'] );
+		}
+
+		/**
+		 * Sanitize dynamic CSS payload.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return array
+		 */
+		public function sanitize_dynamic_css_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			if ( ! is_array( $value ) ) {
+				return array(
+					'css'    => '',
+					'gfonts' => array(),
+				);
+			}
+
+			return array(
+				'css'    => isset( $value['css'] ) && is_string( $value['css'] ) ? $value['css'] : '',
+				'gfonts' => isset( $value['gfonts'] ) && is_array( $value['gfonts'] ) ? $value['gfonts'] : array(),
+			);
+		}
+
+		/**
+		 * Validate blocks payload.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return bool
+		 */
+		public function validate_blocks_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			return is_array( $value );
+		}
+
+		/**
+		 * Sanitize blocks payload.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return array
+		 */
+		public function sanitize_blocks_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			if ( ! is_array( $value ) ) {
+				return array();
+			}
+
+			return array_map( 'sanitize_text_field', $value );
+		}
+
+		/**
+		 * Validate widgets payload.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return bool
+		 */
+		public function validate_widgets_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			if ( null === $value || '' === $value ) {
+				return true;
+			}
+
+			return is_array( $value ) && isset( $value['theme'] ) && is_string( $value['theme'] );
+		}
+
+		/**
+		 * Sanitize widgets payload.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return array
+		 */
+		public function sanitize_widgets_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			if ( ! is_array( $value ) ) {
+				return array();
+			}
+
+			if ( isset( $value['theme'] ) ) {
+				$value['theme'] = sanitize_text_field( $value['theme'] );
+			}
+
+			return $value;
+		}
+
+		/**
+		 * Validate tax terms payload.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return bool
+		 */
+		public function validate_tax_terms_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			if ( ! is_array( $value ) || empty( $value ) ) {
+				return false;
+			}
+
+			foreach ( $value as $taxonomy => $term_ids ) {
+				if ( ! taxonomy_exists( sanitize_text_field( $taxonomy ) ) || ! is_array( $term_ids ) ) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		/**
+		 * Sanitize tax terms payload.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @return array
+		 */
+		public function sanitize_tax_terms_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+			if ( ! is_array( $value ) ) {
+				return array();
+			}
+
+			$sanitized = array();
+			foreach ( $value as $taxonomy => $term_ids ) {
+				$tax_key = sanitize_text_field( $taxonomy );
+				if ( ! is_array( $term_ids ) ) {
+					continue;
+				}
+
+				$sanitized[ $tax_key ] = array_values( array_filter( array_map( 'absint', $term_ids ) ) );
+			}
+
+			return $sanitized;
 		}
 
 		/**
@@ -869,7 +1086,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 			$bg               = '#ffffff';
 			$hover_bg         = '#ffffff';
 			$hover_text_color = '#1974d2';
-			$tax_terms        = $request->get_params( 'tax_terms' )['tax_terms'];
+			$tax_terms        = $request->get_param( 'tax_terms' );
 			$important        = ' !important;';
 			$tax_in_color     = gutentor_get_options( 'tax-in-color' );
 			/*default category text color */

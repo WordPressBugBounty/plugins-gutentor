@@ -1992,8 +1992,8 @@ msgstr ""
 #: includes/tools/class-gutentor-advanced-import.php:328
 #: includes/tools/class-gutentor-self-api-handler.php:1903
 #: includes/tools/class-gutentor-self-api-handler.php:1915
-#: includes/tools/class-gutentor-tempalte-info.php:796
-#: includes/tools/class-gutentor-tempalte-info.php:808
+#: includes/tools/class-gutentor-template-info.php:796
+#: includes/tools/class-gutentor-template-info.php:808
 #: includes/tools/class-gutentor-templateberg.php:287
 #: includes/tools/class-gutentor-templateberg.php:299
 msgid "Cheatin&#8217; huh?"

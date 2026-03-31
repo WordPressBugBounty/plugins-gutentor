@@ -221,6 +221,22 @@ if ( ! function_exists( 'gutentor_esc_svg' ) ) :
 	 */
 	function gutentor_esc_svg( $svg_html ) {
 
+		if ( function_exists( 'gutentor_get_allowed_html' ) ) {
+			$global_allowed_html = gutentor_get_allowed_html();
+			$svg_tags            = array( 'svg', 'path', 'lineargradient', 'stop', 'g', 'text', 'tspan', 'polygon', 'rect', 'circle', 'defs', 'use', 'symbol' );
+			$svg_allowed_html    = array();
+
+			foreach ( $svg_tags as $svg_tag ) {
+				if ( isset( $global_allowed_html[ $svg_tag ] ) && is_array( $global_allowed_html[ $svg_tag ] ) ) {
+					$svg_allowed_html[ $svg_tag ] = $global_allowed_html[ $svg_tag ];
+				}
+			}
+
+			if ( ! empty( $svg_allowed_html ) ) {
+				return wp_kses( $svg_html, $svg_allowed_html );
+			}
+		}
+
 		$allowed_html = array(
 			'svg'            => array(
 				'xmlns'               => array(),
