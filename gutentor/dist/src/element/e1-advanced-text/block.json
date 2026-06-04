@@ -1,0 +1,273 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e1",
+  "title": "Advanced Text",
+  "description": "Design Heading and Paragraph text with advanced options.",
+  "category": "gutentor-elements",
+  "keywords": ["Gutentor Advanced Text Heading Paragraph Word Elements"],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e1"
+    },
+    "e1AT": {
+      "type": "string",
+      "default": "Gutentor Advanced Text",
+      "source": "html",
+      "selector": ".gutentor-text",
+      "role": "content"
+    },
+    "e1Tag": {
+      "type": "string",
+      "default": "p"
+    },
+    "e1LinkOpt": {
+      "type": "object",
+      "default": {
+        "openInNewTab": false,
+        "rel": "",
+        "noFollow": false,
+        "enableIconLink": "",
+        "iconLink": ""
+      }
+    },
+    "e1OnDCap": {
+      "type": "boolean",
+      "default": false
+    },
+    "elAlign": {
+      "type": "object"
+    },
+    "elCAlign": {
+      "type": "object"
+    },
+    "elColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#000",
+        "hover": ""
+      }
+    },
+    "elTypography": {
+      "type": "object"
+    },
+    "elMargin": {
+      "type": "object"
+    },
+    "elPadding": {
+      "type": "object"
+    },
+    "elOnWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "elWidth": {
+      "type": "object"
+    },
+    "elOnDesign": {
+      "type": "boolean",
+      "default": false
+    },
+    "elDesignPos": {
+      "type": "string",
+      "default": "divider-top"
+    },
+    "elDesignType": {
+      "type": "string",
+      "default": "svg-divider"
+    },
+    "elDesignBorderStyle": {
+      "type": "string",
+      "default": "solid"
+    },
+    "elDesignBorderHeight": {
+      "type": "number",
+      "default": 2
+    },
+    "elDesignBorderColor": {
+      "type": "string",
+      "default": "#e0e0e0"
+    },
+    "elDesignWidth": {
+      "type": "object"
+    },
+    "elDesignMargin": {
+      "type": "object"
+    },
+    "elDesignCustomImg": {
+      "type": "object",
+      "default": {
+        "url": "",
+        "alt": ""
+      }
+    },
+    "elDesignDefSVG": {
+      "type": "string",
+      "default": ""
+    },
+    "elDesignCustomSVG": {
+      "type": "string",
+      "default": ""
+    },
+    "elDesignOnBorderColor": {
+      "type": "boolean",
+      "default": false
+    },
+    "elDesignOnSvgColor": {
+      "type": "boolean",
+      "default": false
+    },
+    "elDesignSvgColor": {
+      "type": "string",
+      "default": "#e0e0e0"
+    },
+    "elOnCapColor": {
+      "type": "boolean",
+      "default": false
+    },
+    "elCapColor": {
+      "type": "string",
+      "default": "#275cf6"
+    },
+    "elOnCapBgColor": {
+      "type": "boolean",
+      "default": false
+    },
+    "elCapBgColor": {
+      "type": "string",
+      "default": "#275cf6"
+    },
+    "elCapBgGt": {
+      "type": "string",
+      "default": ""
+    },
+    "elCapTypography": {
+      "type": "object"
+    },
+    "elCapMargin": {
+      "type": "object"
+    },
+    "elCapBorder": {
+      "type": "object"
+    },
+    "elCapPadding": {
+      "type": "object"
+    },
+    "e1Border": {
+      "type": "object"
+    },
+    "e1BxShadow": {
+      "type": "object"
+    },
+    "e1TxtShadow": {
+      "type": "object",
+      "default": {
+        "normal": {
+          "color": "#fff",
+          "x": "",
+          "y": "",
+          "blur": ""
+        },
+        "hover": {
+          "color": "#fff",
+          "x": "",
+          "y": "",
+          "blur": ""
+        }
+      }
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

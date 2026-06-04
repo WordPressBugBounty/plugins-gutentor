@@ -1,0 +1,183 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e3",
+  "title": "Counter",
+  "description": "Display the animated counter number from zero to the entered value in a more interesting way.",
+  "category": "gutentor-elements",
+  "keywords": ["Gutentor Counter Interesting Number Animated Elements"],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e3"
+    },
+    "e3Limit": {
+      "type": "string",
+      "default": "1000"
+    },
+    "e3PreFix": {
+      "type": "string",
+      "default": ""
+    },
+    "e3PostFix": {
+      "type": "string",
+      "default": ""
+    },
+    "e3Typography": {
+      "type": "object"
+    },
+    "e3Duration": {
+      "type": "number"
+    },
+    "e3Color": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#275cf6",
+        "hover": ""
+      }
+    },
+    "e3OnWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "e3Width": {
+      "type": "object",
+      "default": {
+        "type": "px"
+      }
+    },
+    "e3OnHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "e3Height": {
+      "type": "object",
+      "default": {
+        "type": "px"
+      }
+    },
+    "e3Padding": {
+      "type": "object"
+    },
+    "e3Margin": {
+      "type": "object"
+    },
+    "e3Align": {
+      "type": "object"
+    },
+    "e3BgColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#fff",
+        "hover": ""
+      }
+    },
+    "e3BgGt": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#fff",
+        "hover": ""
+      }
+    },
+    "e3Border": {
+      "type": "object"
+    },
+    "e3BoxShadow": {
+      "type": "object"
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

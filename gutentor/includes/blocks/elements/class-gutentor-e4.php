@@ -61,120 +61,6 @@ if ( ! class_exists( 'Gutentor_E4' ) ) {
 		}
 
 		/**
-		 * Google Map Attributes Default Value
-		 *
-		 * @since      1.0.0
-		 * @package    Gutentor
-		 * @author     Gutentor <info@gutentor.com>
-		 */
-		public function get_default_values() {
-			$google_map_attr = array(
-				'id'               => '',
-				'blockID'          => '',
-				'gID'              => '',
-				'e4Loc'            => 'La Sagrada Familia, Barcelona, Spain',
-				'e4Lat'            => '41.4036299',
-				'e4Lon'            => '2.1743558000000576',
-				'e4Type'           => 'roadmap',
-				'e4Zoom'           => 15,
-				'e4Height'         => array(
-					'type'    => 'px',
-					'desktop' => '250',
-					'tablet'  => '250',
-					'mobile'  => '150',
-				),
-				'e4Draggable'      => true,
-				'e4TypeCtrl'       => true,
-				'e4ZoomCtrl'       => true,
-				'e4FullScrCtrl'    => true,
-				'e4StreetViewCtrl' => true,
-				'e4Markers'        => array(),
-			);
-			$google_map_attr = apply_filters( 'gutentor_element_google_map_get_default_values', $google_map_attr );
-			return $google_map_attr;
-		}
-
-		/**
-		 * Returns attributes for this Block
-		 *
-		 * @static
-		 * @access public
-		 * @since 1.0.0
-		 * @return array
-		 */
-		protected function get_attrs() {
-			$google_map_attr = array(
-				'id'               => array(
-					'type' => 'string',
-				),
-				'blockID'          => array(
-					'type' => 'string',
-				),
-				'gID'              => array(
-					'type' => 'string',
-				),
-				'gName'            => array(
-					'type'    => 'string',
-					'default' => 'gutentor/e4',
-				),
-				'e4Loc'            => array(
-					'type'    => 'string',
-					'default' => 'La Sagrada Familia, Barcelona, Spain',
-				),
-				'e4Lat'            => array(
-					'type'    => 'string',
-					'default' => '41.4036299',
-				),
-				'e4Lon'            => array(
-					'type'    => 'string',
-					'default' => '2.1743558000000576',
-				),
-				'e4Type'           => array(
-					'type'    => 'string',
-					'default' => 'roadmap',
-				),
-				'e4Zoom'           => array(
-					'type'    => 'number',
-					'default' => 15,
-				),
-				'e4Height'         => array(
-					'type'    => 'object',
-					'default' => array(
-						'type'    => 'px',
-						'desktop' => '250',
-						'tablet'  => '250',
-						'mobile'  => '150',
-					),
-				),
-				'e4Draggable'      => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'e4TypeCtrl'       => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'e4ZoomCtrl'       => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'e4FullScrCtrl'    => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'e4StreetViewCtrl' => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'e4Markers'        => array(
-					'type'    => 'object',
-					'default' => array(),
-				),
-			);
-			return array_merge_recursive( $google_map_attr, $this->get_element_common_attrs() );
-		}
-
-		/**
 		 * Render Google Map Data
 		 *
 		 * @since    1.0.1
@@ -190,27 +76,24 @@ if ( ! class_exists( 'Gutentor_E4' ) ) {
 			$class   = 'gutentor-google-map';
 
 			$default_class = gutentor_block_add_default_classes( 'gutentor-e4', $attributes );
-
-			if ( isset( $attributes['className'] ) ) {
-				$class .= ' ' . $default_class;
-			}
+			$class        .= ' ' . $default_class;
 
 			$align = isset( $attributes['align'] ) ? 'align' . $attributes['align'] : '';
 			$tag   = 'div';
 
 			$local_attr                      = array();
 			$local_attr['id']                = $id;
-			$local_attr['location']          = $attributes['e4Loc'];
-			$local_attr['latitude']          = $attributes['e4Lat'];
-			$local_attr['longitude']         = $attributes['e4Lon'];
-			$local_attr['zoom']              = $attributes['e4Zoom'];
-			$local_attr['type']              = $attributes['e4Type'];
-			$local_attr['draggable']         = $attributes['e4Draggable'];
-			$local_attr['mapTypeControl']    = $attributes['e4TypeCtrl'];
-			$local_attr['zoomControl']       = $attributes['e4ZoomCtrl'];
-			$local_attr['fullscreenControl'] = $attributes['e4FullScrCtrl'];
-			$local_attr['streetViewControl'] = $attributes['e4StreetViewCtrl'];
-			$local_attr['markers']           = $attributes['e4Markers'];
+			$local_attr['location']          = isset( $attributes['e4Loc'] ) ? $attributes['e4Loc'] : 'La Sagrada Familia, Barcelona, Spain';
+			$local_attr['latitude']          = isset( $attributes['e4Lat'] ) ? $attributes['e4Lat'] : '41.4036299';
+			$local_attr['longitude']         = isset( $attributes['e4Lon'] ) ? $attributes['e4Lon'] : '2.1743558000000576';
+			$local_attr['zoom']              = isset( $attributes['e4Zoom'] ) ? $attributes['e4Zoom'] : 15;
+			$local_attr['type']              = isset( $attributes['e4Type'] ) ? $attributes['e4Type'] : 'roadmap';
+			$local_attr['draggable']         = isset( $attributes['e4Draggable'] ) ? $attributes['e4Draggable'] : true;
+			$local_attr['mapTypeControl']    = isset( $attributes['e4TypeCtrl'] ) ? $attributes['e4TypeCtrl'] : true;
+			$local_attr['zoomControl']       = isset( $attributes['e4ZoomCtrl'] ) ? $attributes['e4ZoomCtrl'] : true;
+			$local_attr['fullscreenControl'] = isset( $attributes['e4FullScrCtrl'] ) ? $attributes['e4FullScrCtrl'] : true;
+			$local_attr['streetViewControl'] = isset( $attributes['e4StreetViewCtrl'] ) ? $attributes['e4StreetViewCtrl'] : true;
+			$local_attr['markers']           = isset( $attributes['e4Markers'] ) ? $attributes['e4Markers'] : array();
 
 			$block_animation_attrs = isset( $attributes['eAnimation'] ) ? $attributes['eAnimation'] : '';
 
@@ -222,12 +105,10 @@ if ( ! class_exists( 'Gutentor_E4' ) ) {
 			$output  = '<' . $tag . ' class="' . esc_attr( apply_filters( 'gutentor_save_element_class', $map_section_class, $attributes ) ) . '" id="section-' . esc_attr( $blockID ) . '"   ' . GutentorAnimationOptionsDataAttr( $block_animation_attrs ) . '>' . "\n";
 			$output .= '<div class="' . esc_attr( apply_filters( 'gutentor_save_grid_row_class', gutentor_concat_space( esc_attr( $class ), 'gutentor-grid-item-wrap' ), $attributes ) ) . '" id="' . esc_attr( $id ) . '"></div>' . "\n";
 			$output .= '</' . $tag . '>' . "\n";
-			$output .= '<script type="text/javascript">' . "\n";
-			$output .= '	/* <![CDATA[ */' . "\n";
-			$output .= '		if ( ! window.gutentorGoogleMaps ) window.gutentorGoogleMaps =[];' . "\n";
-			$output .= '		window.gutentorGoogleMaps.push( { container: "' . esc_attr( $id ) . '", attributes: ' . wp_json_encode( $local_attr ) . ' } );' . "\n";
-			$output .= '	/* ]]> */' . "\n";
-			$output .= '</script>' . "\n";
+
+			$map_data = 'if ( ! window.gutentorGoogleMaps ) window.gutentorGoogleMaps = [];' . "\n";
+			$map_data .= 'window.gutentorGoogleMaps.push( { container: "' . esc_js( $id ) . '", attributes: ' . wp_json_encode( $local_attr ) . ' } );';
+			wp_add_inline_script( 'gutentor-google-maps', $map_data, 'before' );
 
 			return $output;
 		}

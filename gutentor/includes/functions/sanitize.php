@@ -8,6 +8,8 @@ if ( ! function_exists( 'gutentor_sanitize_color' ) ) :
 	 * Color sanitization callback
 	 * https://wordpress.stackexchange.com/questions/257581/escape-hexadecimals-rgba-values
 	 *
+	 * @param mixed $color
+	 * @return string
 	 * @since 1.0.0
 	 */
 	function gutentor_sanitize_color( $color ) {
@@ -34,10 +36,10 @@ if ( ! function_exists( 'gutentor_sanitize_field_background' ) ) :
 	/**
 	 * Sanitize Field Background
 	 *
-	 * @since Gutentor 1.0.0
-	 *
-	 * @param $input
+	 * @param mixed $input
+	 * @param mixed $gutentor_setting
 	 * @return array
+	 * @since Gutentor 1.0.0
 	 */
 	function gutentor_sanitize_field_background( $input, $gutentor_setting ) {
 
@@ -114,8 +116,11 @@ if ( ! function_exists( 'gutentor_sanitize_field_background' ) ) :
 endif;
 
 if ( ! function_exists( 'gutentor_sanitize_checkbox' ) ) :
-	/*
+	/**
 	 * Boolean check.
+	 *
+	 * @param mixed $checked
+	 * @return bool
 	 * @since 2.1.0
 	 */
 	function gutentor_sanitize_checkbox( $checked ) {
@@ -124,8 +129,11 @@ if ( ! function_exists( 'gutentor_sanitize_checkbox' ) ) :
 endif;
 
 if ( ! function_exists( 'gutentor_sanitize_array' ) ) :
-	/*
+	/**
 	 * Array check.
+	 *
+	 * @param mixed $checked
+	 * @return array
 	 * @since 2.1.0
 	 */
 	function gutentor_sanitize_array( $checked ) {

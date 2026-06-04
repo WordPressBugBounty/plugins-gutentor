@@ -14,6 +14,24 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 	class Gutentor_Featured extends Gutentor_Query_Elements {
 
 		/**
+		 * Number of posts or terms used by the featured template set.
+		 *
+		 * @access protected
+		 * @since 2.0.5
+		 * @var int
+		 */
+		protected $number = 0;
+
+		/**
+		 * Template identifier used by the featured template set.
+		 *
+		 * @access protected
+		 * @since 2.0.5
+		 * @var int
+		 */
+		protected $template = 0;
+
+		/**
 		 * Gets an instance of this object.
 		 * Prevents duplicate instances which avoid interface and improves performance.
 		 *
@@ -111,11 +129,11 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 		/**
 		 * Check if P2
 		 *
-		 * @param {array} output
-		 *
-		 * @return {boolean}
-		 */
-		public function isP2( $attributes ) {
+	 * @param array $attributes Block attributes.
+	 *
+	 * @return bool
+	 */
+	public function isP2( $attributes ) {
 			$block_name = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
 			if ( 'gutentor/p2' !== $block_name ) {
 				return false;
@@ -134,11 +152,11 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 		/**
 		 * Check if T2
 		 *
-		 * @param {array} output
-		 *
-		 * @return {boolean}
-		 */
-		public function isT2( $attributes ) {
+	 * @param array $attributes Block attributes.
+	 *
+	 * @return bool
+	 */
+	public function isT2( $attributes ) {
 			$block_name = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
 			if ( 'gutentor/t2' !== $block_name ) {
 				return false;
@@ -157,12 +175,12 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 		/**
 		 * Get Single block
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
-		 */
-		public function p2_single_article( $post, $attributes, $index ) {
+		 * @param object $post
+		 * @param array $attributes
+	 * @param int $index
+	 * @return string
+	 */
+	public function p2_single_article( $post, $attributes, $index ) {
 			$output              = '';
 			$enable_post_format  = isset( $attributes['pOnPostFormatOpt'] ) && $attributes['pOnPostFormatOpt'];
 			$post_format_pos     = ( isset( $attributes['pPostFormatPos'] ) ) ? $attributes['pPostFormatPos'] : false;
@@ -307,18 +325,17 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 		/**
 		 * Get Woo Single block
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
-		 */
-		public function p2_woo_single_article( $post, $attributes, $index ) {
+		 * @param object $post
+		 * @param array $attributes
+	 * @param int $index
+	 * @return string
+	 */
+	public function p2_woo_single_article( $post, $attributes, $index ) {
 
 			$output = '';
 			if ( ! gutentor_is_woocommerce_active() ) {
 				return $output;
 			}
-
 			$product     = wc_get_product( $post->ID );
 			$rating      = $product->get_average_rating();
 			$count       = $product->get_rating_count();
@@ -329,7 +346,6 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 			$cat_pos             = ( isset( $attributes['pPostCatPos'] ) ) ? $attributes['pPostCatPos'] : false;
 			$enable_featured_cat = isset( $attributes['pOnFeaturedCat'] ) && $attributes['pOnFeaturedCat'];
 			$output             .= "<article class='" . esc_attr( apply_filters( 'gutentor_post_module_article_class', gutentor_concat_space( 'gutentor-post gtf-item-wrap', 'gutentor-post-item-' . $index, 'gtf-item-' . $index ), $attributes ) ) . "'>";
-			$output             .= "<div class='" . esc_attr( apply_filters( 'gutentor_post_module_post_item', gutentor_concat_space( 'gutentor-post-item', 'gtf-item' ), $attributes ) ) . "'>";
 
 			$enable_overlayImage = false;
 			$overlayImage        = isset( $attributes['pFImgOColor'] ) && $attributes['pFImgOColor'];
@@ -406,12 +422,12 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 		/**
 		 * Get Edd Single block
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
-		 */
-		public function p2_edd_single_article( $post, $attributes, $index ) {
+		 * @param object $post
+		 * @param array $attributes
+	 * @param int $index
+	 * @return string
+	 */
+	public function p2_edd_single_article( $post, $attributes, $index ) {
 			if ( ! gutentor_is_edd_active() ) {
 				return '';
 			}
@@ -483,16 +499,14 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 		}
 
 		/**
-		 * Featured Post type template
-		 *
-		 * @param {string} $data
-		 * @param {object} $post
-		 * @param {array}  $attributes
-		 * @return {mix}
-		 *
-		 * @return {boolean}
-		 */
-		public function featured_post_type_template( $post, $attributes, $index ) {
+	 * Featured Post type template
+	 *
+	 * @param object $post
+	 * @param array $attributes
+	 * @param int $index
+	 * @return string
+	 */
+	public function featured_post_type_template( $post, $attributes, $index ) {
 			$post_type = ( isset( $attributes['pPostType'] ) ) ? $attributes['pPostType'] : 'post';
 			if ( 'product' === $post_type ) {
 				return $this->p2_woo_single_article( $post, $attributes, $index );
@@ -505,14 +519,14 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 		}
 
 		/**
-		 * Get T2 Single item
-		 *
-		 * @param {string} $data
-		 * @param {array}  $term
-		 * @param {array}  $attributes
-		 * @return {mix}
-		 */
-		public function t2_single_article( $term, $attributes, $index ) {
+	 * Get T2 Single item
+	 *
+	 * @param object $term
+	 * @param array $attributes
+	 * @param int $index
+	 * @return string
+	 */
+	public function t2_single_article( $term, $attributes, $index ) {
 			$output         = '';
 			$no_thumb       = '';
 			$bg_image       = '';

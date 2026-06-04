@@ -15,14 +15,14 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		/**
 		 * Rest route namespace.
 		 *
-		 * @var Gutentor_Self_Api_Handler
+		 * @var string
 		 */
 		public $namespace = 'gutentor-self-api/';
 
 		/**
 		 * Rest route version.
 		 *
-		 * @var Gutentor_Self_Api_Handler
+		 * @var string
 		 */
 		public $version = 'v1';
 
@@ -946,9 +946,9 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 						'callback'            => array( $this, 'popup' ),
 						'args'                => array(
 							'condition' => array(
-								'type'              => 'string',
+								'type'              => 'array',
 								'required'          => false,
-								'sanitize_callback' => array( $this, 'sanitize_text_param' ),
+								'sanitize_callback' => array( $this, 'sanitize_condition_param' ),
 								'validate_callback' => array( $this, 'validate_condition_param' ),
 							),
 						),
@@ -963,9 +963,11 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return string
 		 */
-		public function sanitize_text_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_text_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value ) {
 				return '';
 			}
@@ -974,13 +976,36 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		}
 
 		/**
+		 * Sanitize popup condition input.
+		 *
+		 * @since 3.5.6
+		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
+		 * @return array
+		 */
+		public function sanitize_condition_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+			if ( null === $value || '' === $value ) {
+				return array();
+			}
+
+			if ( ! is_array( $value ) ) {
+				return array();
+			}
+
+			return map_deep( $value, array( $this, 'sanitize_text_param' ) );
+		}
+
+		/**
 		 * Validate that a parameter is a positive integer.
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_positive_int_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_positive_int_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return is_numeric( $value ) && absint( $value ) > 0;
 		}
 
@@ -989,9 +1014,11 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_block_id_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_block_id_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_string( $value ) ) {
 				return false;
 			}
@@ -1004,9 +1031,11 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_simple_string_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_simple_string_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1019,14 +1048,16 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_condition_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_condition_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
 
-			return is_string( $value ) && strlen( $value ) <= 1000;
+			return is_array( $value );
 		}
 
 		/**
@@ -1034,9 +1065,11 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_settings_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_settings_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return is_array( $value ) && ! empty( $value );
 		}
 
@@ -1049,7 +1082,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_post_type_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_type_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_string( $value ) || '' === $value ) {
 				return false;
 			}
@@ -1066,7 +1099,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_post_type_param_optional( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_type_param_optional( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1083,7 +1116,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_taxonomy_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_taxonomy_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_string( $value ) || '' === $value ) {
 				return false;
 			}
@@ -1100,7 +1133,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_taxonomy_param_optional( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_taxonomy_param_optional( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1117,7 +1150,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_non_negative_int_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_non_negative_int_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1134,7 +1167,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_csv_ids_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_csv_ids_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1155,7 +1188,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_orderby_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_orderby_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1177,7 +1210,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_order_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_order_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1199,7 +1232,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_term_orderby_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_term_orderby_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1221,7 +1254,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_taxonomies_csv_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_taxonomies_csv_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1255,7 +1288,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_boolean_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_boolean_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1285,7 +1318,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_tax_operator_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_tax_operator_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1308,7 +1341,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_relation_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_relation_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1330,7 +1363,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_post_status_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_status_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1352,7 +1385,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_perm_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_perm_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1373,7 +1406,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_json_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_json_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1391,9 +1424,11 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return array
 		 */
-		public function sanitize_settings_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_settings_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return is_array( $value ) ? $value : array();
 		}
 
@@ -1402,9 +1437,11 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return array
 		 */
-		public function sanitize_post_type_args_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_post_type_args_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( is_string( $value ) ) {
 				$decoded = json_decode( $value, true );
 				if ( JSON_ERROR_NONE === json_last_error() ) {
@@ -1456,9 +1493,11 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_post_type_args_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_type_args_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1521,6 +1560,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * Function to fetch templates.
 		 *
 		 * @return array|bool|\WP_Error
+		 * @param \WP_REST_Request $request
 		 */
 		public function max_num_pages( \WP_REST_Request $request ) {
 			$query_args = array(
@@ -1562,6 +1602,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * Function to fetch templates.
 		 *
 		 * @return array|bool|\WP_Error
+		 * @param \WP_REST_Request $request
 		 */
 		public function gadvancedb( \WP_REST_Request $request ) {
 			$paged          = $request->get_param( 'paged' );
@@ -1594,21 +1635,9 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 					$blocks = parse_blocks( $content );
 					$pBlock = gutentor_get_block_by_id( $blocks, $blockId );
 
-					/*Get Default Attributes*/
-					if ( 'gutentor/p6' === $innerBlockType ) {
-						$p_attr = Gutentor_P6::get_instance()->get_attrs();
-					} else {
-						$p_attr = Gutentor_P1::get_instance()->get_attrs();
-					}
-					$common_attr      = gutentor_block_base()->get_common_attrs();
-					$default_pre_attr = array_merge( $p_attr, $common_attr );
-					$default_attr     = array();
-					foreach ( $default_pre_attr as $key => $value ) {
-						if ( isset( $value['default'] ) ) {
-							$default_attr[ $key ] = $value['default'];
-						}
-					}
-					$final_attrs          = array_merge( $default_attr, $pBlock['attrs'] );
+					/*Get Default Attributes from block.json*/
+					$default_attr = gutentor_get_block_default_attrs( $innerBlockType );
+					$final_attrs  = array_merge( $default_attr, $pBlock['attrs'] );
 					$final_attrs['paged'] = $paged;
 					if ( $term && $term !== 'default' ) {
 						if ( $term !== 'gAll' ) {
@@ -1694,6 +1723,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * Function to fetch authors.
 		 *
 		 * T
+		 * @param \WP_REST_Request $request
 		 */
 		public function get_authors( \WP_REST_Request $request ) {
 			$post_type = $request->get_param( 'post_type' );
@@ -1714,7 +1744,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 				$post_type
 			);
 
-			$all_authors = $wpdb->get_results( $query );
+			$all_authors = $wpdb->get_results( $query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared via $wpdb->prepare() above; direct query needed for author aggregation.
 
 			$final_data = array();
 			if ( $all_authors ) {
@@ -1732,6 +1762,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 
 		/**
 		 * Function to fetch authors.
+		 * @param \WP_REST_Request $request
 		 */
 		public function get_all_author( \WP_REST_Request $request ) {
 			global $wpdb;
@@ -1745,6 +1776,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
                 ORDER BY post_count DESC
             ";
 
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared -- Hardcoded query with no user input; direct query needed for author aggregation.
 			$all_authors = $wpdb->get_results( $query );
 
 			$final_data = array();
@@ -1763,6 +1795,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 
 		/**
 		 * Function to fetch tax terms.
+		 * @param \WP_REST_Request $request
 		 */
 		public function tax( \WP_REST_Request $request ) {
 			$post_type  = $request->get_param( 'post_type' );
@@ -1779,6 +1812,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 
 		/**
 		 * Function to fetch tax terms.
+		 * @param \WP_REST_Request $request
 		 */
 		public function get_taxonomies( \WP_REST_Request $request ) {
 			$args       = array(
@@ -1798,6 +1832,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 
 		/**
 		 * Function to fetch tax terms.
+		 * @param \WP_REST_Request $request
 		 */
 		public function tex_terms( \WP_REST_Request $request ) {
 			$tax         = $request->get_param( 'tax' );
@@ -1817,6 +1852,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 
 		/**
 		 * Function to fetch tax terms.
+		 * @param \WP_REST_Request $request
 		 */
 		public function get_terms( \WP_REST_Request $request ) {
 			$taxonomy     = $request->get_param( 'taxonomy' );
@@ -1917,6 +1953,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 
 		/**
 		 * Function to fetch tax terms.
+		 * @param \WP_REST_Request $request
 		 */
 		public function get_post_type_posts( \WP_REST_Request $request ) {
 			$post_type   = $request->get_param( 'postType' );
@@ -2199,7 +2236,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			/*Date guid*/
 			$data['guid'] = array(
 				/** This filter is documented in wp-includes/post-template.php */
-				'rendered' => apply_filters( 'get_the_guid', $post->guid, $post->ID ),
+				'rendered' => apply_filters( 'get_the_guid', $post->guid, $post->ID ), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WP core filter invocation.
 				'raw'      => $post->guid,
 			);
 
@@ -2214,7 +2251,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			}
 			$data['modified_gmt'] = $this->prepare_date_response( $post_modified_gmt );
 
-			/*Passeord*/
+			/*Password*/
 			$data['password'] = $post->post_password;
 
 			/*Slug*/
@@ -2251,7 +2288,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 
 			}
 
-			$data['content']['rendered']      = post_password_required( $post ) ? '' : apply_filters( 'the_content', $post->post_content );
+			$data['content']['rendered']      = post_password_required( $post ) ? '' : apply_filters( 'the_content', $post->post_content ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WP core filter invocation.
 			$data['content']['protected']     = (bool) $post->post_password;
 			$data['content']['block_version'] = block_version( $post->post_content );
 
@@ -2284,7 +2321,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			/*Is sticky*/
 			$data['sticky'] = is_sticky( $post->ID );
 
-			/*Tempalate*/
+			/*Template*/
 			$template = get_page_template_slug( $post->ID );
 			if ( $template ) {
 				$data['template'] = $template;
@@ -2892,7 +2929,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 					}
 					$g_options[ $key ] = $value;
 				}
-				do_action( 'set_gutentor_settings_options', $g_options );
+				do_action( 'gutentor_set_settings_options', $g_options );
 				update_option( 'gutentor_settings_options', $g_options );
 				return rest_ensure_response( gutentor_get_options() );
 			}
@@ -2958,6 +2995,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
                 AND meta_key NOT REGEXP BINARY '(^[0-9]+$)'
             ";
 
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared via $wpdb->prepare(); direct query needed for meta key discovery; transient caching used below.
 			$normal_meta = $wpdb->get_col( $wpdb->prepare( $query, $post_type ) );
 
 			if ( function_exists( 'gutentor_get_acf_fields_by_location' ) ) {
@@ -3013,6 +3051,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
             AND $wpdb->termmeta.meta_key NOT REGEXP '(^[_0-9].+$)' 
             AND $wpdb->termmeta.meta_key NOT REGEXP '(^[0-9]+$)'";
 
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared via $wpdb->prepare(); direct query needed for term meta key discovery; transient caching used below.
 			$normal_meta = $wpdb->get_col( $wpdb->prepare( $query, $taxonomy ) );
 
 			if ( function_exists( 'gutentor_get_acf_fields_by_location' ) ) {
@@ -3040,6 +3079,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * Function to popup.
 		 *
 		 * @return array|bool|\WP_Error
+		 * @param \WP_REST_Request $request
 		 */
 		public function popup( \WP_REST_Request $request ) {
 			if ( ! function_exists( 'gutentor_template' ) ) {
@@ -3049,6 +3089,9 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 				return false;
 			}
 			$page_conditions = $request->get_param( 'condition' );
+			if ( ! is_array( $page_conditions ) ) {
+				$page_conditions = array();
+			}
 
 			$popup_data = gutentor_template()->get_popup_data( $page_conditions );
 			return rest_ensure_response( $popup_data );

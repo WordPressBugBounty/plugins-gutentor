@@ -39,6 +39,11 @@ if ( ! class_exists( 'Gutentor_Term_Modules_Hooks' ) ) {
 		 * Add Filter
 		 *
 		 * @access public
+		 * @param string $hook Hook name.
+		 * @param object $component Object instance that owns the callback.
+		 * @param string $callback Callback method name on the component.
+		 * @param int    $priority Hook priority.
+		 * @param int    $accepted_args Number of accepted callback args.
 		 * @return void
 		 * @since 2.0.0
 		 */
@@ -50,6 +55,11 @@ if ( ! class_exists( 'Gutentor_Term_Modules_Hooks' ) ) {
 		 * Add Action
 		 *
 		 * @access public
+		 * @param string $hook Hook name.
+		 * @param object $component Object instance that owns the callback.
+		 * @param string $callback Callback method name on the component.
+		 * @param int    $priority Hook priority.
+		 * @param int    $accepted_args Number of accepted callback args.
 		 * @return void
 		 * @since 2.0.0
 		 */
@@ -72,9 +82,9 @@ if ( ! class_exists( 'Gutentor_Term_Modules_Hooks' ) ) {
 		/**
 		 * Adding Align class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_item_post_align_class( $output, $attributes ) {
 

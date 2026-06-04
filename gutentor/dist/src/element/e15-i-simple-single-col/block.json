@@ -1,0 +1,121 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e15",
+  "title": "Single Column",
+  "description": "A simple single column to control width.",
+  "category": "gutentor-elements",
+  "keywords": [],
+  "textdomain": "gutentor",
+  "attributes": {
+    "e15Col": {
+      "type": "number",
+      "default": 3
+    },
+    "e15Layout": {
+      "type": "object",
+      "default": {
+        "d": "fiveFiveTwo",
+        "t": "fiveFiveTwo",
+        "m": "fiveFiveTwo"
+      }
+    },
+    "e15Index": {
+      "type": "number",
+      "default": 0
+    },
+    "e15ColWidth": {
+      "type": "object",
+      "default": {
+        "d": [33, 33, 34],
+        "t": [33, 33, 34],
+        "m": [33, 33, 34]
+      }
+    },
+    "mBGType": {
+      "type": "string"
+    },
+    "mBGImageSrc": {
+      "type": "string",
+      "default": "self-hosted-local"
+    },
+    "mBGImage": {
+      "type": "object"
+    },
+    "mBGImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mBGImageSizeType": {
+      "type": "string",
+      "default": "full"
+    },
+    "mBGVideoSrc": {
+      "type": "string",
+      "default": "self-hosted-local"
+    },
+    "mBGVideo": {
+      "type": "object"
+    },
+    "mBGVideoUrl": {
+      "type": "string",
+      "default": "https://www.youtube.com/watch?v=bGMi7L78hVk"
+    },
+    "mBGColor": {
+      "type": "object"
+    },
+    "mBGGradient": {
+      "type": "string"
+    },
+    "mBGImgSize": {
+      "type": "string"
+    },
+    "mBGImgPos": {
+      "type": "string"
+    },
+    "mBGImgRepeat": {
+      "type": "string"
+    },
+    "mBGImgAttach": {
+      "type": "string"
+    },
+    "mBGVideoLoop": {
+      "type": "boolean",
+      "default": true
+    },
+    "mBGVideoMute": {
+      "type": "boolean",
+      "default": true
+    },
+    "mOnOverlay": {
+      "type": "boolean",
+      "default": false
+    },
+    "mOverlayColor": {
+      "type": "object"
+    },
+    "mOCGradient": {
+      "type": "string"
+    },
+    "mBxBorder": {
+      "type": "object"
+    },
+    "mMargin": {
+      "type": "object"
+    },
+    "mPadding": {
+      "type": "object"
+    },
+    "mBxShadow": {
+      "type": "object"
+    },
+    "mHideColSpace": {
+      "type": "object"
+    }
+  },
+  "supports": {
+    "inserter": false,
+    "reusable": false,
+    "html": false
+  }
+}

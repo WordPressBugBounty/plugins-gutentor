@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * Class for adding Reusable Block Widget
  *
@@ -133,9 +136,9 @@ if ( ! class_exists( 'Gutentor_WP_Block_Widget' ) ) {
 			$title       = apply_filters( 'widget_title', ! empty( $instance['title'] ) ? $instance['title'] : '', $instance, $this->id_base );
 			$wp_block_id = absint( $instance['wp_block_id'] );
 
-			echo $args['before_widget'];
+			echo wp_kses_post( $args['before_widget'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Widget args are set by the theme.
 			if ( ! empty( $title ) ) {
-				echo $args['before_title'] . esc_html( $title ) . $args['after_title'];
+				echo wp_kses_post( $args['before_title'] ) . esc_html( $title ) . wp_kses_post( $args['after_title'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Widget args are set by the theme.
 			}
 			if ( ! empty( $wp_block_id ) ) :
 				$g_args  = array(
@@ -179,7 +182,7 @@ if ( ! class_exists( 'Gutentor_WP_Block_Widget' ) ) {
 				endif;
 				wp_reset_postdata();
 			endif;
-			echo $args['after_widget'];
+			echo wp_kses_post( $args['after_widget'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Widget args are set by the theme.
 		}
 
 		/**
@@ -188,9 +191,8 @@ if ( ! class_exists( 'Gutentor_WP_Block_Widget' ) ) {
 		 * @since    2.1.2
 		 * @access   public
 		 *
-		 * @param null
-		 * @return void
-		 */
+	 * @return void
+	 */
 		function scripts() {
 			if ( ! is_active_widget( false, false, $this->id_base, true ) ) {
 				return;
@@ -245,12 +247,10 @@ if ( ! class_exists( 'Gutentor_WP_Block_Widget' ) ) {
 
 		/**
 		 * Add missing assets if any
-		 * Reference from Gutentor_Dynamic_CSS -> get_blocks_css
 		 *
 		 * @since    3.0.0
 		 * @access   public
 		 *
-		 * @param null
 		 * @return void
 		 */
 		public function add_missing_assets() {
@@ -349,11 +349,13 @@ if ( ! class_exists( 'Gutentor_WP_Block_Widget' ) ) {
 				foreach ( $this->used_blocks as $used_block ) {
 					$style = get_post_meta( $used_block, 'gutentor_dynamic_css', true );
 
-					if ( get_post_meta( $used_block, 'gutentor_gfont_url', true ) ) {
+				if ( get_post_meta( $used_block, 'gutentor_gfont_url', true ) ) {
 						$fonts_url = get_post_meta( $used_block, 'gutentor_gfont_url', true );
-						echo '<link id="gutentor-google-fonts-' . esc_attr( $used_block ) . '" href="' . esc_url( $fonts_url ) . '" rel="stylesheet" />';
+						wp_register_style( 'gutentor-widget-google-fonts-' . $used_block, esc_url( $fonts_url ), array(), GUTENTOR_VERSION );
+						wp_enqueue_style( 'gutentor-widget-google-fonts-' . $used_block );
 					}
-					echo "<!-- Dynamic CSS -->\n<style type=\"text/css\" id='gutentor-used-block-$used_block'>\n" . wp_strip_all_tags( $style ) . "\n</style>";
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output inside style tag, sanitized with wp_strip_all_tags.
+					echo "<!-- Dynamic CSS -->\n<style type=\"text/css\" id='gutentor-used-block-" . esc_attr( $used_block ) . "'>\n" . wp_strip_all_tags( $style ) . "\n</style>";
 
 				}
 			}

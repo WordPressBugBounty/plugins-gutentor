@@ -50,10 +50,10 @@ if ( ! class_exists( 'Gutentor_T1_Templates' ) ) {
 		/**
 		 * Load Grid Template 1
 		 *
-		 * @param {string} $data
-		 * @param {array}  $term
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Term $term
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_t1_grid_template1( $data, $term, $attributes ) {
 			$query_sorting       = array_key_exists( 'blockSortableItems', $attributes ) ? $attributes['blockSortableItems'] : false;
@@ -94,10 +94,10 @@ if ( ! class_exists( 'Gutentor_T1_Templates' ) ) {
 		/**
 		 * Load List Template 1
 		 *
-		 * @param {string} $data
-		 * @param {array}  $term
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Term $term
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_t1_list_template1( $data, $term, $attributes ) {
 
@@ -143,10 +143,10 @@ if ( ! class_exists( 'Gutentor_T1_Templates' ) ) {
 		/**
 		 * Template 2
 		 *
-		 * @param {string} $data
-		 * @param {array}  $term
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Term $term
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_t1_template2( $data, $term, $attributes ) {
 			$url            = array();
@@ -194,10 +194,10 @@ if ( ! class_exists( 'Gutentor_T1_Templates' ) ) {
 		/**
 		 * Load Template 1
 		 *
-		 * @param {string} $data
-		 * @param {array}  $term
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Term $term
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_t1_template1( $data, $term, $attributes ) {
 
@@ -214,10 +214,11 @@ if ( ! class_exists( 'Gutentor_T1_Templates' ) ) {
 		/**
 		 * Blog Post Templates
 		 *
-		 * @param {string} $data
-		 * @param {array}  $term
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Term $term
+		 * @param array $attributes
+		 * @param int $index
+		 * @return string
 		 */
 		public function load_blog_post_template( $data, $term, $attributes, $index ) {
 

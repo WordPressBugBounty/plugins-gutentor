@@ -73,6 +73,11 @@ if ( ! class_exists( 'Gutentor_P3_Hooks' ) ) {
 		 * Add Filter
 		 *
 		 * @access public
+		 * @param string $hook Hook name.
+		 * @param object $component Object instance that owns the callback.
+		 * @param string $callback Callback method name on the component.
+		 * @param int    $priority Hook priority.
+		 * @param int    $accepted_args Number of accepted callback args.
 		 * @since 2.0.0
 		 * @return void
 		 */
@@ -84,6 +89,11 @@ if ( ! class_exists( 'Gutentor_P3_Hooks' ) ) {
 		 * Add Action
 		 *
 		 * @access public
+		 * @param string $hook Hook name.
+		 * @param object $component Object instance that owns the callback.
+		 * @param string $callback Callback method name on the component.
+		 * @param int    $priority Hook priority.
+		 * @param int    $accepted_args Number of accepted callback args.
 		 * @since 2.0.0
 		 * @return void
 		 */
@@ -112,9 +122,9 @@ if ( ! class_exists( 'Gutentor_P3_Hooks' ) ) {
 		/**
 		 * Adding Carousel Class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_carousel_arrow_class( $output, $attributes ) {
 
@@ -154,8 +164,8 @@ if ( ! class_exists( 'Gutentor_P3_Hooks' ) ) {
 		/**
 		 * Adding Container Remove Classes
 		 *
-		 * @param {array} output
-		 * @param {object} props
+		 * @param string $output
+		 * @param array $attributes
 		 * @return string
 		 */
 		public function add_carousel_row( $output, $attributes ) {
@@ -173,9 +183,9 @@ if ( ! class_exists( 'Gutentor_P3_Hooks' ) ) {
 		/**
 		 * Adding Carousel Data
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_carousel_data( $output, $attributes ) {
 			if ( ! isset( $attributes['p1CarouselOpt'] ) || ! $attributes['p1CarouselOpt']['enable'] ) {
@@ -281,9 +291,9 @@ if ( ! class_exists( 'Gutentor_P3_Hooks' ) ) {
 		/**
 		 * Adding carousel class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_carousel_class( $output, $attributes ) {
 
@@ -296,9 +306,9 @@ if ( ! class_exists( 'Gutentor_P3_Hooks' ) ) {
 		/**
 		 * Adding carousel class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_carousel_arrow( $output, $attributes ) {
 

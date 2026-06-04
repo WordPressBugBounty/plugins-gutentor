@@ -16,14 +16,14 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		/**
 		 * Rest route namespace.
 		 *
-		 * @var $namespace
+		 * @var string $namespace
 		 */
 		public $namespace = 'gutentor-dynamic-css/';
 
 		/**
 		 * Rest route version.
 		 *
-		 * @var $version
+		 * @var string $version
 		 */
 		public $version = 'v1';
 
@@ -101,10 +101,10 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 *
 		 * TODO : JS
 		 *
+		 * @param array $localize_data
+		 * @return array
 		 * @since    3.1.9
 		 * @access   public
-		 *
-		 * @return array
 		 */
 		public function render_fse_admin_css( $localize_data ) {
 
@@ -311,7 +311,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 							'gutentor-google-fonts-' . $id,
 							esc_url( $fonts_url ),
 							array(),
-							null // Fonts usually don't need a version query string
+							GUTENTOR_VERSION
 						);
 					}
 				}
@@ -333,10 +333,10 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		/**
 		 * Set unique blocks
 		 *
+		 * @param int $post_id
+		 * @return void
 		 * @since    3.0.0
 		 * @access   public
-		 *
-		 * @return void
 		 */
 		public function set_unique_blocks( $post_id ) {
 			$css_info = get_post_meta( $post_id, 'gutentor_css_info', true );
@@ -360,10 +360,10 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		/**
 		 * Get google font url
 		 *
+		 * @param array $gfonts
+		 * @return string
 		 * @since    1.0.0
 		 * @access   public
-		 *
-		 * @return string
 		 */
 		public function get_google_font_url( $gfonts ) {
 			$fonts_url           = '';
@@ -510,7 +510,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param \WP_REST_Request $request Request object.
 		 * @return bool
 		 */
-		public function validate_post_id_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_id_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -530,7 +530,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return bool
 		 */
-		public function validate_dynamic_css_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_dynamic_css_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return is_array( $value ) && isset( $value['css'] );
 		}
 
@@ -541,7 +541,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return array
 		 */
-		public function sanitize_dynamic_css_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_dynamic_css_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) ) {
 				return array(
 					'css'    => '',
@@ -562,7 +562,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return bool
 		 */
-		public function validate_blocks_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_blocks_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return is_array( $value );
 		}
 
@@ -573,7 +573,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return array
 		 */
-		public function sanitize_blocks_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_blocks_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) ) {
 				return array();
 			}
@@ -588,7 +588,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return bool
 		 */
-		public function validate_widgets_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_widgets_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -603,7 +603,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return array
 		 */
-		public function sanitize_widgets_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_widgets_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) ) {
 				return array();
 			}
@@ -622,7 +622,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return bool
 		 */
-		public function validate_tax_terms_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_tax_terms_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) || empty( $value ) ) {
 				return false;
 			}
@@ -643,7 +643,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return array
 		 */
-		public function sanitize_tax_terms_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_tax_terms_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) ) {
 				return array();
 			}
@@ -813,97 +813,12 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 			return $block_css;
 		}
 
-		private function get_blocks_css( $blocks ) {
-			$block_css = '';
-			if ( is_array( $blocks ) ) {
-				/*global*/
-				$block_css .= $this->get_static_css( 'global' );
-
-				/*Slick*/
-				$slick = array(
-					'gutentor/image-slider',
-					'gutentor/m5',
-					'gutentor/m0',
-					'gutentor/p3',
-					'gutentor/t3',
-				);
-				if ( ! empty( array_intersect( $blocks, $slick ) ) ) {
-					$block_css .= $this->get_static_css( 'slick' );
-				}
-
-				/*featured*/
-				$featured = array(
-					'gutentor/t1',
-					'gutentor/t2',
-					'gutentor/p2',
-				);
-				if ( ! empty( array_intersect( $blocks, $featured ) ) ) {
-					$block_css .= $this->get_static_css( 'featured' );
-				}
-
-				/*Post/Tax Type*/
-				$types = array(
-					'gutentor/p1',
-					'gutentor/p2',
-					'gutentor/p3',
-					'gutentor/p4',
-					'gutentor/p5',
-					'gutentor/p6',
-					'gutentor/t1',
-					'gutentor/t2',
-					'gutentor/t3',
-				);
-				if ( ! empty( array_intersect( $blocks, $types ) ) ) {
-					$block_css .= $this->get_static_css( 'global-type' );
-				}
-
-				/*Widget*/
-				$widgets = array(
-					'gutentor/about-block',
-					'gutentor/accordion',
-					'gutentor/author-profile',
-					'gutentor/blog-post',
-					'gutentor/call-to-action',
-					'gutentor/content-box',
-					'gutentor/count-down',
-					'gutentor/counter-box',
-					'gutentor/divider',
-					'gutentor/featured-block',
-					'gutentor/gallery',
-					'gutentor/google-map',
-					'gutentor/icon-box',
-					'gutentor/image-box',
-					'gutentor/image-slider',
-					'gutentor/list',
-					'gutentor/notification',
-					'gutentor/opening-hours',
-					'gutentor/pricing',
-					'gutentor/progress-bar',
-					'gutentor/restaurant-menu',
-					'gutentor/show-more',
-					'gutentor/social',
-					'gutentor/tabs',
-					'gutentor/team',
-					'gutentor/testimonial',
-					'gutentor/timeline',
-					'gutentor/video-popup',
-				);
-				if ( ! empty( array_intersect( $blocks, $widgets ) ) ) {
-					$block_css .= $this->get_static_css( 'global-widget' );
-				}
-
-				foreach ( $blocks as $block ) {
-					$block_css .= $this->get_static_css( $block );
-				}
-			}
-			return $block_css;
-		}
-
 		/**
 		 * Save Post Dynamic CSS
 		 *
-		 * @since    3.1.3
+		 * @param \WP_REST_Request $request
 		 * @return array
+		 * @since    3.1.3
 		 */
 		public function save_post_dcss( $request ) {
 			$message = array();
@@ -987,8 +902,9 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		/**
 		 * Save Widget Dynamic CSS
 		 *
-		 * @since    3.1.3
+		 * @param \WP_REST_Request $request
 		 * @return array
+		 * @since    3.1.3
 		 */
 		public function save_widget_dcss( $request ) {
 			$message = array();
@@ -1060,8 +976,9 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		}
 
 		/**
-		 * Function to fetch template JSON.
+		 * Function to save dynamic CSS.
 		 *
+		 * @param \WP_REST_Request $request
 		 * @return void
 		 */
 		public function save_dynamic_css( $request ) {
@@ -1076,8 +993,9 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		}
 
 		/**
-		 * Function to fetch template JSON.
+		 * Function to get tax term CSS.
 		 *
+		 * @param \WP_REST_Request $request
 		 * @return string
 		 */
 		public function get_tax_term_css( $request ) {
@@ -1190,10 +1108,10 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		/**
 		 * Set all_google_fonts
 		 *
+		 * @param array $block
+		 * @return void
 		 * @since    1.0.0
 		 * @access   public
-		 *
-		 * @return void
 		 */
 		public function google_block_typography_prep( $block ) {
 			if ( ! $this->isGutentorMetaExists() ) {
@@ -1227,10 +1145,10 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		/**
 		 * Prepare $post object for google font url or typography
 		 *
+		 * @param \WP_Post $post
+		 * @return void
 		 * @since    1.1.4
 		 * @access   public
-		 *
-		 * @return void
 		 */
 		public function post_google_typography_prep( $post ) {
 			if ( isset( $post->ID ) ) {
@@ -1283,10 +1201,10 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * Remove style from Gutentor Blocks
 		 * 3.2.6 updates
 		 * Uses:
-		 * 1. Dont remove style tag from blocks while saving
-		 * 2. Dont save style on meta
+		 * 1. Don't remove style tag from blocks while saving
+		 * 2. Don't save style on meta
 		 * 3. DYNAMIC CSS OPTIONS, head,file,inline
-		 * (verson compare check needed)
+		 * (version compare check needed)
 		 * 3.1. if inline is selected return $block_content as it is(it contain style tag and css)
 		 * 3.2. else return $block_content by removing style tag
 		 *
@@ -1295,7 +1213,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 *
 		 * @param string $block_content
 		 * @param array  $block
-		 * @return mixed
+		 * @return string
 		 */
 		public function remove_block_css( $block_content, $block ) {
 			if ( $this->isGutentorMetaExists() ) {
@@ -1311,12 +1229,10 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		/**
 		 * Add Google Fonts
 		 *
+		 * @param bool $head
+		 * @return void|boolean
 		 * @since    1.0.0
 		 * @access   public
-		 *
-		 * @param string $block_content
-		 * @param array  $block
-		 * @return void|boolean
 		 */
 		public function enqueue_google_fonts( $head = false ) {
 			/*FSE CSS for frontend only*/
@@ -1339,10 +1255,11 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 					}
 				}
 				if ( $fonts_url ) {
-					if ( $head ) {
+				if ( $head ) {
+						// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- Conditional early-load font stylesheet.
 						echo '<link id="gutentor-google-fonts" href="' . esc_url( $fonts_url ) . '" rel="stylesheet" />';
 					} else {
-						wp_enqueue_style( 'gutentor-google-fonts', esc_url( $fonts_url ) );
+						wp_enqueue_style( 'gutentor-google-fonts', esc_url( $fonts_url ), array(), GUTENTOR_VERSION );
 					}
 				}
 			}
@@ -1386,9 +1303,10 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 			}
 			if ( $fonts_url ) {
 				if ( $head ) {
+					// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- Conditional early-load font stylesheet.
 					echo '<link id="gutentor-global-google-fonts" href="' . esc_url( $fonts_url ) . '" rel="stylesheet" />';
 				} else {
-					wp_enqueue_style( 'gutentor-global-google-fonts', esc_url( $fonts_url ) );
+					wp_enqueue_style( 'gutentor-global-google-fonts', esc_url( $fonts_url ), array(), GUTENTOR_VERSION );
 				}
 			}
 		}
@@ -1499,7 +1417,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @author     Gutentor <info@gutentor.com>
 		 *
 		 * @param array $blocks
-		 * @return mixed
+		 * @return string
 		 */
 		public function inner_blocks( $blocks ) {
 			$get_style = '';
@@ -1545,7 +1463,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @author     Gutentor <info@gutentor.com>
 		 *
 		 * @param object $this_post
-		 * @return mixed
+		 * @return string
 		 */
 		public function single_stylesheet( $this_post ) {
 
@@ -1577,7 +1495,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @package    Gutentor
 		 * @author     Gutentor <info@gutentor.com>
 		 *
-		 * @return mixed
+		 * @return string
 		 */
 		public function css_prefix( $post = false ) {
 			if ( ! $post ) {
@@ -1596,7 +1514,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @access   public
 		 *
 		 * @param object $post
-		 * @return mixed
+		 * @return string
 		 */
 		public function get_singular_dynamic_css( $post = false ) {
 
@@ -1609,8 +1527,8 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 			} elseif ( is_archive() || is_home() || is_search() ) {
 				global $wp_query;
 				if ( isset( $wp_query->posts ) ) {
-					foreach ( $wp_query->posts as $post ) {
-						$getCSS .= $this->single_stylesheet( $post );
+					foreach ( $wp_query->posts as $query_post ) {
+						$getCSS .= $this->single_stylesheet( $query_post );
 					}
 				}
 			}
@@ -1639,7 +1557,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 			/*
 			 * If new version, just return
 			 *
-			 * Dont load css on new version
+			 * Don't load css on new version
 			 * */
 			if ( $css_info && isset( $css_info['version'] ) ) {
 				return;
@@ -1649,9 +1567,12 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 				?>
 				<style type="text/css">
 					<?php
-					echo gutentor_post_format_colors( true );
-					echo gutentor_post_featured_format_colors( true );
-					echo gutentor_pm_post_categories_color( true );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output in style tag, sanitized with wp_strip_all_tags.
+					echo wp_strip_all_tags( gutentor_post_format_colors( true ) );
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output in style tag, sanitized with wp_strip_all_tags.
+					echo wp_strip_all_tags( gutentor_post_featured_format_colors( true ) );
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output in style tag, sanitized with wp_strip_all_tags.
+					echo wp_strip_all_tags( gutentor_pm_post_categories_color( true ) );
 					?>
 				</style>
 				<?php
@@ -1663,8 +1584,10 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 				?>
 				<style type="text/css" id="g-dc-p1-p2-p6">
 					<?php
-					echo gutentor_post_format_colors( true );
-					echo gutentor_pm_post_categories_color( true );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output in style tag, sanitized with wp_strip_all_tags.
+					echo wp_strip_all_tags( gutentor_post_format_colors( true ) );
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output in style tag, sanitized with wp_strip_all_tags.
+					echo wp_strip_all_tags( gutentor_pm_post_categories_color( true ) );
 					?>
 				</style>
 				<?php
@@ -1673,7 +1596,8 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 				?>
 				<style type="text/css" id="g-dc-p6">
 					<?php
-					echo gutentor_post_featured_format_colors( true );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output in style tag, sanitized with wp_strip_all_tags.
+					echo wp_strip_all_tags( gutentor_post_featured_format_colors( true ) );
 					?>
 				</style>
 				<?php
@@ -1731,8 +1655,9 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 					}
 				}
 
-				// Render CSS in the head
+			// Render CSS in the head.
 				if ( ! empty( $combineCSS ) ) {
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output in style tag, sanitized with wp_strip_all_tags.
 					echo "<!-- Gutentor Dynamic CSS -->\n<style type=\"text/css\" id='gutentor-dynamic-css'>\n" . wp_strip_all_tags( $combineCSS ) . "\n</style>";
 				}
 			} else {
@@ -1761,8 +1686,9 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 					}
 				}
 
-				// Render CSS in the head
+			// Render CSS in the head.
 				if ( ! empty( $combineCSS ) ) {
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output in style tag, sanitized with wp_strip_all_tags.
 					echo "<!-- Gutentor Dynamic CSS -->\n<style type=\"text/css\" id='gutentor-dynamic-css'>\n" . wp_strip_all_tags( $combineCSS ) . "\n</style>";
 				}
 			}
@@ -1777,26 +1703,26 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @since    3.0.0
 		 * @access   public
 		 *
-		 * @param null
-		 * @return void
-		 */
-		public function fix_rtl( $post_id ) {
+	 * @param int|string $post_id
+	 * @return void
+	 */
+	public function fix_rtl( $post_id ) {
 			$is_rtl       = is_rtl() ? '.rtl' : '';
 			$post_content = get_the_content( $post_id ); // Get the post_content
 			preg_match_all( '<!-- /wp:(.*?) -->', $post_content, $blocks ); // Get all matches in between <!-- /wp: --> strings
 
 			if ( is_array( $blocks[1] ) ) {
 				/*global CSS*/
-				wp_enqueue_style( 'gutentor-global', GUTENTOR_URL . 'assets/css/global/global' . $is_rtl . '.css' );
+				wp_enqueue_style( 'gutentor-global', GUTENTOR_URL . 'assets/css/global/global' . $is_rtl . '.css', array(), GUTENTOR_VERSION );
 
 				/*slick CSS*/
-				wp_enqueue_style( 'gutentor-slick', GUTENTOR_URL . 'assets/css/global/slick' . $is_rtl . '.css' );
+				wp_enqueue_style( 'gutentor-slick', GUTENTOR_URL . 'assets/css/global/slick' . $is_rtl . '.css', array(), GUTENTOR_VERSION );
 
 				/*widget CSS*/
-				wp_enqueue_style( 'gutentor-widget', GUTENTOR_URL . 'assets/css/global/widget-global' . $is_rtl . '.css' );
+				wp_enqueue_style( 'gutentor-widget', GUTENTOR_URL . 'assets/css/global/widget-global' . $is_rtl . '.css', array(), GUTENTOR_VERSION );
 
 				/*post CSS*/
-				wp_enqueue_style( 'gutentor-post', GUTENTOR_URL . 'assets/css/global/pg' . $is_rtl . '.css' );
+				wp_enqueue_style( 'gutentor-post', GUTENTOR_URL . 'assets/css/global/pg' . $is_rtl . '.css', array(), GUTENTOR_VERSION );
 
 				foreach ( $blocks[1] as $key => $block_name ) {
 					switch ( $block_name ) {
@@ -1814,7 +1740,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 							$id   = $block_name;
 							$file = explode( '/', $block_name )[1];
 							$href = GUTENTOR_URL . 'assets/css/elements/' . $file . $is_rtl . '.css';
-							wp_enqueue_style( $id, $href );
+							wp_enqueue_style( $id, $href, array(), GUTENTOR_VERSION );
 							break;
 
 						case 'gutentor/m0':
@@ -1840,7 +1766,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 							$id   = $block_name;
 							$file = explode( '/', $block_name )[1];
 							$href = GUTENTOR_URL . 'assets/css/module/' . $file . $is_rtl . '.css';
-							wp_enqueue_style( $id, $href );
+							wp_enqueue_style( $id, $href, array(), GUTENTOR_VERSION );
 							break;
 
 						default:

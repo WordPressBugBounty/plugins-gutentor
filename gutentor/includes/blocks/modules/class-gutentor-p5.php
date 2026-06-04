@@ -71,127 +71,6 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 		}
 
 		/**
-		 * Returns attributes for this Block
-		 *
-		 * @static
-		 * @access public
-		 * @return array
-		 * @since 1.0.1
-		 */
-		public function get_attrs() {
-			$blog_post_attr     = array(
-				'gID'                             => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'timestamp'                       => array(
-					'type'    => 'number',
-					'default' => 0,
-				),
-				'gName'                           => array(
-					'type'    => 'string',
-					'default' => 'gutentor/p5',
-				),
-				'p5Temp'                          => array(
-					'type'    => 'string',
-					'default' => 'gutentor_p5_template1',
-				),
-				'pTaxType'                        => array(
-					'type'    => 'string',
-					'default' => 'category',
-				),
-				'pTaxOperator'                    => array(
-					'type'    => 'string',
-					'default' => 'IN',
-				),
-				'pTaxTerm'                        => array(
-					'type'  => 'array',
-					'items' => array(
-						'type'  => 'object',
-						'label' => array(
-							'type' => 'string',
-						),
-						'value' => array(
-							'type' => 'number',
-						),
-					),
-				),
-				'pPostType'                       => array(
-					'type'    => 'string',
-					'default' => 'post',
-				),
-				'pIncludePosts'                   => array(
-					'type' => 'string',
-				),
-				'pExcludePosts'                   => array(
-					'type' => 'string',
-				),
-				'pOffsetPosts'                    => array(
-					'type' => 'number',
-				),
-				'gStyle'                          => array(
-					'type'    => 'string',
-					'default' => 'gutentor-blog-grid',
-				),
-				'postsToShow'                     => array(
-					'type'    => 'number',
-					'default' => 6,
-				),
-				'order'                           => array(
-					'type'    => 'string',
-					'default' => 'desc',
-				),
-				'orderBy'                         => array(
-					'type'    => 'string',
-					'default' => 'date',
-				),
-				'categories'                      => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'gutentorBlogPostImageLink'       => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'gutentorBlogPostImageLinkNewTab' => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'p5OnNewsTxt'                     => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'p5Type'                          => array(
-					'type'    => 'string',
-					'default' => 'marquee',
-				),
-				'p5Direction'                     => array(
-					'type'    => 'string',
-					'default' => 'up',
-				),
-				'p5NewsTxt'                       => array(
-					'type'    => 'string',
-					'default' => __( 'News', 'gutentor' ),
-				),
-				'p5Speed'                         => array(
-					'type'    => 'number',
-					'default' => 0.05,
-				),
-				'p5PauseOnHover'                  => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'p5OnControl'                     => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-			);
-			$blog_partial_attrs = array_merge_recursive( $blog_post_attr, $this->get_module_common_attrs() );
-			return array_merge_recursive( $blog_partial_attrs, $this->get_module_query_elements_common_attrs() );
-		}
-
-
-		/**
 		 * Render Blog Post Data
 		 *
 		 * @param array  $attributes
@@ -201,19 +80,19 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 		 * @access   public
 		 */
 		public function render_callback( $attributes, $content ) {
-			$blockID = isset( $attributes['pID'] ) ? $attributes['pID'] : $attributes['gID'];
 			$gID     = isset( $attributes['gID'] ) ? $attributes['gID'] : '';
+			$blockID = isset( $attributes['pID'] ) ? $attributes['pID'] : $gID;
 			$output  = '';
 
 			$default_class = gutentor_block_add_default_classes( 'gutentor-p5', $attributes );
 
 			// the query
 			$args = array(
-				'posts_per_page' => $attributes['postsToShow'],
+				'posts_per_page' => isset( $attributes['postsToShow'] ) ? $attributes['postsToShow'] : 6,
 				'post_type'      => isset( $attributes['pPostType'] ) ? $attributes['pPostType'] : 'post',
-				'orderby'        => $attributes['orderBy'],
-				'order'          => $attributes['order'],
-				'cat'            => $attributes['categories'],
+				'orderby'        => isset( $attributes['orderBy'] ) ? $attributes['orderBy'] : 'date',
+				'order'          => isset( $attributes['order'] ) ? $attributes['order'] : 'desc',
+				'cat'            => isset( $attributes['categories'] ) ? $attributes['categories'] : '',
 				'paged'          => isset( $attributes['paged'] ) ? $attributes['paged'] : 1,
 			);
 
@@ -221,7 +100,7 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 				isset( $attributes['pTaxTerm'] ) && ! empty( $attributes['pTaxTerm'] ) ) {
 
 				$args['taxonomy']    = $attributes['pTaxType'];
-				$args['taxOperator'] = $attributes['pTaxOperator'] ? $attributes['pTaxOperator'] : 'IN';
+				$args['taxOperator'] = isset( $attributes['pTaxOperator'] ) ? $attributes['pTaxOperator'] : 'IN';
 				if ( is_array( $attributes['pTaxTerm'] ) ) {
 					$p1_terms = array();
 					foreach ( $attributes['pTaxTerm'] as $p1_term ) {
@@ -251,20 +130,24 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 			if ( isset( $attributes['pOffsetPosts'] ) ) {
 				$args['offset'] = $attributes['pOffsetPosts'];
 			}
-			$tag                     = $attributes['mTag'] ? $attributes['mTag'] : 'div';
-			$news_ticker_header      = $attributes['p5NewsTxt'] ? $attributes['p5NewsTxt'] : '';
-			$template                = $attributes['p5Temp'] ? $attributes['p5Temp'] : '';
+			$tag                     = isset( $attributes['mTag'] ) ? $attributes['mTag'] : 'div';
+			$news_ticker_header      = isset( $attributes['p5NewsTxt'] ) ? $attributes['p5NewsTxt'] : '';
+			$template                = isset( $attributes['p5Temp'] ) ? $attributes['p5Temp'] : '';
 			$align                   = isset( $attributes['align'] ) ? 'align' . $attributes['align'] : '';
 			$blockComponentAnimation = isset( $attributes['mAnimation'] ) ? $attributes['mAnimation'] : '';
 
 			$the_query = new WP_Query( gutentor_get_query( $args ) );
+			$p5OnNewsTxt = isset( $attributes['p5OnNewsTxt'] ) ? $attributes['p5OnNewsTxt'] : true;
+			$p5Type      = isset( $attributes['p5Type'] ) ? $attributes['p5Type'] : 'marquee';
+			$p5OnControl = isset( $attributes['p5OnControl'] ) ? $attributes['p5OnControl'] : true;
+
 			if ( $the_query->have_posts() ) :
 				$tag     = gutentor_get_module_tag( $tag );
 				$output .= '<' . esc_attr( $tag ) . ' class="' . esc_attr( apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'gutentor-post-module', 'gutentor-post-module-p5', 'section-' . $gID, $template, $align, $default_class ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '' . gutentor_get_html_attr( apply_filters( 'gutentor_edit_news_ticker_data_attr', array(), $attributes ) ) . '>' . "\n";
 				$output .= apply_filters( 'gutentor_post_module_before_container', '', $attributes );
 				$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_post_module_p5_newsticker_wrap_class', 'gutentor-news-ticker', $attributes ) ) . "'>";
 				$output .= apply_filters( 'gutentor_post_module_before_block_items', '', $attributes );
-				if ( $attributes['p5OnNewsTxt'] ) {
+				if ( $p5OnNewsTxt ) {
 					$output .= "<div class='gutentor-news-ticker-label'>" . esc_html( $news_ticker_header ) . '</div>';/*.ul*/
 				}
 				$output .= "<div class='gutentor-news-ticker-box'>";
@@ -280,19 +163,19 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 				$output .= '</div>';/*.gutentor-news-ticker-wrap*/
 				$output .= '</div>';/*.gutentor-news-ticker-box*/
 
-				if ( 'vertical' === $attributes['p5Type'] ) {
+				if ( 'vertical' === $p5Type ) {
 					$hor = ' gutentor-news-ticker-vertical-controls';
 				} else {
 					$hor = ' gutentor-news-ticker-horizontal-controls';
 				}
 
-				if ( $attributes['p5OnControl'] ) {
+				if ( $p5OnControl ) {
 					$output .= "<div class='gutentor-news-ticker-controls" . $hor . "'>";/*.ul*/
-					if ( $attributes['p5Type'] !== 'marquee' ) {
+					if ( $p5Type !== 'marquee' ) {
 						$output .= '<Button type="button" class="gutentor-news-ticker-arrow gutentor-news-ticker-prev"></Button>';
 					}
 					$output .= '<Button type="button" class="gutentor-news-ticker-action gutentor-news-ticker-pause"></Button>';
-					if ( $attributes['p5Type'] !== 'marquee' ) {
+					if ( $p5Type !== 'marquee' ) {
 						$output .= '<Button type="button" class="gutentor-news-ticker-arrow gutentor-news-ticker-next"></Button>';
 					}
 					$output .= '</div>';/*.gutentor-news-ticker-controls*/

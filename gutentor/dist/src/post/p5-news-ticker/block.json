@@ -1,0 +1,327 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/p5",
+  "title": "Post (Type) News Ticker",
+  "description": "Display Marquee, Vertical, Horizontal or Typewriter News Ticker from post or post type.",
+  "category": "gutentor-posts",
+  "keywords": [
+    "Gutentor Blog Post Type WooCommerce Products EDD Easy Digital Downloads Marquee Vertical Horizontal Typewriter News Ticker Module"
+  ],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "pPostType": {
+      "type": "string",
+      "default": "post"
+    },
+    "p5Temp": {
+      "type": "string",
+      "default": "gutentor_p5_template1"
+    },
+    "gStyle": {
+      "type": "string",
+      "default": "gutentor-blog-grid"
+    },
+    "categories": {
+      "type": "string",
+      "default": ""
+    },
+    "gutentorBlogPostImageLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "gutentorBlogPostImageLinkNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "postsToShow": {
+      "type": "number",
+      "default": 6
+    },
+    "pTaxType": {
+      "type": "string",
+      "default": "category"
+    },
+    "pTaxOperator": {
+      "type": "string",
+      "default": "IN"
+    },
+    "pTaxTerm": {
+      "type": "array"
+    },
+    "order": {
+      "type": "string",
+      "default": "desc"
+    },
+    "orderBy": {
+      "type": "string",
+      "default": "date"
+    },
+    "pMetaKey": {
+      "type": "string",
+      "default": ""
+    },
+    "pIncludePosts": {
+      "type": "string"
+    },
+    "pExcludePosts": {
+      "type": "string"
+    },
+    "pOffsetPosts": {
+      "type": "number"
+    },
+    "pAuthor": {
+      "type": "array"
+    },
+    "timestamp": {
+      "type": "number",
+      "default": 0
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/p5"
+    },
+    "p5NewsTxt": {
+      "type": "string",
+      "default": "News"
+    },
+    "p5Type": {
+      "type": "string",
+      "default": "marquee"
+    },
+    "p5Direction": {
+      "type": "string",
+      "default": "up"
+    },
+    "p5Speed": {
+      "type": "number",
+      "default": 0.05
+    },
+    "p5PauseOnHover": {
+      "type": "boolean",
+      "default": false
+    },
+    "p5OnControl": {
+      "type": "boolean",
+      "default": true
+    },
+    "p5OnNewsTxt": {
+      "type": "boolean",
+      "default": true
+    },
+    "p5NewsTxtColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "m5TxtBgColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#275cf6",
+        "hover": ""
+      }
+    },
+    "m5TxtBgGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "m5ControlColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "m5ControlBgColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#275cf6",
+        "hover": ""
+      }
+    },
+    "m5ControlBgGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "p5ControlBorder": {
+      "type": "object"
+    },
+    "m5BgColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "m5BgGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "p5NewsTxtTypography": {
+      "type": "object"
+    },
+    "pOnTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "pTitleColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "pTitleTypography": {
+      "type": "object"
+    },
+    "p5WrapPadding": {
+      "type": "object"
+    },
+    "p5WrapMargin": {
+      "type": "object"
+    },
+    "p5WrapBorder": {
+      "type": "object"
+    },
+    "p5WrapBoxShadow": {
+      "type": "object"
+    },
+    "p5WrapOnHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "p5WrapHeight": {
+      "type": "object",
+      "default": {
+        "type": "px"
+      }
+    },
+    "mAnimation": {
+      "type": "object",
+      "default": {
+        "Animation": "none",
+        "Delay": "",
+        "Speed": "",
+        "IterationType": "1",
+        "Iteration": "1"
+      }
+    },
+    "mHideMode": {
+      "type": "object"
+    },
+    "mBxBorder": {
+      "type": "object"
+    },
+    "mMargin": {
+      "type": "object"
+    },
+    "mPadding": {
+      "type": "object"
+    },
+    "mBxShadow": {
+      "type": "object"
+    },
+    "mTag": {
+      "type": "string",
+      "default": "section"
+    },
+    "pID": {
+      "type": "string",
+      "default": ""
+    },
+    "mOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "mPosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "mPosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "mPosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "mPosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "mPosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "mPosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "mPosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "mPosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "mPosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "mPosD": {
+      "type": "object"
+    },
+    "mPosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "mPosT": {
+      "type": "object"
+    },
+    "mPosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "mPosM": {
+      "type": "object"
+    },
+    "mPosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

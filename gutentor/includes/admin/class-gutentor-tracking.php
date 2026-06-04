@@ -69,7 +69,7 @@ class Gutentor_Tracking {
 	public function init() {
 
 		add_action( 'init', array( $this, 'schedule_send' ) );
-		add_action( 'set_gutentor_settings_options', array( $this, 'is_do_post' ) );
+		add_action( 'gutentor_set_settings_options', array( $this, 'is_do_post' ) );
 		add_action( 'admin_init', array( $this, 'do_agents' ) );
 		add_action( 'admin_init', array( $this, 'do_show_tracking_notice' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notice' ) );
@@ -171,8 +171,7 @@ class Gutentor_Tracking {
 	/**
 	 * Default Options
 	 *
-	 * @param null
-	 * @return array $advanced_import_default_options
+	 * @return array
 	 *
 	 * @since  3.2.1
 	 */
@@ -389,6 +388,7 @@ class Gutentor_Tracking {
 	 * @since  3.2.1
 	 */
 	public function schedule_send() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Anti-hotlinking probe check, not processing form data.
 		if ( isset( $_GET['acmeit_verify_user_secret_key_rand_3022'] ) ) {
 			die( 'equal' );
 		}

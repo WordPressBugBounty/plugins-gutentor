@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e18",
+  "title": "Filter Item",
+  "description": "Filter single item.",
+  "category": "gutentor-elements",
+  "keywords": [],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gFilterId": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e18"
+    },
+    "e18Txt": {
+      "type": "string",
+      "default": "Filter",
+      "source": "html",
+      "selector": ".g-fm-title",
+      "role": "content"
+    },
+    "e18Icon": {
+      "type": "object",
+      "default": {
+        "label": "fas fa-cog",
+        "value": "fas fa-cog",
+        "code": "f013"
+      }
+    },
+    "e18OnIcon": {
+      "type": "boolean",
+      "default": false
+    },
+    "e18IconPos": {
+      "type": "string",
+      "default": "right"
+    }
+  },
+  "supports": {
+    "inserter": false,
+    "reusable": false,
+    "html": false,
+    "customClassName": false
+  }
+}

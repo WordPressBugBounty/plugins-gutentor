@@ -61,131 +61,6 @@ if ( ! class_exists( 'Gutentor_Google_Map' ) ) {
 		}
 
 		/**
-		 * Google Map Attributes Default Value
-		 *
-		 * @since      1.0.0
-		 * @package    Gutentor
-		 * @author     Gutentor <info@gutentor.com>
-		 */
-		public function get_default_values() {
-			$google_map_attr = array(
-				'id'                => '',
-				'location'          => 'La Sagrada Familia, Barcelona, Spain',
-				'containerWidth'    => 'grid-container',
-				'latitude'          => '41.4036299',
-				'longitude'         => '2.1743558000000576',
-				'type'              => 'roadmap',
-				'zoom'              => 15,
-				'mapHeight'         => array(
-					'type'    => 'px',
-					'desktop' => '250',
-					'tablet'  => '250',
-					'mobile'  => '150',
-				),
-				'draggable'         => true,
-				'mapTypeControl'    => true,
-				'zoomControl'       => true,
-				'fullscreenControl' => true,
-				'streetViewControl' => true,
-				'markers'           => array(),
-			);
-			$google_map_attr = apply_filters( 'gutentor_google_map_get_default_values', $google_map_attr );
-			return $google_map_attr;
-		}
-
-		/**
-		 * Returns attributes for this Block
-		 *
-		 * @static
-		 * @access public
-		 * @since 1.0.0
-		 * @return array
-		 */
-		protected function get_attrs() {
-			$google_map_attr = array(
-				'id'                => array(
-					'type' => 'string',
-				),
-				'blockID'           => array(
-					'type' => 'string',
-				),
-				'gutentorBlockName' => array(
-					'type' => 'string',
-				),
-				'containerWidth'    => array(
-					'type'    => 'string',
-					'default' => 'grid-container',
-				),
-				'location'          => array(
-					'type'    => 'string',
-					'default' => 'La Sagrada Familia, Barcelona, Spain',
-				),
-				'latitude'          => array(
-					'type'    => 'string',
-					'default' => '41.4036299',
-				),
-				'longitude'         => array(
-					'type'    => 'string',
-					'default' => '2.1743558000000576',
-				),
-				'type'              => array(
-					'type'    => 'string',
-					'default' => 'roadmap',
-				),
-				'zoom'              => array(
-					'type'    => 'number',
-					'default' => 15,
-				),
-				'mapHeight'         => array(
-					'type'    => 'object',
-					'default' => array(
-						'type'    => 'px',
-						'desktop' => '250',
-						'tablet'  => '250',
-						'mobile'  => '150',
-					),
-				),
-				'draggable'         => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'mapTypeControl'    => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'zoomControl'       => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'fullscreenControl' => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'streetViewControl' => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'markers'           => array(
-					'type'    => 'object',
-					'default' => array(),
-				),
-				'mBGImageSrc'       => array(
-					'type'    => 'string',
-					'default' => 'self-hosted-local',
-				),
-				'mBGVideoSrc'       => array(
-					'type'    => 'string',
-					'default' => 'self-hosted-local',
-				),
-				'mBGVideoUrl'       => array(
-					'type'    => 'string',
-					'default' => 'https://www.youtube.com/watch?v=bGMi7L78hVk',
-				),
-			);
-			return $google_map_attr;
-		}
-
-		/**
 		 * Render Google Map Data
 		 *
 		 * @since    1.0.1
@@ -203,7 +78,7 @@ if ( ! class_exists( 'Gutentor_Google_Map' ) ) {
 			$default_class = gutentor_block_add_default_classes( 'gutentor-google-map', $attributes );
 
 			$align = isset( $attributes['align'] ) ? 'align' . $attributes['align'] : '';
-			$tag   = $attributes['blockSectionHtmlTag'] ? $attributes['blockSectionHtmlTag'] : 'section';
+			$tag   = isset( $attributes['blockSectionHtmlTag'] ) ? $attributes['blockSectionHtmlTag'] : 'section';
 
 			$blockComponentAnimation = isset( $attributes['blockComponentAnimation'] ) ? $attributes['blockComponentAnimation'] : '';
 			$blockItemsWrapAnimation = isset( $attributes['blockItemsWrapAnimation'] ) ? $attributes['blockItemsWrapAnimation'] : '';
@@ -212,33 +87,31 @@ if ( ! class_exists( 'Gutentor_Google_Map' ) ) {
 
 			$local_attr                      = array();
 			$local_attr['id']                = $id;
-			$local_attr['location']          = $attributes['location'];
-			$local_attr['latitude']          = $attributes['latitude'];
-			$local_attr['longitude']         = $attributes['longitude'];
-			$local_attr['zoom']              = $attributes['zoom'];
-			$local_attr['type']              = $attributes['type'];
-			$local_attr['draggable']         = $attributes['draggable'];
-			$local_attr['mapTypeControl']    = $attributes['mapTypeControl'];
-			$local_attr['zoomControl']       = $attributes['zoomControl'];
-			$local_attr['fullscreenControl'] = $attributes['fullscreenControl'];
-			$local_attr['streetViewControl'] = $attributes['streetViewControl'];
-			$local_attr['markers']           = $attributes['markers'];
+			$local_attr['location']          = isset( $attributes['location'] ) ? $attributes['location'] : '';
+			$local_attr['latitude']          = isset( $attributes['latitude'] ) ? $attributes['latitude'] : '';
+			$local_attr['longitude']         = isset( $attributes['longitude'] ) ? $attributes['longitude'] : '';
+			$local_attr['zoom']              = isset( $attributes['zoom'] ) ? $attributes['zoom'] : 15;
+			$local_attr['type']              = isset( $attributes['type'] ) ? $attributes['type'] : 'roadmap';
+			$local_attr['draggable']         = isset( $attributes['draggable'] ) ? $attributes['draggable'] : true;
+			$local_attr['mapTypeControl']    = isset( $attributes['mapTypeControl'] ) ? $attributes['mapTypeControl'] : true;
+			$local_attr['zoomControl']       = isset( $attributes['zoomControl'] ) ? $attributes['zoomControl'] : true;
+			$local_attr['fullscreenControl'] = isset( $attributes['fullscreenControl'] ) ? $attributes['fullscreenControl'] : true;
+			$local_attr['streetViewControl'] = isset( $attributes['streetViewControl'] ) ? $attributes['streetViewControl'] : true;
+			$local_attr['markers']           = isset( $attributes['markers'] ) ? $attributes['markers'] : array();
 
 			$output  = '<' . esc_attr( $tag ) . ' class="' . esc_attr( apply_filters( 'gutentor_save_section_class', gutentor_concat_space( 'gutentor-section gutentor-google-map', $align, $default_class ), $attributes ) ) . '" id="section-' . esc_attr( $blockID ) . '"   ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 			$output .= apply_filters( 'gutentor_save_before_container', '', $attributes );
 			$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_save_container_class', 'grid-container', $attributes ) ) . "'>";
 			$output .= apply_filters( 'gutentor_save_before_block_items', '', $attributes );
-			$output .= '<div class="' . esc_attr( apply_filters( 'gutentor_save_grid_row_class', esc_attr( 'gutentor-grid-item-wrap' ), $attributes ) ) . '" id="' . esc_attr( $id ) . '" ' . GutentorAnimationOptionsDataAttr( $blockItemsWrapAnimation ) . '></div>' . "\n";
+			$output .= '<div class="' . esc_attr( apply_filters( 'gutentor_save_grid_row_class', 'gutentor-grid-item-wrap', $attributes ) ) . '" id="' . esc_attr( $id ) . '" ' . GutentorAnimationOptionsDataAttr( $blockItemsWrapAnimation ) . '></div>' . "\n";
 			$output .= apply_filters( 'gutentor_save_after_block_items', '', $attributes );
 			$output .= '</div>' . "\n";
 			$output .= apply_filters( 'gutentor_save_after_container', '', $attributes );
 			$output .= '</' . esc_attr( $tag ) . '>' . "\n";
-			$output .= '<script type="text/javascript">' . "\n";
-			$output .= '	/* <![CDATA[ */' . "\n";
-			$output .= '		if ( ! window.gutentorGoogleMaps ) window.gutentorGoogleMaps =[];' . "\n";
-			$output .= '		window.gutentorGoogleMaps.push( { container: "' . esc_attr( $id ) . '", attributes: ' . wp_json_encode( $local_attr ) . ' } );' . "\n";
-			$output .= '	/* ]]> */' . "\n";
-			$output .= '</script>' . "\n";
+
+			$map_data = 'if ( ! window.gutentorGoogleMaps ) window.gutentorGoogleMaps = [];' . "\n";
+			$map_data .= 'window.gutentorGoogleMaps.push( { container: "' . esc_js( $id ) . '", attributes: ' . wp_json_encode( $local_attr ) . ' } );';
+			wp_add_inline_script( 'gutentor-google-maps', $map_data, 'before' );
 
 			return $output;
 		}

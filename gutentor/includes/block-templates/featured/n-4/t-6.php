@@ -57,11 +57,11 @@ if ( ! class_exists( 'Gutentor_Featured_N4_T6' ) ) {
 		/**
 		 * Post template
 		 *
-		 * @param {string} $output
-		 * @param {object} $the_query
-		 * @param {array}  $attributes
+		 * @param string $output
+		 * @param object $the_query
+		 * @param array $attributes
 		 *
-		 * @return {string}
+		 * @return string
 		 */
 		public function post_template( $output, $the_query, $attributes ) {
 
@@ -97,11 +97,11 @@ if ( ! class_exists( 'Gutentor_Featured_N4_T6' ) ) {
 		/**
 		 * Term Template
 		 *
-		 * @param {string} $output
-		 * @param {array}  $terms
-		 * @param {array}  $attributes
+		 * @param string $output
+		 * @param array $terms
+		 * @param array $attributes
 		 *
-		 * @return {string}
+		 * @return string
 		 */
 		public function term_template( $output, $terms, $attributes ) {
 

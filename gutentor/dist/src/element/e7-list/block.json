@@ -1,0 +1,277 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "gutentor/e7",
+	"title": "Advanced List",
+	"description": "Represent list with beautiful icon and image.",
+	"category": "gutentor-elements",
+	"keywords": [
+		"Gutentor Advanced List Item Icon Image Elements"
+	],
+	"textdomain": "gutentor",
+	"attributes": {
+		"gID": {
+			"type": "string"
+		},
+		"gName": {
+			"type": "string",
+			"default": "gutentor/e7"
+		},
+		"e7Type": {
+			"type": "string",
+			"default": "list-indicator-icon"
+		},
+		"e7DefaultType": {
+			"type": "string",
+			"default": "list-style-circle"
+		},
+		"e7Icon": {
+			"type": "object",
+			"default": {
+				"label": "fa-arrow-right",
+				"value": "fas fa-arrow-right",
+				"code": "f061"
+			}
+		},
+		"e7OnT": {
+			"type": "boolean",
+			"default": true
+		},
+		"e7TTag": {
+			"type": "string",
+			"default": "h3"
+		},
+		"e7TColor": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"e7TTypography": {
+			"type": "object"
+		},
+		"e7TMargin": {
+			"type": "object"
+		},
+		"e7TPadding": {
+			"type": "object"
+		},
+		"e7BxColor": {
+			"type": "object",
+			"default": {
+				"enable": true,
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"e7BxGt": {
+			"type": "object",
+			"default": {
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"e7BxBorder": {
+			"type": "object"
+		},
+		"e7BxShadow": {
+			"type": "object"
+		},
+		"e7BxMargin": {
+			"type": "object"
+		},
+		"e7BxPadding": {
+			"type": "object"
+		},
+		"e7ItemImage": {
+			"type": "object",
+			"default": {}
+		},
+		"e7SortableItem": {
+			"type": "array",
+			"default": [],
+			"query": {
+				"title": {
+					"type": "string",
+					"source": "html",
+					"selector": ".gutentor-single-item-title"
+				}
+			}
+		},
+		"e7OnIcon": {
+			"type": "boolean",
+			"default": true
+		},
+		"e7IconColor": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "#275cf6",
+				"hover": ""
+			}
+		},
+		"e7IconMargin": {
+			"type": "object"
+		},
+		"e7Align": {
+			"type": "object"
+		},
+		"e7IconSize": {
+			"type": "object"
+		},
+		"e7IconPadding": {
+			"type": "object"
+		},
+		"e7Col": {
+			"type": "object",
+			"default": {
+				"desktop": "grid-lg-12",
+				"tablet": "grid-md-12",
+				"mobile": "grid-12"
+			}
+		},
+		"e7HideRowSpace": {
+			"type": "object"
+		},
+		"e7HideColSpace": {
+			"type": "object"
+		},
+		"e7OImgColor": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "rgba(39,92,246,0.2)",
+				"hover": ""
+			}
+		},
+		"e7OImgGt": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "rgba(39,92,246,0.2)",
+				"hover": ""
+			}
+		},
+		"e7ImgPadding": {
+			"type": "object"
+		},
+		"e7ImgMargin": {
+			"type": "object"
+		},
+		"e7ImgBorder": {
+			"type": "object"
+		},
+		"e7ImgOnWidth": {
+			"type": "boolean",
+			"default": false
+		},
+		"e7ImgWidth": {
+			"type": "object"
+		},
+		"e7ImgOnHeight": {
+			"type": "boolean",
+			"default": false
+		},
+		"e7ImgHeight": {
+			"type": "object"
+		},
+		"e7Padding": {
+			"type": "object"
+		},
+		"e7Margin": {
+			"type": "object"
+		},
+		"eAnimation": {
+			"type": "object"
+		},
+		"eOnPos": {
+			"type": "boolean",
+			"default": false
+		},
+		"ePosTypeD": {
+			"type": "string",
+			"default": "g-pos-d"
+		},
+		"ePosOptD": {
+			"type": "string",
+			"default": "default"
+		},
+		"ePosMarginAutoD": {
+			"type": "boolean",
+			"default": false
+		},
+		"ePosTypeT": {
+			"type": "string",
+			"default": "g-pos-d"
+		},
+		"ePosOptT": {
+			"type": "string",
+			"default": "default"
+		},
+		"ePosMarginAutoT": {
+			"type": "boolean",
+			"default": false
+		},
+		"ePosTypeM": {
+			"type": "string",
+			"default": "g-pos-d"
+		},
+		"ePosOptM": {
+			"type": "string",
+			"default": "default"
+		},
+		"ePosMarginAutoM": {
+			"type": "boolean",
+			"default": false
+		},
+		"ePosD": {
+			"type": "object"
+		},
+		"ePosDWidth": {
+			"type": "object",
+			"default": {
+				"type": "%",
+				"width": ""
+			}
+		},
+		"ePosT": {
+			"type": "object"
+		},
+		"ePosTWidth": {
+			"type": "object",
+			"default": {
+				"type": "%",
+				"width": ""
+			}
+		},
+		"ePosM": {
+			"type": "object"
+		},
+		"ePosMWidth": {
+			"type": "object",
+			"default": {
+				"type": "%",
+				"width": ""
+			}
+		},
+		"eZIndex": {
+			"type": "object"
+		},
+		"eHideMode": {
+			"type": "object"
+		},
+		"eRawCustomCss": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"align": [
+			"wide",
+			"full"
+		],
+		"html": false
+	}
+}

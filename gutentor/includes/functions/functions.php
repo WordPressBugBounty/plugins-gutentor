@@ -4,13 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! function_exists( 'gutentor_isset' ) ) {
+
 /**
  * Check Isset
  *
- * @param  mix $value value to check.
- * @return [boolean]
+ * @param mixed $value value to check.
+ * @return bool
  */
-if ( ! function_exists( 'gutentor_isset' ) ) {
 	function gutentor_isset( $value ) {
 		if ( isset( $value ) ) {
 			return $value;
@@ -20,14 +21,15 @@ if ( ! function_exists( 'gutentor_isset' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_rgb_string' ) ) {
+
 /**
  * Convert into RBG Color
  * gutentor_rgb_string
  *
- * @param  [mix] $rgba
- * @return boolean | string
+ * @param mixed $rgba
+ * @return string|null
  */
-if ( ! function_exists( 'gutentor_rgb_string' ) ) {
 	function gutentor_rgb_string( $rgba ) {
 		if ( ! is_array( $rgba ) ) {
 			return null;
@@ -37,14 +39,16 @@ if ( ! function_exists( 'gutentor_rgb_string' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_concat_space' ) ) {
+
 /**
  * Gutentor String Concat with space
- * gutentor_rgb_string
  *
- * @param  [mix] $rgba
- * @return boolean | string
+ * @param string $class1
+ * @param string $class2
+ * @param string $class3
+ * @return string
  */
-if ( ! function_exists( 'gutentor_concat_space' ) ) {
 	function gutentor_concat_space(
 		$class1,
 		$class2 = '',
@@ -110,15 +114,15 @@ if ( ! function_exists( 'gutentor_concat_space' ) ) {
 }
 
 
+if ( ! function_exists( 'gutentor_not_empty' ) ) {
+
 /**
  * Check Empty
  * gutentor_not_empty
  *
- * @param  [mix] $var
- * @return [boolean]
+ * @param mixed $var
+ * @return bool
  */
-if ( ! function_exists( 'gutentor_not_empty' ) ) {
-
 	function gutentor_not_empty( $var ) {
 		if ( trim( $var ) === '' ) {
 			return false;
@@ -127,15 +131,15 @@ if ( ! function_exists( 'gutentor_not_empty' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_unit_type' ) ) {
+
 /**
  * Gutentor Unit Type
  * gutentor_unit_type
  *
- * @param  [mix] $type
+ * @param  string $type
  * @return string
  */
-if ( ! function_exists( 'gutentor_unit_type' ) ) {
-
 	function gutentor_unit_type( $type ) {
 		if ( $type === 'px' ) {
 			return 'px';
@@ -147,17 +151,17 @@ if ( ! function_exists( 'gutentor_unit_type' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_generate_css' ) ) {
+
 /**
  * Generate Css
  * gutentor_generate_css
  *
- * @param  [mix] $prop
- * @param  [mix] $value
+ * @param  string $prop
+ * @param  string $value
  *
- * @return [string]
+ * @return string
  */
-if ( ! function_exists( 'gutentor_generate_css' ) ) {
-
 	function gutentor_generate_css( $prop, $value ) {
 		if ( ! is_string( $prop ) || ! is_string( $value ) ) {
 			return '';
@@ -169,14 +173,17 @@ if ( ! function_exists( 'gutentor_generate_css' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_text_length' ) ) {
+
 /**
  * Get term excerpt
  *
- * @since 3.0.0
- *
+ * @param string $original_excerpt
+ * @param int $excerpt_length
+ * @param bool $in_words
  * @return string
+ * @since 3.0.0
  */
-if ( ! function_exists( 'gutentor_text_length' ) ) {
 	function gutentor_text_length( $original_excerpt, $excerpt_length = 200, $in_words = false ) {
 		if ( ! $original_excerpt ) {
 			return '';
@@ -196,12 +203,16 @@ if ( ! function_exists( 'gutentor_text_length' ) ) {
 		return apply_filters( 'gutentor_text_length', $the_excerpt, $original_excerpt, $excerpt_length, $in_words );
 	}
 }
+if ( ! function_exists( 'gutentor_get_excerpt_by_id' ) ) {
+
 /**
  * Get post excerpt
  *
+ * @param int $post_id
+ * @param int $excerpt_length
+ * @param bool $in_words
  * @return string
  */
-if ( ! function_exists( 'gutentor_get_excerpt_by_id' ) ) {
 	function gutentor_get_excerpt_by_id( $post_id, $excerpt_length = 200, $in_words = false ) {
 		$the_post     = get_post( $post_id );
 		$the_excerpt  = $the_post->post_excerpt;
@@ -215,14 +226,17 @@ if ( ! function_exists( 'gutentor_get_excerpt_by_id' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_term_description' ) ) {
+
 /**
  * Get term excerpt
  *
- * @since 3.0.0
- *
+ * @param WP_Term $term
+ * @param int $length
+ * @param bool $in_words
  * @return string
+ * @since 3.0.0
  */
-if ( ! function_exists( 'gutentor_get_term_description' ) ) {
 	function gutentor_get_term_description( $term, $length = 200, $in_words = false ) {
 		$the_excerpt    = $term->description;
 		$in_words_con   = ( $in_words ) ? $in_words : false;
@@ -231,6 +245,8 @@ if ( ! function_exists( 'gutentor_get_term_description' ) ) {
 		return apply_filters( 'gutentor_get_term_description', $the_excerpt, $term, $excerpt_length, $in_words_con );
 	}
 }
+
+if ( ! function_exists( 'gutentor_get_dynamic_css' ) ) {
 
 /**
  * Gutentor dynamic CSS
@@ -243,8 +259,6 @@ if ( ! function_exists( 'gutentor_get_term_description' ) ) {
  * @return mixed
  * @since    1.0.0
  */
-if ( ! function_exists( 'gutentor_get_dynamic_css' ) ) {
-
 	function gutentor_get_dynamic_css( $dynamic_css = array() ) {
 		$getCSS      = '';
 		$dynamic_css = apply_filters( 'gutentor_get_dynamic_css', $dynamic_css );
@@ -284,16 +298,16 @@ if ( ! function_exists( 'gutentor_get_dynamic_css' ) ) {
 	}
 }
 
+if ( ! function_exists( 'GutentorButtonOptionsClasses' ) ) {
+
 /**
  *  GutentorButtonOptionsClasses
  *
- * @param null
+ * @param array $button
  * @return string
  *
  * @since Gutentor 1.0.0
  */
-if ( ! function_exists( 'GutentorButtonOptionsClasses' ) ) {
-
 	function GutentorButtonOptionsClasses( $button ) {
 		if ( $button === null || empty( $button ) ) {
 			return false;
@@ -307,15 +321,16 @@ if ( ! function_exists( 'GutentorButtonOptionsClasses' ) ) {
 	}
 }
 
+if ( ! function_exists( 'GutentorBackgroundOptionsCSSClasses' ) ) {
+
 /**
  *  GutentorBackgroundOptionsCSSClasses
  *
- * @param null
+ * @param string $backgroundType
  * @return string
  *
  * @since Gutentor 1.0.0
  */
-if ( ! function_exists( 'GutentorBackgroundOptionsCSSClasses' ) ) {
 	function GutentorBackgroundOptionsCSSClasses( $backgroundType ) {
 		if ( $backgroundType === null || empty( $backgroundType ) ) {
 			return false;
@@ -353,8 +368,8 @@ function gutentor_get_youtube_id_from_url( $url ) {
 /**
  * Get vimeo id from url.
  *
- * @param $url
- * @return string id
+ * @param string $url
+ * @return string|false
  *
  * @since Gutentor 3.0.1
  */
@@ -364,18 +379,19 @@ function gutentor_get_vimeo_id_from_url( $url ) {
 	}
 	return false;
 }
+if ( ! function_exists( 'GutentorUpdatedBackgroundVideoOutput' ) ) {
+
 /**
  * Set Updated video output.
  *
- * @param {string} backgroundType
- * @param {string} backgroundVideoSrc
- * @param {object} backgroundVideo
- * @param {object} backgroundVideoUrl
- * @param {boolean} backgroundVideoLoop
- * @param {boolean} backgroundVideoMuted
- * @return {string} The video output container.
+ * @param string $backgroundType
+ * @param string $backgroundVideoSrc
+ * @param array $backgroundVideo
+ * @param array $backgroundVideoUrl
+ * @param bool $backgroundVideoLoop
+ * @param bool $backgroundVideoMuted
+ * @return string The video output container.
  */
-if ( ! function_exists( 'GutentorUpdatedBackgroundVideoOutput' ) ) {
 	function GutentorUpdatedBackgroundVideoOutput( $backgroundType, $backgroundVideoSrc, $backgroundVideo, $backgroundVideoUrl, $backgroundVideoLoop, $backgroundVideoMuted ) {
 		$video_container     = '';
 		$backgroundVideo_src = ( is_array( $backgroundVideo ) && array_key_exists( 'url', $backgroundVideo ) ) ? $backgroundVideo['url'] : false;
@@ -426,25 +442,25 @@ if ( ! function_exists( 'GutentorUpdatedBackgroundVideoOutput' ) ) {
 	}
 }
 
+if ( ! function_exists( 'GutentorAnimationOptionsDataAttr' ) ) {
+
 /**
- *  GutentorButtonOptionsClasses
+ *  GutentorAnimationOptionsDataAttr
  *
- * @param null
+ * @param array $valueAnimation
  * @return string
  *
  * @since Gutentor 1.0.0
  */
-if ( ! function_exists( 'GutentorAnimationOptionsDataAttr' ) ) {
-
 	/**
 	 * Background Classes
 	 *
-	 * @param {string} backgroundType - The Background type
-	 * @return {array} The inline CSS class.
+	 * @param array $valueAnimation - The animation options
+	 * @return string The inline data attributes.
 	 */
 	function GutentorAnimationOptionsDataAttr( $valueAnimation ) {
 		if ( $valueAnimation === null || empty( $valueAnimation ) ) {
-			return false;
+			return '';
 		}
 		$animation_attr = '';
 
@@ -476,15 +492,16 @@ if ( ! function_exists( 'GutentorAnimationOptionsDataAttr' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_default_options' ) ) :
+
 /**
  *  Customize Default Options
  *
- * @param null
- * @return array $gutentor_default_options
+ * @param bool $old
+ * @return array
  *
  * @since Gutentor 1.0.0
  */
-if ( ! function_exists( 'gutentor_get_default_options' ) ) :
 	function gutentor_get_default_options( $old = false ) {
 		if ( $old ) {
 			$default_theme_options = array(
@@ -495,7 +512,7 @@ if ( ! function_exists( 'gutentor_get_default_options' ) ) :
 				'gutentor_dynamic_style_location'    => 'head',
 				'gutentor_gt_apply_options'          => 'global',
 				'gutentor_font_awesome_version'      => '5',
-				'gutentor_color_palatte_options'     => 'both',
+				'gutentor_color_palette_options'     => 'both',
 			);
 		} else {
 			$default_theme_options = array(
@@ -579,14 +596,15 @@ if ( ! function_exists( 'gutentor_get_default_options' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'gutentor_get_post_formats' ) ) {
+
 /**
  * Get post formats
  *
- * @return array || boolean
+ * @return array|bool
  * @since    2.2.1
  * @access   public
  */
-if ( ! function_exists( 'gutentor_get_post_formats' ) ) {
 	function gutentor_get_post_formats() {
 		$post_formats = get_theme_support( 'post-formats' );
 		if ( is_array( $post_formats ) && ! empty( $post_formats ) && isset( $post_formats[0] ) ) {
@@ -598,16 +616,16 @@ if ( ! function_exists( 'gutentor_get_post_formats' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_options' ) ) :
+
 /**
  * Get options
  *
- * @param null
- * @return mixed gutentor_get_options
+ * @param string $key
+ * @return mixed
  *
  * @since Gutentor 1.0.0
  */
-if ( ! function_exists( 'gutentor_get_options' ) ) :
-
 	function gutentor_get_options( $key = '' ) {
 		$g_options                = get_option( 'gutentor_settings_options' );
 		$gutentor_default_options = gutentor_get_default_options();
@@ -634,16 +652,16 @@ if ( ! function_exists( 'gutentor_get_options' ) ) :
 endif;
 
 
+if ( ! function_exists( 'gutentor_delete_options' ) ) :
+
 /**
  * Delete options
  *
- * @param null
- * @return mixed gutentor_delete_options
+ * @param string $key
+ * @return mixed
  *
  * @since Gutentor 3.0.2
  */
-if ( ! function_exists( 'gutentor_delete_options' ) ) :
-
 	function gutentor_delete_options( $key = '' ) {
 		if ( ! empty( $key ) ) {
 			delete_option( $key );
@@ -659,29 +677,28 @@ if ( ! function_exists( 'gutentor_delete_options' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'gutentor_get_theme_support' ) ) :
+
 /**
  * Return "theme support" values from the current theme, if set.
  *
  * @return boolean
  * @since Gutentor 1.0.0
  */
-if ( ! function_exists( 'gutentor_get_theme_support' ) ) :
-
 	function gutentor_get_theme_support() {
 		return get_theme_support( 'gutentor' );
 	}
 endif;
 
+if ( ! function_exists( 'gutentor_default_color_palettes' ) ) {
+
 /**
  * Default color palettes
  *
- * @param null
- * @return array $gutentor_default_color_palettes
+ * @return array
  *
  * @since Gutentor 1.0.0
  */
-if ( ! function_exists( 'gutentor_default_color_palettes' ) ) {
-
 	function gutentor_default_color_palettes() {
 		$palettes = array(
 			'#000000',
@@ -697,16 +714,16 @@ if ( ! function_exists( 'gutentor_default_color_palettes' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_pm_post_dynamic_categories_color' ) ) {
+
 /**
- * Add  Dynamic Category Css
+ * Add Dynamic Category Css
  *
- * @param array $data
- * @param array $attributes
- * @return array | boolean
+ * @param array $terms
+ * @return string
  * @since    1.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_pm_post_dynamic_categories_color' ) ) {
 	function gutentor_pm_post_dynamic_categories_color( $terms = array() ) {
 		$important = ' !important;';
 
@@ -776,16 +793,16 @@ if ( ! function_exists( 'gutentor_pm_post_dynamic_categories_color' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_pm_post_categories_color' ) ) {
+
 /**
  * Add Category Dynamic Css
  *
- * @param array $data
- * @param array $attributes
- * @return array | boolean
+ * @param bool $imp
+ * @return string
  * @since    1.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_pm_post_categories_color' ) ) {
 	function gutentor_pm_post_categories_color( $imp = false ) {
 		$important = $imp ? ' !important;' : ';';
 
@@ -859,6 +876,8 @@ if ( ! function_exists( 'gutentor_pm_post_categories_color' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_post_format_colors' ) ) {
+
 /**
  * Get post format colors
  *
@@ -867,8 +886,6 @@ if ( ! function_exists( 'gutentor_pm_post_categories_color' ) ) {
  * @since    2.2.1
  * @access   public
  */
-if ( ! function_exists( 'gutentor_get_post_format_colors' ) ) {
-
 	function gutentor_get_post_format_colors( $imp = false ) {
 		$important  = $imp ? ' !important;' : ';';
 		$color_data = array();
@@ -936,18 +953,16 @@ if ( ! function_exists( 'gutentor_get_post_format_colors' ) ) {
 		return $color_data;
 	}
 }
+if ( ! function_exists( 'gutentor_post_format_colors' ) ) {
+
 /**
  * Add Post Format Dynamic Css
  *
- * @param array $data
- * @param array $attributes
- * @return array | boolean
+ * @param bool $imp
+ * @return string
  * @since    1.0.0
- * modified on    2.2.1
  * @access   public
  */
-if ( ! function_exists( 'gutentor_post_format_colors' ) ) {
-
 	function gutentor_post_format_colors( $imp = false ) {
 		$local_dynamic_css  = '';
 		$post_format_colors = gutentor_get_post_format_colors( $imp );
@@ -968,17 +983,16 @@ if ( ! function_exists( 'gutentor_post_format_colors' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_post_featured_format_colors' ) ) {
+
 /**
  * Add Post Featured Format Dynamic Css
  *
- * @param array $data
- * @param array $attributes
- * @return array | boolean
+ * @param bool $imp
+ * @return string
  * @since    1.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_post_featured_format_colors' ) ) {
-
 	function gutentor_post_featured_format_colors( $imp = false ) {
 		$local_dynamic_css  = '';
 		$post_format_colors = gutentor_get_post_format_colors( $imp );
@@ -1000,13 +1014,14 @@ if ( ! function_exists( 'gutentor_post_featured_format_colors' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_global_typography' ) ) {
+
 /**
  * Get Global Typography Options
  *
  * @since    3.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_get_global_typography' ) ) {
 	function gutentor_get_global_typography() {
 		$typography        = array();
 		$global_typography = array(
@@ -1027,13 +1042,14 @@ if ( ! function_exists( 'gutentor_get_global_typography' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_global_color' ) ) {
+
 /**
  * Get Global Color Options
  *
  * @since    3.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_get_global_color' ) ) {
 	function gutentor_get_global_color() {
 		$color        = array();
 		$global_color = array(
@@ -1053,13 +1069,14 @@ if ( ! function_exists( 'gutentor_get_global_color' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_global_container_width' ) ) {
+
 /**
  * Get Global Container Width
  *
  * @since    3.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_get_global_container_width' ) ) {
 	function gutentor_get_global_container_width() {
 		$color     = array();
 		$global_gw = array(
@@ -1076,13 +1093,14 @@ if ( ! function_exists( 'gutentor_get_global_container_width' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_is_edit_page' ) ) {
+
 /**
  * gutentor_is_edit_page
  *
  * @since    1.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_is_edit_page' ) ) {
 	function gutentor_is_edit_page() {
 		// make sure we are on the backend
 		if ( ! is_admin() ) {
@@ -1093,15 +1111,16 @@ if ( ! function_exists( 'gutentor_is_edit_page' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_post_format_default_icon' ) ) {
+
 /**
  * Get Default Post Format
  *
- * @param array $post_format
+ * @param string $post_format
  * @return string
  * @since    1.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_get_post_format_default_icon' ) ) {
 	function gutentor_get_post_format_default_icon( $post_format ) {
 		switch ( $post_format ) :
 			case 'aside':
@@ -1140,15 +1159,16 @@ if ( ! function_exists( 'gutentor_get_post_format_default_icon' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_post_format_icon' ) ) {
+
 /**
  * Get Default Post Format Icon
  *
- * @param array $post_format
+ * @param string $post_format
  * @return string
  * @since    1.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_get_post_format_icon' ) ) {
 	function gutentor_get_post_format_icon( $post_format ) {
 		$string_icon  = gutentor_get_options( 'pf-' . esc_attr( $post_format ) );
 		$decoded_icon = is_string( $string_icon ) ? json_decode( $string_icon, true ) : $string_icon;
@@ -1167,15 +1187,15 @@ if ( ! function_exists( 'gutentor_get_post_format_icon' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_all_post_format_icons' ) ) {
+
 /**
  * Get All Post Format Icon
  *
- * @param array $post_format
- * @return string
+ * @return array
  * @since    1.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_get_all_post_format_icons' ) ) {
 	function gutentor_get_all_post_format_icons() {
 		$icons        = array();
 		$post_formats = gutentor_get_post_formats();
@@ -1190,6 +1210,8 @@ if ( ! function_exists( 'gutentor_get_all_post_format_icons' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_check_post_format_support_enable' ) ) {
+
 /**
  * Check Post Format Enable
  *
@@ -1197,7 +1219,6 @@ if ( ! function_exists( 'gutentor_get_all_post_format_icons' ) ) {
  * @since    1.0.0
  * @access   public
  */
-if ( ! function_exists( 'gutentor_check_post_format_support_enable' ) ) {
 	function gutentor_check_post_format_support_enable() {
 		$post_formats = gutentor_get_post_formats();
 		if ( ! $post_formats ) {
@@ -1207,14 +1228,15 @@ if ( ! function_exists( 'gutentor_check_post_format_support_enable' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_boolean_to_string' ) ) {
+
 /**
  * Convert boolean to string
  * gutentor_boolean_to_string
  *
- * @param  [mix] $var
- * @return [boolean]
+ * @param mixed $var
+ * @return bool
  */
-if ( ! function_exists( 'gutentor_boolean_to_string' ) ) {
 	function gutentor_boolean_to_string( $var ) {
 		if ( $var ) {
 			return 'true';
@@ -1224,13 +1246,14 @@ if ( ! function_exists( 'gutentor_boolean_to_string' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_html_attr' ) ) {
+
 /**
  * Convert array to html attr
  *
- * @param  [array] $attr_list
- * @return [string]
+ * @param array $attr_list
+ * @return string
  */
-if ( ! function_exists( 'gutentor_get_html_attr' ) ) {
 	function gutentor_get_html_attr( $attr_list ) {
 		if ( ! is_array( $attr_list ) ) {
 			return '';
@@ -1378,7 +1401,7 @@ function gutentor_get_query( $attr ) {
 		if ( is_string( $attr['tag__and'] ) ) {
 			$query_args['tag__and'] = explode( ',', $attr['tag__and'] );
 		} else {
-			$query_args['tag__and'] = explode( $attr['tag__and'] );
+			$query_args['tag__and'] = explode( ',', $attr['tag__and'] );
 		}
 	}
 
@@ -1671,10 +1694,11 @@ function gutentor_get_term_query( $attr ) {
 }
 
 /**
- * Function to create query args
+ * Function to get block by id
  *
- * @param  [array] $attr
- * @return array
+ * @param array $blocks
+ * @param string $blockId
+ * @return array|null
  */
 function gutentor_get_block_by_id( $blocks, $blockId ) {
 	if ( is_array( $blocks ) && ! empty( $blocks ) ) {
@@ -1781,6 +1805,12 @@ function gutentor_admin_get_post_types( $args = array( 'public' => true ), $excl
 }
 
 
+/**
+ * Check if array is empty
+ *
+ * @param array $array
+ * @return bool
+ */
 function gutentor_is_array_empty( $array ) {
 	foreach ( $array as $key => $val ) {
 		if ( trim( $val ) !== '' ) {
@@ -1790,82 +1820,82 @@ function gutentor_is_array_empty( $array ) {
 	return true;
 }
 
+if ( ! function_exists( 'gutentor_pro_active' ) ) {
+
 /**
  * Check if Gutentor Pro activated
  */
-if ( ! function_exists( 'gutentor_pro_active' ) ) {
-
 	function gutentor_pro_active() {
 		return class_exists( 'Gutentor_Pro' );
 	}
 }
 
+if ( ! function_exists( 'gutentor_is_woocommerce_active' ) ) {
+
 /**
  * Check if WooCommerce activated
  */
-if ( ! function_exists( 'gutentor_is_woocommerce_active' ) ) {
-
 	function gutentor_is_woocommerce_active() {
 		return class_exists( 'WooCommerce' );
 	}
 }
 
+if ( ! function_exists( 'gutentor_is_edd_active' ) ) {
+
 /**
  * Check if Edd activated
  */
-if ( ! function_exists( 'gutentor_is_edd_active' ) ) {
-
 	function gutentor_is_edd_active() {
 		return class_exists( 'Easy_Digital_Downloads' );
 	}
 }
 
+if ( ! function_exists( 'gutentor_is_edd_review_active' ) ) {
+
 /**
  * Check if Edd Rating activated
  */
-if ( ! function_exists( 'gutentor_is_edd_review_active' ) ) {
-
 	function gutentor_is_edd_review_active() {
 		return ( class_exists( 'Easy_Digital_Downloads' ) && class_exists( 'EDD_Reviews' ) && function_exists( 'edd_reviews' ) );
 	}
 }
 
+if ( ! function_exists( 'gutentor_is_edd_wishlist_active' ) ) {
+
 /**
  * Check if Edd Whishlist activated
  */
-if ( ! function_exists( 'gutentor_is_edd_wishlist_active' ) ) {
-
 	function gutentor_is_edd_wishlist_active() {
 		return ( class_exists( 'Easy_Digital_Downloads' ) && class_exists( 'EDD_Wish_Lists' ) );
 	}
 }
+if ( ! function_exists( 'gutentor_is_edd_favorites_active' ) ) {
+
 /**
  * Check if Edd Whishlist activated
  */
-if ( ! function_exists( 'gutentor_is_edd_favorites_active' ) ) {
-
 	function gutentor_is_edd_favorites_active() {
 		return ( class_exists( 'Easy_Digital_Downloads' ) && class_exists( 'EDD_Wish_Lists' ) && class_exists( 'EDD_Favorites' ) );
 	}
 }
 
+if ( ! function_exists( 'gutentor_is_templateberg_active' ) ) {
+
 /**
  * Check if Templateberg activated
  */
-if ( ! function_exists( 'gutentor_is_templateberg_active' ) ) {
-
 	function gutentor_is_templateberg_active() {
 		return class_exists( 'Templateberg' );
 	}
 }
+
+if ( ! function_exists( 'gutentor_templateberg_has_account' ) ) {
 
 /**
  * Check if Templateberg connect status
  *
  * @retun boolean
  */
-if ( ! function_exists( 'gutentor_templateberg_has_account' ) ) {
-
 	function gutentor_templateberg_has_account() {
 		if ( ! gutentor_is_templateberg_active() ) {
 			return false;
@@ -1875,11 +1905,14 @@ if ( ! function_exists( 'gutentor_templateberg_has_account' ) ) {
 }
 
 
-/**
- * Custom Edd Review
- */
 if ( ! function_exists( 'gutentor_custom_edd_review' ) ) {
 
+/**
+ * Custom Edd Review
+ *
+ * @param int $id
+ * @return string
+ */
 	function gutentor_custom_edd_review( $id ) {
 
 		// make sure edd reviews is active.
@@ -1924,6 +1957,8 @@ if ( ! function_exists( 'gutentor_custom_edd_review' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_mysql_to_rfc3339' ) ) {
+
 /**
  * Just to fix this
  *  ERROR | Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead
@@ -1934,12 +1969,13 @@ if ( ! function_exists( 'gutentor_custom_edd_review' ) ) {
  * @param string $date_string Date string to parse and format.
  * @return string Date formatted for ISO8601 without time zone.
  */
-if ( ! function_exists( 'gutentor_mysql_to_rfc3339' ) ) {
 	function gutentor_mysql_to_rfc3339( $date_string ) {
 		return mysql2date( 'Y-m-d\TH:i:s', $date_string, false );
 	}
 }
 
+
+if ( ! function_exists( 'gutentor_has_gutentor_block' ) ) {
 
 /**
  * Gutentor has Gutentor blocks
@@ -1949,7 +1985,6 @@ if ( ! function_exists( 'gutentor_mysql_to_rfc3339' ) ) {
  * @return bool Whether the post content contains the specified block.
  * @since 3.0.9
  */
-if ( ! function_exists( 'gutentor_has_gutentor_block' ) ) {
 	function gutentor_has_gutentor_block( $post = null ) {
 		$has_block = false;
 		if ( ! is_string( $post ) ) {
@@ -1983,6 +2018,8 @@ if ( ! function_exists( 'gutentor_has_gutentor_block' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_has_block' ) ) {
+
 /**
  * Just to fix this
  * has_block doesn't return true when a block is inside a reusable block #18272
@@ -1993,10 +2030,11 @@ if ( ! function_exists( 'gutentor_has_gutentor_block' ) ) {
  * @param string                  $block_name Full Block type to look for.
  * @param int|string|WP_Post|null $post Optional. Post content, post ID, or post object. Defaults to global $post.
  *
+ * @param string $block_name
+ * @param WP_Post|null $post
  * @return bool Whether the post content contains the specified block.
  * @since 3.0.3
  */
-if ( ! function_exists( 'gutentor_has_block' ) ) {
 	function gutentor_has_block( $block_name, $post = null ) {
 		$has_block = false;
 		if ( has_block( $block_name, $post ) ) {
@@ -2026,6 +2064,8 @@ if ( ! function_exists( 'gutentor_has_block' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_reusable_block_ids' ) ) {
+
 /**
  * Get all reusable blocks IDs by the post id
  *
@@ -2034,7 +2074,6 @@ if ( ! function_exists( 'gutentor_has_block' ) ) {
  * @return bool Whether the post content contains the specified block.
  * @since 3.0.9
  */
-if ( ! function_exists( 'gutentor_get_reusable_block_ids' ) ) {
 	function gutentor_get_reusable_block_ids( $post = null ) {
 		$reusable_blocks = array();
 		if ( ! is_string( $post ) ) {
@@ -2055,11 +2094,14 @@ if ( ! function_exists( 'gutentor_get_reusable_block_ids' ) ) {
 		return $reusable_blocks;
 	}
 }
-/**
- * check if Edd Whishlist activated
- */
 if ( ! function_exists( 'gutentor_is_edd_has_price' ) ) {
 
+/**
+ * check if Edd Whishlist activated
+ *
+ * @param int $id
+ * @return string
+ */
 	function gutentor_is_edd_has_price( $id ) {
 		if ( edd_has_variable_prices( $id ) ) {
 			return 'price-not-empty';
@@ -2072,23 +2114,25 @@ if ( ! function_exists( 'gutentor_is_edd_has_price' ) ) {
 }
 
 
+if ( ! function_exists( 'gutentor_setting_enable_template_library' ) ) {
+
 /**
  * Enabled Import button.
  *
  * @since 2.1.0
  */
-if ( ! function_exists( 'gutentor_setting_enable_template_library' ) ) {
 	function gutentor_setting_enable_template_library() {
 		return gutentor_get_options( 'enable-import-block' );
 	}
 }
+
+if ( ! function_exists( 'gutentor_setting_enable_export_template_button' ) ) {
 
 /**
  * Enabled Export button.
  *
  * @since 2.1.0
  */
-if ( ! function_exists( 'gutentor_setting_enable_export_template_button' ) ) {
 	function gutentor_setting_enable_export_template_button() {
 		return gutentor_get_options( 'enable-export-block' );
 	}
@@ -2096,12 +2140,13 @@ if ( ! function_exists( 'gutentor_setting_enable_export_template_button' ) ) {
 
 
 
+if ( ! function_exists( 'gutentor_block_name_short_full_form' ) ) {
+
 /**
  * Get Gutentor Block Full Name.
  *
  * @since 3.1.0
  */
-if ( ! function_exists( 'gutentor_block_name_short_full_form' ) ) {
 	function gutentor_block_name_short_full_form() {
 		$all_blocks = array();
 		$elements   = Gutentor_Admin::elements();
@@ -2128,12 +2173,16 @@ if ( ! function_exists( 'gutentor_block_name_short_full_form' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_block_add_default_classes' ) ) {
+
 /**
  * Add Default class to PHP block
  *
+ * @param string $name
+ * @param array $attributes
+ * @return string
  * @since 3.1.0
  */
-if ( ! function_exists( 'gutentor_block_add_default_classes' ) ) {
 	function gutentor_block_add_default_classes( $name, $attributes = array() ) {
 		$classes = 'wp-block-' . $name;
 
@@ -2144,12 +2193,15 @@ if ( ! function_exists( 'gutentor_block_add_default_classes' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_dynamic_element' ) ) {
+
 /**
  *Get dynamic Element
  *
+ * @param WP_Post $post
+ * @return array
  * @since 3.1.0
  */
-if ( ! function_exists( 'gutentor_get_dynamic_element' ) ) {
 	function gutentor_get_dynamic_element( $post ) {
 		$response  = array();
 		$g_options = gutentor_get_options();
@@ -2188,12 +2240,15 @@ if ( ! function_exists( 'gutentor_get_dynamic_element' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_get_term_dynamic_element' ) ) {
+
 /**
  *Get dynamic Element
  *
+ * @param WP_Term $term
+ * @return array
  * @since 3.1.0
  */
-if ( ! function_exists( 'gutentor_get_term_dynamic_element' ) ) {
 	function gutentor_get_term_dynamic_element( $term ) {
 		$response  = array();
 		$g_options = gutentor_get_options();
@@ -2221,13 +2276,14 @@ if ( ! function_exists( 'gutentor_get_term_dynamic_element' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_has_post_featured' ) ) {
+
 /**
  * Check has Featured
  *
- * @param  [mix] $var
- * @return [boolean]
+ * @param WP_Post $post
+ * @return bool
  */
-if ( ! function_exists( 'gutentor_has_post_featured' ) ) {
 	function gutentor_has_post_featured( $post ) {
 		$featured_condition = apply_filters( 'gutentor_has_post_featured', has_post_thumbnail( $post->ID ), $post );
 		if ( $featured_condition ) {
@@ -2237,14 +2293,15 @@ if ( ! function_exists( 'gutentor_has_post_featured' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_is_site_editor_screen' ) ) {
+
 /**
  * Check if site editor screen
  *
  * @since    3.1.9
 
- * @return [boolean]
+ * @return bool
  */
-if ( ! function_exists( 'gutentor_is_site_editor_screen' ) ) {
 	function gutentor_is_site_editor_screen() {
 		if ( get_current_screen() &&
 			get_current_screen()->base === 'site-editor'
@@ -2255,14 +2312,15 @@ if ( ! function_exists( 'gutentor_is_site_editor_screen' ) ) {
 	}
 }
 
+if ( ! function_exists( 'gutentor_is_fse_template' ) ) {
+
 /**
  * FSE Fixed
  *
  * @since    3.1.9
 
- * @return [boolean]
+ * @return bool
  */
-if ( ! function_exists( 'gutentor_is_fse_template' ) ) {
 	function gutentor_is_fse_template() {
 		global $_wp_current_template_content;
 		if ( current_theme_supports( 'block-templates' ) && $_wp_current_template_content ) {
@@ -2273,15 +2331,16 @@ if ( ! function_exists( 'gutentor_is_fse_template' ) ) {
 }
 
 
+if ( ! function_exists( 'gutentor_is_valid_url' ) ) {
+
 /**
  * Simple check for validating a URL, it must start with http:// or https://.
  * and pass FILTER_VALIDATE_URL validation.
  *
+ * @param string $url
+ * @return bool
  * @since    3.2.1
-
- * @return [boolean]
  */
-if ( ! function_exists( 'gutentor_is_valid_url' ) ) {
 	function gutentor_is_valid_url( $url ) {
 
 		// Must start with http:// or https://.
@@ -2319,7 +2378,7 @@ if ( ! function_exists( 'gutentor_add_installed_time' ) ) {
 	}
 }
 
-if ( ! function_exists( 'gutentor_strip_malicious_html' ) ) {
+if ( ! function_exists( 'gutentor_get_allowed_html' ) ) {
 	/**
 	 * Returns the unified allowed HTML schema for Gutentor render sanitization.
 	 *
@@ -2407,19 +2466,90 @@ if ( ! function_exists( 'gutentor_strip_malicious_html' ) ) {
 			'data-*'              => true,
 		);
 
-		$add_tag_attrs( 'svg', $svg_attrs );
-		$add_tag_attrs( 'path', $svg_attrs );
-		$add_tag_attrs( 'g', $svg_attrs );
-		$add_tag_attrs( 'text', $svg_attrs );
-		$add_tag_attrs( 'tspan', $svg_attrs );
-		$add_tag_attrs( 'lineargradient', $svg_attrs );
-		$add_tag_attrs( 'stop', $svg_attrs );
-		$add_tag_attrs( 'polygon', $svg_attrs );
-		$add_tag_attrs( 'rect', $svg_attrs );
-		$add_tag_attrs( 'circle', $svg_attrs );
-		$add_tag_attrs( 'defs', $svg_attrs );
-		$add_tag_attrs( 'use', $svg_attrs );
-		$add_tag_attrs( 'symbol', $svg_attrs );
+		$svg_tags = array(
+			'svg', 'path', 'g', 'text', 'tspan', 'lineargradient', 'stop',
+			'polygon', 'polyline', 'rect', 'circle', 'ellipse', 'line',
+			'defs', 'use', 'symbol', 'clippath', 'mask', 'filter',
+			'fegaussianblur', 'feoffset', 'femerge', 'femergenode',
+			'feflood', 'fecolormatrix', 'feblend', 'fecomposite',
+			'fedisplacementmap', 'feturbulence', 'femorphology',
+			'fecomponenttransfer', 'fefuncr', 'fefuncg', 'fefuncb',
+			'fefunca', 'fediffuselighting', 'fespecularlighting',
+			'fepointlight', 'fespotlight', 'fedistantlight',
+			'feimage', 'fetile', 'feconvolvematrix', 'fedropshadow',
+			'radialgradient', 'image', 'a', 'marker', 'pattern', 'textpath',
+			'title', 'desc', 'metadata', 'switch',
+		);
+		foreach ( $svg_tags as $svg_tag ) {
+			$add_tag_attrs( $svg_tag, $svg_attrs );
+		}
+
+		$form_attrs = array(
+			'action'         => true,
+			'method'         => true,
+			'enctype'        => true,
+			'name'           => true,
+			'target'         => true,
+			'novalidate'     => true,
+			'autocomplete'   => true,
+			'accept-charset' => true,
+			'type'           => true,
+			'value'          => true,
+			'placeholder'    => true,
+			'required'       => true,
+			'disabled'       => true,
+			'readonly'       => true,
+			'checked'        => true,
+			'multiple'       => true,
+			'accept'         => true,
+			'autofocus'      => true,
+			'form'           => true,
+			'list'           => true,
+			'max'            => true,
+			'maxlength'      => true,
+			'min'            => true,
+			'minlength'      => true,
+			'pattern'        => true,
+			'size'           => true,
+			'step'           => true,
+			'alt'            => true,
+			'selected'       => true,
+			'label'          => true,
+			'formaction'     => true,
+			'formenctype'    => true,
+			'formmethod'     => true,
+			'formnovalidate' => true,
+			'formtarget'     => true,
+			'for'            => true,
+			'rows'           => true,
+			'cols'           => true,
+			'wrap'           => true,
+			'src'            => true,
+			'width'          => true,
+			'height'         => true,
+			'id'             => true,
+			'class'          => true,
+			'style'          => true,
+			'role'           => true,
+			'aria-label'     => true,
+			'aria-hidden'    => true,
+			'data-*'         => true,
+		);
+
+		$add_tag_attrs( 'form', $form_attrs );
+		$add_tag_attrs( 'input', $form_attrs );
+		$add_tag_attrs( 'select', $form_attrs );
+		$add_tag_attrs( 'option', $form_attrs );
+		$add_tag_attrs( 'optgroup', $form_attrs );
+		$add_tag_attrs( 'button', $form_attrs );
+		$add_tag_attrs( 'label', $form_attrs );
+		$add_tag_attrs( 'fieldset', $form_attrs );
+		$add_tag_attrs( 'legend', $form_attrs );
+		$add_tag_attrs( 'textarea', $form_attrs );
+		$add_tag_attrs( 'datalist', $form_attrs );
+		$add_tag_attrs( 'output', $form_attrs );
+		$add_tag_attrs( 'progress', $form_attrs );
+		$add_tag_attrs( 'meter', $form_attrs );
 
 		$media_attrs = array(
 			'src'             => true,
@@ -2466,36 +2596,29 @@ if ( ! function_exists( 'gutentor_strip_malicious_html' ) ) {
 		return $allowed_html;
 	}
 
-	/**
-	 * Sanitizes HTML content by removing potentially malicious attributes and scripts.
-	 *
-	 * @since 3.4.9
-	 * @param string $html The HTML content to sanitize.
-	 * @return string Sanitized HTML content.
-	 */
-	function gutentor_strip_malicious_html( $html ) {
-		if ( empty( $html ) ) {
-			return '';
-		}
+}
 
-		return wp_kses( $html, gutentor_get_allowed_html() );
+if ( ! function_exists( 'gutentor_get_block_default_attrs' ) ) {
+	/**
+	 * Get default attributes from block.json for a given block type.
+	 *
+	 * @param string $block_name The block name (e.g., 'gutentor/p1').
+	 * @return array Default attribute values.
+	 */
+	function gutentor_get_block_default_attrs( $block_name ) {
+		$block_type = \WP_Block_Type_Registry::get_instance()->get_registered( $block_name );
+		if ( ! $block_type ) {
+			return array();
+		}
+		$defaults = array();
+		if ( ! empty( $block_type->attributes ) ) {
+			foreach ( $block_type->attributes as $attr_name => $attr_schema ) {
+				if ( isset( $attr_schema['default'] ) ) {
+					$defaults[ $attr_name ] = $attr_schema['default'];
+				}
+			}
+		}
+		return $defaults;
 	}
 }
 
-if ( ! function_exists( 'gutentor_clean_rendered_block' ) ) {
-	/**
-	 * Filters rendered block content to remove malicious HTML.
-	 *
-	 * @since 3.4.9
-	 * @param string $block_content The block content about to be appended.
-	 * @param array  $block The full block, including name and attributes.
-	 * @return string Filtered block content.
-	 */
-	function gutentor_clean_rendered_block( $block_content, $block ) {
-		if ( isset( $block['blockName'] ) && str_starts_with( $block['blockName'], 'gutentor' ) ) {
-			$block_content = gutentor_strip_malicious_html( $block_content );
-		}
-		return $block_content;
-	}
-}
-add_filter( 'render_block', 'gutentor_clean_rendered_block', 10, 2 );

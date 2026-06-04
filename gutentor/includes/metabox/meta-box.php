@@ -1,5 +1,4 @@
 <?php
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -128,14 +127,15 @@ if ( ! class_exists( 'Gutentor_Custom_Meta_Box' ) ) :
 			 * */
 			if (
 				! isset( $_POST['gutentor_meta_nonce'] ) ||
-				! wp_verify_nonce( $_POST['gutentor_meta_nonce'], basename( __FILE__ ) ) || /*Protecting against unwanted requests*/
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce value passed directly to wp_verify_nonce which handles its own sanitization.
+				! wp_verify_nonce( wp_unslash( $_POST['gutentor_meta_nonce'] ), basename( __FILE__ ) ) || /*Protecting against unwanted requests*/
 				( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || /*Dealing with autosaves*/
 				! current_user_can( 'edit_post', $post_id )/*Verifying access rights*/
 			) {
 				return;
 			}
 
-			if ( 'download' != $_POST['post_type'] ) {
+			if ( isset( $_POST['post_type'] ) && 'download' != sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) ) {
 				return $post_id;
 			}
 			if ( ! current_user_can( 'edit_post', $post_id ) ) {
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Gutentor_Custom_Meta_Box' ) ) :
 			// site layout.
 			if ( isset( $_POST['gutentor_edd_demo_url'] ) ) {
 				$old = get_post_meta( $post_id, 'gutentor_edd_demo_url', true );
-				$new = esc_url_raw( $_POST['gutentor_edd_demo_url'] );
+				$new = esc_url_raw( wp_unslash( $_POST['gutentor_edd_demo_url'] ) );
 				if ( $new && $new != $old ) {
 					update_post_meta( $post_id, 'gutentor_edd_demo_url', $new );
 				} elseif ( '' == $new && $old ) {
@@ -161,12 +161,9 @@ endif;
 /**
  * Create Instance for Gutentor_Custom_Meta_Box
  *
+ * @return Gutentor_Custom_Meta_Box
  * @since    3.0.0
  * @access   public
- *
- * @param
- *
- * @return object
  */
 if ( ! function_exists( 'gutentor_custom_meta_box' ) ) {
 

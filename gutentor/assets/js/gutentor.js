@@ -774,7 +774,25 @@
   );
 
   /*Advanced popup*/
+
+  /*Queue (4.0.0): when two popups are scheduled to fire at the same time
+   *(e.g. two load triggers with timing=1), only one is allowed on screen.
+   *The first one to reach gAdvPopupOpen() opens; any subsequent calls
+   *while the slot is busy are pushed onto gPopupQueue and opened by the
+   *current popup's close callback (in FIFO order). The chain helper
+   *gChainOpenNext() goes through gAdvPopupOpen() too, so a chain next
+   *fired while another popup is on screen also gets queued — the chain
+   *relationship is preserved but the visual order is "first-scheduled,
+   *first-served".*/
+  let gPopupIsOpen = false;
+  let gPopupQueue = [];
+
   function gAdvPopupOpen(gma, gThis) {
+    if (gPopupIsOpen) {
+      gPopupQueue.push({ gma: gma, gThis: gThis });
+      return;
+    }
+    gPopupIsOpen = true;
     if (gThis.attr("devices")) {
       let devices = JSON.parse(gThis.attr("devices"));
       if (Array.isArray(devices)) {
@@ -792,6 +810,62 @@
       }
     } else {
       $.magnificPopup.open(gma);
+    }
+  }
+
+  /*Chain (4.0.0): module-level registry of built magnificPopup configs.
+   *Populated inside gInitAdvPopup() so the chain helper below can look up
+   *a popup by id when re-opening it on close. Keyed by the popup element id
+   *(`g-adv-popup-<post_id>`). Each popup has its own mfp config (built from
+   *its own gma[i]); the config is NOT shared between popups in different
+   *chain groups — the registry key is the unique popup id, and the chain
+   *helper only re-opens popups in the same chain group.*/
+  const gAdvPopupConfigs = {};
+
+  /*Chain (4.0.0): when a popup closes, walk forward through popups that
+   *share the same chain group, in ascending chain order, and open the
+   *next one that is not dismissed. The walk is filtered to the current
+   *popup's chaingroup, so popups in other chain groups are never opened
+   *by this helper. Device filtering is handled by gAdvPopupOpen() inside
+   *the per-popup mfp config.*/
+  function gChainOpenNext(currentGThis) {
+    if (!currentGThis || currentGThis.attr("chainenable") !== "1") {
+      return;
+    }
+    const group = currentGThis.attr("chaingroup");
+    const currentOrder = parseInt(currentGThis.attr("chainorder"), 10);
+    if (!group || isNaN(currentOrder)) {
+      return;
+    }
+    let targetOrder = currentOrder + 1;
+    /*Skip dismissed popups: a user has opted out of that one, so the
+     *chain should jump to the one after it. We bound the loop to 200
+     *hops as a safety net so a misconfigured chain can never hang the
+     *page.*/
+    for (let safety = 0; safety < 200; safety++) {
+      let found = null;
+      $(".g-adv-popup").each(function () {
+        const $el = $(this);
+        if (
+          $el.attr("chaingroup") === group &&
+          parseInt($el.attr("chainorder"), 10) === targetOrder
+        ) {
+          found = $el;
+          return false;
+        }
+      });
+      if (!found) {
+        return;
+      }
+      if (typeof gIsDismissed === "function" && gIsDismissed(found.attr("id"))) {
+        targetOrder++;
+        continue;
+      }
+      const cfg = gAdvPopupConfigs[found.attr("id")];
+      if (cfg) {
+        gAdvPopupOpen(cfg, found);
+      }
+      return;
     }
   }
 
@@ -996,11 +1070,70 @@
         },
         close: function () {
           $("#gutentor-adv-popup-style").remove();
+          if ("1" === gThis.attr("dismissenabled")) {
+            gSetDismissed(
+              gThis.attr("id"),
+              gThis.attr("dismissduration"),
+              gThis.attr("dismissunit")
+            );
+          }
+          /*Mark the slot as free so the next queued popup (or chain next)
+           *can open. 250ms matches the typical magnificPopup fade-out so
+           *the next popup does not appear before the current one is fully
+           *hidden. Queue is processed BEFORE the chain: the queue holds
+           *popups that were already scheduled (e.g. two load triggers at
+           *the same timing), so they shouldn't be preempted by a chain
+           *next that was configured separately.*/
+          gPopupIsOpen = false;
+          setTimeout(function () {
+            if (gPopupQueue.length > 0) {
+              const next = gPopupQueue.shift();
+              if (
+                next.gThis &&
+                typeof gIsDismissed === "function" &&
+                gIsDismissed(next.gThis.attr("id"))
+              ) {
+                /*Queued popup was dismissed in the meantime — drop it
+                 *and try the next one in the queue.*/
+                gPopupIsOpen = true;
+                next.gThis.remove && next.gThis.remove();
+                gAdvPopupOpen(next.gma, next.gThis);
+                return;
+              }
+              gAdvPopupOpen(next.gma, next.gThis);
+              return;
+            }
+            /*Chain (4.0.0): after the close animation has settled, open the
+             *next popup in the same chain group (if any).*/
+            if ("1" === gThis.attr("chainenable")) {
+              gChainOpenNext(gThis);
+            }
+          }, 250);
         },
       };
 
       if (gThis.attr("trigger")) {
-        if ("load" === gThis.attr("trigger")) {
+        if (
+          "1" === gThis.attr("dismissenabled") &&
+          gIsDismissed(gThis.attr("id"))
+        ) {
+          gThis.remove();
+          return;
+        }
+        /*Chain (4.0.0): popups that are part of a chain (chainenable=1)
+         *and have an order greater than 1 are opened by gChainOpenNext()
+         *when the previous popup in the chain closes. If we also let
+         *their own trigger fire (e.g. trigger=load), the popup would
+         *open twice in quick succession and skip the user-driven chain
+         *flow. Skip the trigger handler for these popups so the chain
+         *is the only path that opens them.*/
+        if (
+          "1" === gThis.attr("chainenable") &&
+          parseInt(gThis.attr("chainorder"), 10) > 1
+        ) {
+          /*Chain member with order>1: own trigger is suppressed. Chain
+           *will open this popup when the previous one closes.*/
+        } else if ("load" === gThis.attr("trigger")) {
           if (gThis.attr("timing")) {
             setTimeout(function () {
               gAdvPopupOpen(gma[i], gThis);
@@ -1067,7 +1200,48 @@
           }
         }
       }
+      /*Chain (4.0.0): expose the built mfp config so gChainOpenNext()
+       *can re-open this popup by id when the previous popup in the
+       *chain closes.*/
+      gAdvPopupConfigs[gThis.attr("id")] = gma[i];
     });
+  }
+  function gGetDismissKey(popupId) {
+    return "gutentor_popup_dismissed_" + popupId;
+  }
+  function gIsDismissed(popupId) {
+    try {
+      var val = localStorage.getItem(gGetDismissKey(popupId));
+      if (!val) return false;
+      if (val === "1") return true;
+      return Date.now() < parseInt(val, 10);
+    } catch (e) {
+      return false;
+    }
+  }
+  function gSetDismissed(popupId, duration, unit) {
+    try {
+      if (unit === "forever") {
+        localStorage.setItem(gGetDismissKey(popupId), "1");
+        return;
+      }
+      var multipliers = {
+        hour: 3600,
+        day: 86400,
+        week: 604800,
+        month: 2592000,
+        custom: 1,
+      };
+      var seconds =
+        Math.max(1, parseInt(duration, 10) || 1) *
+        (multipliers[unit] || 86400);
+      localStorage.setItem(
+        gGetDismissKey(popupId),
+        String(Date.now() + seconds * 1000)
+      );
+    } catch (e) {
+      /* localStorage disabled */
+    }
   }
   function gAdvPopupData() {
     let gAllScripts = [],

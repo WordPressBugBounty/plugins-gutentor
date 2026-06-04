@@ -118,10 +118,13 @@ class Gutentor_Pro_License_Init {
 		);
 		$license = trim( get_option( $this->slug . '_license_key' ) );
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin UI notice display, not processing form submission.
 		if ( isset( $_GET['g-message'] ) && ! empty( $_GET['g-message'] ) ) {
 			?>
 			<div id="message" class="error notice is-dismissible">
-				<p><?php echo esc_html( $_GET['g-message'] ); ?></p>
+				<p><?php
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Admin UI notice display, value escaped with esc_html and unslashed.
+        echo esc_html( wp_unslash( $_GET['g-message'] ) ); ?></p>
 			</div>
 			<?php
 		}
@@ -290,15 +293,17 @@ class Gutentor_Pro_License_Init {
 		$user_id = $current_user->ID;
 
 		/* If user clicks to ignore the notice, add info to user meta */
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin notice dismissal via URL param, not processing form submission.
 		if ( isset( $_GET[ $this->slug . '_upgrade_to_pro_notice' ] ) && '0' == $_GET[ $this->slug . '_upgrade_to_pro_notice' ] ) {
 			add_user_meta( $user_id, $this->slug . '_upgrade_to_pro_notice', 'true', true );
 		}
 
 		/* If user clicks to ignore the notice, add that to their user meta */
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin notice dismissal via URL param, not processing form submission.
 		if ( isset( $_GET[ $this->slug . '_upgrade_to_pro_notice_partially' ] ) && '0' == $_GET[ $this->slug . '_upgrade_to_pro_notice_partially' ] ) {
 
 			update_user_meta( $user_id, $this->slug . '_upgrade_to_pro_notice_partially', time() );
-			if ( isset( $_GET['go-license-page'] ) && '1' == $_GET['go-license-page'] ) {
+			if ( isset( $_GET['go-license-page'] ) && '1' == $_GET['go-license-page'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin notice dismissal via URL param.
 				wp_safe_redirect( admin_url( 'admin.php?page=' . $this->menu_slug ) );
 			}
 		}

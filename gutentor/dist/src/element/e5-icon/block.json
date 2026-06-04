@@ -1,0 +1,193 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e5",
+  "title": "Icon",
+  "description": "Display an icon to symbolize the text or link to a social media profile or website.",
+  "category": "gutentor-elements",
+  "keywords": [
+    "Gutentor Icon Link Social Media Profile Website Symbol URL Elements"
+  ],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e5"
+    },
+    "e5IType": {
+      "type": "string",
+      "default": "g-icon-d"
+    },
+    "e5cSVG": {
+      "type": "string",
+      "default": ""
+    },
+    "e5Icon": {
+      "type": "object",
+      "default": {
+        "label": "fa-arrow-right",
+        "value": "fas fa-arrow-right",
+        "code": "f061"
+      }
+    },
+    "e5Size": {
+      "type": "object"
+    },
+    "e5Color": {
+      "type": "object",
+      "default": {
+        "enable": true,
+        "normal": "#275cf6",
+        "hover": ""
+      }
+    },
+    "e5Style": {
+      "type": "string",
+      "default": "gutentor-icon-default"
+    },
+    "e5LinkOpt": {
+      "type": "object",
+      "default": {
+        "openInNewTab": false,
+        "rel": "",
+        "noFollow": false,
+        "enableIconLink": "",
+        "iconLink": ""
+      }
+    },
+    "e5OnWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "e5Width": {
+      "type": "object"
+    },
+    "e5OnHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "e5Height": {
+      "type": "object"
+    },
+    "e5Padding": {
+      "type": "object"
+    },
+    "e5Margin": {
+      "type": "object"
+    },
+    "e5Align": {
+      "type": "object"
+    },
+    "e5BgColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#fff",
+        "hover": ""
+      }
+    },
+    "e5BgGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "e5Border": {
+      "type": "object"
+    },
+    "e5BoxShadow": {
+      "type": "object"
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

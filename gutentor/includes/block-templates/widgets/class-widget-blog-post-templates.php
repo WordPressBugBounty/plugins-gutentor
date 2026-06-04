@@ -50,10 +50,10 @@ if ( ! class_exists( 'Gutentor_Widget_Blog_Post_Templates' ) ) {
 		/**
 		 * Load Template 1
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function template_1( $data, $post, $attributes ) {
 
@@ -130,10 +130,10 @@ if ( ! class_exists( 'Gutentor_Widget_Blog_Post_Templates' ) ) {
 		/**
 		 * Blog Post Templates
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function load_blog_post_template( $data, $post, $attributes ) {
 

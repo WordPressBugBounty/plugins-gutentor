@@ -6,7 +6,7 @@ if ( ! class_exists( 'Gutentor_Template_Info' ) ) {
 	/**
 	 * Gutentor Template Info
 	 * Copy of wp-includes\template-loader.php, wp-includes\template.php files and locate_block_template function
-	 * to retrive template info
+	 * to retrieve template info
 	 * If we can directly get currently template info, we may delete this file
 	 *
 	 * @package Gutentor
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Gutentor_Template_Info' ) ) {
 				);
 				$index                  = array_search( $relative_template_path, $templates, true );
 
-				// If the template hiearchy algorithm has successfully located a PHP template file,
+				// If the template hierarchy algorithm has successfully located a PHP template file,
 				// we will only consider block templates with higher or equal specificity.
 				$templates = array_slice( $templates, 0, $index + 1 );
 			}
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Gutentor_Template_Info' ) ) {
 			 *
 			 * @param string[] $templates A list of template candidates, in descending order of priority.
 			 */
-			$templates = apply_filters( "{$type}_template_hierarchy", $templates );
+			$templates = apply_filters( "{$type}_template_hierarchy", $templates ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- WP core template hierarchy hook pattern.
 
 			$template = locate_template( $templates );
 
@@ -734,9 +734,12 @@ if ( ! class_exists( 'Gutentor_Template_Info' ) ) {
 			return $this->get_query_template( 'attachment', $templates );
 		}
 
-		/*
-		wp-includes\template-loader.php
-		*/
+		/**
+		 * Get template part info
+		 *
+		 * @param array $attributes
+		 * @return array
+		 */
 		public function get_template_part_info( $attributes ) {
 
 			$template_part_query = new WP_Query(

@@ -1,0 +1,245 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e2",
+  "title": "Button",
+  "description": "Prompt visitors to take action with attractive buttons.",
+  "category": "gutentor-elements",
+  "keywords": ["Gutentor Button Text Word Action Link URL Elements"],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e2"
+    },
+    "pName": {
+      "type": "string"
+    },
+    "e2Align": {
+      "type": "object"
+    },
+    "e2DisableLinkOpt": {
+      "type": "boolean",
+      "default": false
+    },
+    "e2LinkOpt": {
+      "type": "object",
+      "default": {
+        "linkOption": "open-new-tab",
+        "openInNewTab": false,
+        "rel": ""
+      }
+    },
+    "e2Margin": {
+      "type": "object"
+    },
+    "e2Padding": {
+      "type": "object",
+      "default": {
+        "type": "px",
+        "dTop": "12",
+        "dRight": "25",
+        "dBottom": "12",
+        "dLeft": "25",
+        "tTop": "12",
+        "tRight": "25",
+        "tBottom": "12",
+        "tLeft": "25",
+        "mTop": "12",
+        "mRight": "25",
+        "mBottom": "12",
+        "mLeft": "25"
+      }
+    },
+    "e2IconOpt": {
+      "type": "object",
+      "default": {
+        "position": "hide",
+        "size": 14,
+        "tSize": 14,
+        "mSize": 14
+      }
+    },
+    "e2IconMargin": {
+      "type": "object"
+    },
+    "e2IconPadding": {
+      "type": "object"
+    },
+    "e2IconTypography": {
+      "type": "object",
+      "default": {
+        "fontType": "default",
+        "desktopFontSize": "16",
+        "tabletFontSize": "16",
+        "mobileFontSize": "16",
+        "textTransform": "normal"
+      }
+    },
+    "e2Icon": {
+      "type": "object",
+      "default": {
+        "label": "fa-book",
+        "value": "fas fa-book",
+        "code": "f108"
+      }
+    },
+    "e2Text": {
+      "type": "string",
+      "default": "Gutentor Button",
+      "source": "html",
+      "selector": ".gutentor-button>span",
+      "role": "content"
+    },
+    "e2Link": {
+      "type": "string",
+      "default": "#"
+    },
+    "e2ClassName": {
+      "type": "string",
+      "default": ""
+    },
+    "e2Layout": {
+      "type": "string",
+      "default": ""
+    },
+    "e2BgColor": {
+      "type": "object",
+      "default": {
+        "enable": true,
+        "normal": "rgba(39, 92, 246, 1)",
+        "hover": "rgba(25, 73, 212, 1)"
+      }
+    },
+    "e2BgGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "e2TxtColor": {
+      "type": "object",
+      "default": {
+        "enable": true,
+        "normal": "#fff",
+        "hover": ""
+      }
+    },
+    "e2Border": {
+      "type": "object",
+      "default": {
+        "rTypeN": "px",
+        "rTypeH": "px",
+        "rTopN": "3",
+        "rTopH": "3",
+        "rRightN": "3",
+        "rRightH": "3",
+        "rBottomN": "3",
+        "rBottomH": "3",
+        "rLeftN": "3",
+        "rLeftH": "3"
+      }
+    },
+    "e2BoxShadow": {
+      "type": "object"
+    },
+    "e2RSetting": {
+      "type": "object"
+    },
+    "e2Size": {
+      "type": "object",
+      "default": "medium"
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

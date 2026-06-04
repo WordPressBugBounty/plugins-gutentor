@@ -4,9 +4,9 @@ Contributors: gutentor, acmeit, addonspress, codersantosh
 Donate link: https://www.gutentor.com/
 Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
-Tested up to: 6.9
-Requires PHP: 5.6.20
-Stable tag: 3.5.6
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 4.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,20 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 4.0.0 - 2026-06-04 =
+* Added:   Full WordPress 7.0 compatibility.
+* Added:   React 19 support.
+* Updated: Block registration and build system modernized.
+* Fixed:   Editor icons (dashicons, Font Awesome) not loading in the block editor.
+* Fixed:   Advanced Columns layout not applying column widths on initial selection.
+* Fixed:   Blog Post widget styles not loading on the frontend.
+* Fixed:   Post and Term block inspector panels were missing.
+* Fixed:   Editor crashes when block attributes are undefined.
+* Fixed:   Dynamic CSS not loading for some blocks with multiple instances.
+* Fixed:   Block validation errors when opening posts with older saved blocks.
+* Fixed:   Images in blocks displaying with distorted aspect ratios.
+* Security: Improved block content sanitization with per-attribute validation.
 
 = 3.5.6 (Security Release) =
 * Security: Fixed Stored XSS vulnerability (CVE-2026-2951) in Gutentor blocks by replacing fragile regex-based sanitization with strict wp_kses allowlist.

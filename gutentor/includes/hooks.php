@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * The Gutentor theme hooks callback functionality of the plugin.
@@ -168,12 +171,11 @@ class Gutentor_Hooks {
 
 	/**
 	 * Callback functions for after_setup_theme,
-	 * Add Gutentor global color palatte
+	 * Add Gutentor global color palette
 	 *
 	 * @since    3.0.0
 	 * @access   public
 	 *
-	 * @param null
 	 * @return void
 	 */
 	public function add_color_palette() {
@@ -302,7 +304,6 @@ class Gutentor_Hooks {
 	 * @since    2.1.2
 	 * @access   public
 	 *
-	 * @param null
 	 * @return void
 	 */
     function register_script_style(){ // phpcs:ignore
@@ -440,7 +441,7 @@ class Gutentor_Hooks {
 		wp_register_style(
 			'gutentor', // Handle.
 			GUTENTOR_URL . 'dist/blocks.style.build.css',
-			array( 'wp-editor' ), // Dependency to include the CSS after it.
+			array( 'wp-editor', 'dashicons' ), // Dependency to include the CSS after it.
 			GUTENTOR_VERSION // Version: File modification time.
 		);
 
@@ -520,7 +521,6 @@ class Gutentor_Hooks {
 	 * @since    2.1.2
 	 * @access   public
 	 *
-	 * @param null
 	 * @return void
 	 */
 	function load_lib_assets() {
@@ -584,12 +584,22 @@ class Gutentor_Hooks {
 	 * @since    1.0.0
 	 * @access   public
 	 *
-	 * @param null
 	 * @return void
 	 */
 	function block_assets() { // phpcs:ignore
 
 		$this->load_lib_assets();
+
+		// Editor styles loaded via enqueue_block_assets for apiVersion 3 iframe compatibility.
+		if ( is_admin() ) {
+			wp_enqueue_style(
+				'gutentor-editor',
+				GUTENTOR_URL . 'dist/blocks.editor.build.css',
+				array( 'wp-edit-blocks', 'dashicons', 'fontawesome' ),
+				GUTENTOR_VERSION
+			);
+			wp_style_add_data( 'gutentor-editor', 'rtl', 'replace' );
+		}
 	}
 
 	/**
@@ -599,7 +609,6 @@ class Gutentor_Hooks {
 	 * @since    2.1.2
 	 * @access   public
 	 *
-	 * @param null
 	 * @return void|boolean
 	 */
 	function load_last_scripts() {
@@ -821,16 +830,6 @@ class Gutentor_Hooks {
 		/*Frontend styles*/
 		wp_enqueue_style( 'gutentor' );
 		wp_style_add_data( 'gutentor', 'rtl', 'replace' );
-
-		// Backend only styles.
-		wp_enqueue_style(
-			'gutentor-editor', // Handle.
-			GUTENTOR_URL . 'dist/blocks.editor.build.css',
-			array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-			GUTENTOR_VERSION // Version: File modification time.
-		);
-
-		wp_style_add_data( 'gutentor-editor', 'rtl', 'replace' );
 	}
 
 	/**
@@ -861,17 +860,15 @@ class Gutentor_Hooks {
 	}
 
 	/**
-	 * Callback functions for body_class,
+	 * Callback functions for admin_body_class,
 	 * Adding Admin Body Class.
 	 *
+	 * @param string $classes space-separated string of classes.
+	 * @return string
 	 * @since    1.0.0
 	 * @access   public
-	 *
-	 * @param array $classes array of classes.
-	 * @return string
 	 */
 	function add_admin_body_class( $classes ) {
-		// Wrong: No space in the beginning/end.
 		$classes                 .= ' gutentor-active ';
 		$disable_full_with_editor = gutentor_get_options( 'wide-width-editor' );
 		if ( current_theme_supports( 'align-wide' ) && ! $disable_full_with_editor ) {
@@ -883,8 +880,8 @@ class Gutentor_Hooks {
 	/**
 	 * Create Page Template
 	 *
-	 * @param {string} $templates
-	 * @return string $templates
+	 * @param array $templates
+	 * @return array
 	 */
 	function gutentor_add_page_template( $templates ) {
 		$templates['template-gutentor-full-width.php'] = esc_html__( 'Gutentor Full Width', 'gutentor' );
@@ -895,8 +892,8 @@ class Gutentor_Hooks {
 	/**
 	 * Redirect Custom Page Template
 	 *
-	 * @param {string} $templates
-	 * @return string $templates
+	 * @param string $template
+	 * @return string
 	 */
 	function gutentor_redirect_page_template( $template ) {
 		$post          = get_post();

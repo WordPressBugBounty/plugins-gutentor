@@ -73,198 +73,7 @@ if ( ! class_exists( 'Gutentor_P1' ) ) {
 			require_once GUTENTOR_PATH . 'includes/block-templates/normal/class-normal-p1-edd-templates.php';
 		}
 
-		/**
-		 * Returns attributes for this Block
-		 *
-		 * @static
-		 * @access public
-		 * @return array
-		 * @since 1.0.1
-		 */
-		public function get_attrs() {
-			$blog_post_attr = array(
-				'gID'                             => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				/*column*/
-				'blockItemsColumn'                => array(
-					'type'    => 'object',
-					'default' => array(
-						'desktop' => 'grid-md-4',
-						'tablet'  => 'grid-sm-4',
-						'mobile'  => 'grid-xs-12',
-					),
-				),
-				'timestamp'                       => array(
-					'type'    => 'number',
-					'default' => 0,
-				),
-				'gName'                           => array(
-					'type'    => 'string',
-					'default' => 'gutentor/p1',
-				),
-				'p1Temp'                          => array(
-					'type'    => 'string',
-					'default' => 'gutentor_p1_template1',
-				),
-				'gStyle'                          => array(
-					'type'    => 'string',
-					'default' => 'gutentor-blog-grid',
-				),
-				'pTaxTerm'                        => array(
-					'type'  => 'array',
-					'items' => array(
-						'type'  => 'object',
-						'label' => array(
-							'type' => 'string',
-						),
-						'value' => array(
-							'type' => 'number',
-						),
-					),
-				),
-				'pTaxType'                        => array(
-					'type'    => 'string',
-					'default' => 'category',
-				),
-				'pTaxOperator'                    => array(
-					'type'    => 'string',
-					'default' => 'IN',
-				),
-				'pPostType'                       => array(
-					'type'    => 'string',
-					'default' => 'post',
-				),
-				'pIncludePosts'                   => array(
-					'type' => 'string',
-				),
-				'pExcludePosts'                   => array(
-					'type' => 'string',
-				),
-				'pOffsetPosts'                    => array(
-					'type' => 'number',
-				),
-				'postsToShow'                     => array(
-					'type'    => 'number',
-					'default' => 6,
-				),
-				'order'                           => array(
-					'type'    => 'string',
-					'default' => 'desc',
-				),
-				'orderBy'                         => array(
-					'type'    => 'string',
-					'default' => 'date',
-				),
-				'pNoFoundTxt'                     => array(
-					'type'    => 'string',
-					'default' => 'Nothing Found',
-				),
-				'pEqlHeight'                      => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'categories'                      => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'gutentorBlogPostImageLink'       => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'pReverseContent'                 => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'pOnColInList'                    => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'gutentorBlogPostImageLinkNewTab' => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'pContentPos'                     => array(
-					'type'    => 'object',
-					'default' => array(
-						'desktop' => 'g-pos-center',
-						'tablet'  => 'g-pos-center',
-						'mobile'  => 'g-pos-center',
-					),
-				),
-				'pMsyOn'                          => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'pTimeline'                       => array(
-					'type'    => 'object',
-					'default' => array(
-						'enable'   => false,
-						/*icon*/
-						'icon'     => array(
-							'label' => 'fa-arrow-down',
-							'value' => (int) gutentor_get_options( 'fa-version' ) === 4 ? 'fa fa-arrow-down' : 'fas fa-arrow-down',
-							'code'  => 'f108',
-						),
-						'iSize'    => array(
-							'type'   => 'px',
-							'mobile' => 10,
-						),
-						'iColor'   => array(
-							'enable' => true,
-							'normal' => '#fff',
-						),
-						/*node*/
-						'nBgColor' => array(
-							'enable' => true,
-							'normal' => '#d5dee6',
-						),
-						'nWidth'   => array(
-							'enable' => true,
-							'type'   => 'px',
-							'mobile' => 30,
-						),
-						'nHeight'  => array(
-							'enable' => true,
-							'type'   => 'px',
-							'mobile' => 30,
-						),
-						'border'   => array(
-							'rTypeN'   => '%',
-							'rTopN'    => '50',
-							'rRightN'  => '50',
-							'rBottomN' => '50',
-							'rLeftN'   => '50',
-						),
-						/*width*/
-						'lColor'   => array(
-							'enable' => true,
-							'normal' => '#d5dee6',
-						),
-						'lWidth'   => array(
-							'enable' => true,
-							'type'   => 'px',
-							'mobile' => 3,
-						),
-					),
-				),
-				'pTypeWpQuery'                    => array(
-					'type'    => 'string',
-					'default' => 'default',
-				),
-				'pWpQuery'                        => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'pImgDisplayType'                 => array(
-					'type'    => 'string',
-					'default' => 'bg-image',
-				),
-			);
-			$blog_partial_attrs = array_merge_recursive( $blog_post_attr, $this->get_module_common_attrs() );
-			return array_merge_recursive( $blog_partial_attrs, $this->get_module_query_elements_common_attrs() );
-		}
+
 
 
 		/**
@@ -285,9 +94,9 @@ if ( ! class_exists( 'Gutentor_P1' ) ) {
 
 			$default_class = gutentor_block_add_default_classes( 'gutentor-p1', $attributes );
 
-			$tag                     = $attributes['mTag'] ? $attributes['mTag'] : 'div';
-			$pFType                  = $attributes['pFType'] ? $attributes['pFType'] : '';
-			$template                = $attributes['p1Temp'] ? $attributes['p1Temp'] : '';
+			$tag                     = isset( $attributes['mTag'] ) ? $attributes['mTag'] : 'div';
+			$pFType                  = isset( $attributes['pFType'] ) ? $attributes['pFType'] : '';
+			$template                = isset( $attributes['p1Temp'] ) ? $attributes['p1Temp'] : '';
 			$enable_equal_height     = isset( $attributes['pEqlHeight'] ) && $attributes['pEqlHeight'] ? 'g-equal-height' : '';
 			$align                   = isset( $attributes['align'] ) ? 'align' . $attributes['align'] : '';
 			$blockComponentAnimation = isset( $attributes['mAnimation'] ) ? $attributes['mAnimation'] : '';
@@ -336,7 +145,7 @@ if ( ! class_exists( 'Gutentor_P1' ) ) {
 				if ( isset( $attributes['pTaxType'] ) && ! empty( $attributes['pTaxType'] ) &&
 					isset( $attributes['pTaxTerm'] ) && ! empty( $attributes['pTaxTerm'] ) ) {
 					$query_args['taxonomy']    = $attributes['pTaxType'];
-					$query_args['taxOperator'] = $attributes['pTaxOperator'] ? $attributes['pTaxOperator'] : 'IN';
+					$query_args['taxOperator'] = isset( $attributes['pTaxOperator'] ) ? $attributes['pTaxOperator'] : 'IN';
 					if ( is_array( $attributes['pTaxTerm'] ) ) {
 						$p1_terms = array();
 						foreach ( $attributes['pTaxTerm'] as $p1_term ) {

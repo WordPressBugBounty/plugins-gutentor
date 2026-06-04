@@ -1,0 +1,204 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "gutentor/t3",
+	"title": "Term Category Carousel",
+	"description": "Category/Taxonomy carousel using term category with added advanced carousel options.",
+	"category": "gutentor-terms",
+	"keywords": [
+		"Gutentor Category Taxonomy Carousel Slider Term Terms Type Feature WooCommerce Products EDD Easy Digital Downloads Column Grid List Module"
+	],
+	"textdomain": "gutentor",
+	"attributes": {
+		"gID": {
+			"type": "string"
+		},
+		"gName": {
+			"type": "string",
+			"default": "gutentor/t3"
+		},
+		"mPID": {
+			"type": "string"
+		},
+		"t3Dots": {
+			"type": "boolean",
+			"default": false
+		},
+		"t3DotsT": {
+			"type": "boolean",
+			"default": false
+		},
+		"t3DotsM": {
+			"type": "boolean",
+			"default": false
+		},
+		"t3DotsColor": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"t3DotsGtColor": {
+			"type": "object",
+			"default": {
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"t3DotsBr": {
+			"type": "object"
+		},
+		"t3DotsOnWidth": {
+			"type": "boolean",
+			"default": false
+		},
+		"t3DotsWidth": {
+			"type": "object"
+		},
+		"t3DotsOnHeight": {
+			"type": "boolean",
+			"default": false
+		},
+		"t3DotsHeight": {
+			"type": "object"
+		},
+		"t3ArrowPosition": {
+			"type": "object",
+			"default": {
+				"desktop": "gutentor-slick-a-default",
+				"tablet": "gutentor-slick-a-default",
+				"mobile": "gutentor-slick-a-default"
+			}
+		},
+		"t3ArrowNextIcon": {
+			"type": "object",
+			"default": {
+				"label": "fa-angle-right",
+				"value": "fas fa-angle-right",
+				"code": "f105"
+			}
+		},
+		"t3ArrowPrevIcon": {
+			"type": "object",
+			"default": {
+				"label": "fa-angle-left",
+				"value": "fas fa-angle-left",
+				"code": "f104"
+			}
+		},
+		"t3ArrowSize": {
+			"type": "object"
+		},
+		"t3Arrows": {
+			"type": "boolean",
+			"default": true
+		},
+		"t3ArrowsT": {
+			"type": "boolean",
+			"default": true
+		},
+		"t3ArrowsM": {
+			"type": "boolean",
+			"default": true
+		},
+		"t3ArrowBgColor": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"t3ArrowBgGt": {
+			"type": "object",
+			"default": {
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"t3ArrowTxtColor": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"t3ArrowOnWidth": {
+			"type": "boolean",
+			"default": false
+		},
+		"t3ArrowWidth": {
+			"type": "object"
+		},
+		"t3ArrowOnHeight": {
+			"type": "boolean",
+			"default": false
+		},
+		"t3ArrowHeight": {
+			"type": "object"
+		},
+		"t3ArrowBr": {
+			"type": "object"
+		},
+		"t3Infinite": {
+			"type": "boolean",
+			"default": false
+		},
+		"t3AutoPlay": {
+			"type": "boolean",
+			"default": false
+		},
+		"t3AutoPlaySpeed": {
+			"type": "number",
+			"default": 3000
+		},
+		"t3SlideSpeed": {
+			"type": "number",
+			"default": 300
+		},
+		"t3SlideItem": {
+			"type": "object",
+			"default": {
+				"desktop": "3",
+				"tablet": "3",
+				"mobile": "2"
+			}
+		},
+		"t3SlideScroll": {
+			"type": "object",
+			"default": {
+				"desktop": "3",
+				"tablet": "3",
+				"mobile": "2"
+			}
+		},
+		"t3Cm": {
+			"type": "object"
+		},
+		"t3Draggable": {
+			"type": "boolean",
+			"default": true
+		},
+		"t3PauseOnFocus": {
+			"type": "boolean",
+			"default": true
+		},
+		"t3PauseOnHover": {
+			"type": "boolean",
+			"default": true
+		},
+		"t3SIMargin": {
+			"type": "object"
+		}
+	},
+	"supports": {
+		"align": [
+			"wide",
+			"full"
+		],
+		"html": false
+	}
+}

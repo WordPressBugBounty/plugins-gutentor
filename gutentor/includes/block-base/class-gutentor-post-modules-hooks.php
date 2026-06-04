@@ -39,6 +39,11 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		 * Add Filter
 		 *
 		 * @access public
+		 * @param string $hook Hook name.
+		 * @param object $component Object instance that owns the callback.
+		 * @param string $callback Callback method name on the component.
+		 * @param int    $priority Hook priority.
+		 * @param int    $accepted_args Number of accepted callback args.
 		 * @return void
 		 * @since 2.0.0
 		 */
@@ -50,6 +55,11 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		 * Add Action
 		 *
 		 * @access public
+		 * @param string $hook Hook name.
+		 * @param object $component Object instance that owns the callback.
+		 * @param string $callback Callback method name on the component.
+		 * @param int    $priority Hook priority.
+		 * @param int    $accepted_args Number of accepted callback args.
 		 * @return void
 		 * @since 2.0.0
 		 */
@@ -147,9 +157,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Main  Section Classes
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_main_wrap_classes( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -298,9 +308,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Main Section Classes For Featured Post
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_featured_post_main_wrap_classes( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -333,9 +343,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Link Related Class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_link_related_class_p2( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -361,9 +371,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Link
 		 *
-		 * @param {array} output
-		 * @param {array}        $post
-		 * @param {object} props
+		 * @param string $output
+		 * @param WP_Post $post
+		 * @param array $attributes
 		 * @return string
 		 */
 		public function add_p2_link_featured_image( $output, $post, $attributes ) {
@@ -377,6 +387,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			if ( ! $attributes['pImgOnLink'] ) {
 				return $output;
 			}
+			$target = '';
+			$rel    = '';
 			if ( array_key_exists( 'pImgOpenNewTab', $attributes ) ) {
 				$target = ( $attributes['pImgOpenNewTab'] ) ? 'target="_blank"' : '';
 			}
@@ -393,9 +405,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Main  Section Classes
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_main_wrap_additional_classes( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -489,9 +501,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Advanced Options Video Output
 		 *
-		 * @param {object} output
-		 * @param {object} props
-		 * @return {object} Inline CSS
+		 * @param string $output
+		 * @param array $attributes
+		 * @return object Inline CSS
 		 */
 		public function addAdvancedVideoOutput( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -520,8 +532,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Container Remove Classes
 		 *
-		 * @param {array} output
-		 * @param {object} props
+		 * @param string $output
+		 * @param array $attributes
 		 * @return string
 		 */
 		public function add_container_remove_space_classes( $output, $attributes ) {
@@ -557,8 +569,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Container Remove Classes
 		 *
-		 * @param {array} output
-		 * @param {object} props
+		 * @param string $output
+		 * @param array $attributes
 		 * @return string
 		 */
 		public function add_row_remove_space_classes( $output, $attributes ) {
@@ -594,8 +606,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Container Remove Classes
 		 *
-		 * @param {array} output
-		 * @param {object} props
+		 * @param string $output
+		 * @param array $attributes
 		 * @return string
 		 */
 		public function add_column_remove_space_classes( $output, $attributes ) {
@@ -629,8 +641,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Container Remove Classes
 		 *
-		 * @param {array} output
-		 * @param {object} props
+		 * @param string $output
+		 * @param array $attributes
 		 * @return string
 		 */
 		public function add_article_column_space_classes( $output, $attributes ) {
@@ -666,8 +678,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Advanced Block Shape Before Container
 		 *
-		 * @param {string} $output
-		 * @return {object} $attributes
+		 * @param string $output
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function addAdvancedBlockShapeTop( $output, $attributes ) {
 
@@ -719,8 +732,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Advanced Block Shape After Container
 		 *
-		 * @param {string} $output
-		 * @return {object} $attributes
+		 * @param string $output
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function addAdvancedBlockShapeBottom( $output, $attributes ) {
 
@@ -773,9 +787,10 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Link to Post Thumbnails
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param string $url
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function add_link_to_post_thumbnails( $output, $url, $attributes ) {
 			$output_wrap = '';
@@ -813,9 +828,10 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Link to Post Thumbnails of term
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param string $url
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function term_add_link_to_post_thumbnails( $output, $url, $attributes ) {
 			$output_wrap = '';
@@ -853,9 +869,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Block Header
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_column_class( $output, $attributes ) {
 
@@ -889,9 +905,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding term add class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function term_add_column_class( $output, $attributes ) {
 
@@ -925,9 +941,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Align class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_align_class( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -965,9 +981,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding p2 Align class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_p2_align_class( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -1004,9 +1020,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Post Box Align class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_p6_post_box_align_class( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -1045,10 +1061,10 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Add Button Attributes
 		 *
-		 * @param {object} output
-		 * @param {string} buttonLink
-		 * @param {object} buttonLinkOptions
-		 * @return {object}
+		 * @param string $output
+		 * @param string $buttonLink
+		 * @param object $buttonLinkOptions
+		 * @return object
 		 */
 		public function addButtonLinkAttr( $output, $buttonLink, $buttonLinkOptions ) {
 			$target     = $buttonLinkOptions['openInNewTab'] ? '_blank' : '';
@@ -1068,9 +1084,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function addingBlogStyleOptionsClass( $output, $attributes ) {
 			if ( 'gutentor/p1' !== $attributes['gName'] ) {
@@ -1085,9 +1101,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function adding_reverse_class( $output, $attributes ) {
 			if ( 'gutentor/p1' !== $attributes['gName'] ||
@@ -1104,9 +1120,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Position Class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_p1_template5_content_pos_class( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -1143,9 +1159,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding p2 Position Class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_p2_content_pos_class( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -1177,9 +1193,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Position Class
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_t1_template2_content_pos_class( $output, $attributes ) {
 			$gutentorBlockName = ( isset( $attributes['gName'] ) ) ? $attributes['gName'] : '';
@@ -1210,9 +1226,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Remove Column Class in Blog post
 		 *
-		 * @param {array} output
-		 * @param {object} attributes
-		 * @return mixed||boolean
+		 * @param string $output
+		 * @param array $attributes
+		 * @return string|bool
 		 */
 		public function remove_column_class_blog_post( $output, $attributes ) {
 			if ( 'gutentor/p1' !== $attributes['gName'] ) {
@@ -1228,9 +1244,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Remove Term Column Class in list
 		 *
-		 * @param {array} output
-		 * @param {object} attributes
-		 * @return mixed||boolean
+		 * @param string $output
+		 * @param array $attributes
+		 * @return string|bool
 		 */
 		public function term_remove_column_class( $output, $attributes ) {
 			if ( 'gutentor/t1' !== $attributes['gName'] ) {
@@ -1246,9 +1262,9 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding News Ticker Data
 		 *
-		 * @param {array} output
-		 * @param {object} props
-		 * @return {array}
+		 * @param string $output
+		 * @param array $attributes
+		 * @return array
 		 */
 		public function add_news_ticker_data( $output, $attributes ) {
 			if ( 'gutentor/p5' !== $attributes['gName'] ) {
@@ -1284,7 +1300,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		 * @static
 		 * @access public
 		 * @since 2.1.9
-		 * @return string
+		 * @param array $args
+		 * @return array
 		 */
 		public function edd_favorites_css_class( $args ) {
 			if ( gutentor_is_edd_favorites_active() ) {
@@ -1297,8 +1314,8 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 		/**
 		 * Adding Avatar Classes
 		 *
-		 * @param {array} output
-		 * @param {object} props
+		 * @param string $output
+		 * @param array $attributes
 		 * @return string
 		 */
 		public function add_avatar_position_class( $output, $attributes ) {

@@ -14,7 +14,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @wordpress-plugin
  * Plugin Name:       Gutentor - Gutenberg Blocks - Page Builder for Gutenberg Editor
  * Description:       Advanced yet easy, Gutenberg editor page builder blocks. Create a masterpiece, pixel perfect websites using modern WordPress Gutenberg blocks.
- * Version:           3.5.6
+ * Version:           4.0.0
  * Author:            Gutentor
  * Author URI:        https://www.gutentor.com/
  * License:           GPL-2.0+
@@ -23,17 +23,18 @@ if ( ! defined( 'WPINC' ) ) {
  */
 
 /*Define Constants for this plugin*/
-define( 'GUTENTOR_VERSION', '3.5.6' );
+define( 'GUTENTOR_VERSION', '4.0.0' );
 define( 'GUTENTOR_PLUGIN_NAME', 'gutentor' );
 define( 'GUTENTOR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GUTENTOR_URL', plugin_dir_url( __FILE__ ) );
-define( 'GUTENTOR_SCRIPT_PREFIX', ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '' );
+define( 'GUTENTOR_SCRIPT_PREFIX', ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min' );
 $GLOBALS['GUTENTOR_GLOBAL'] = array();
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-gutentor-activator.php
  */
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- Required by register_activation_hook.
 function activate_gutentor() {
 	require_once GUTENTOR_PATH . 'includes/activator.php';
 	Gutentor_Activator::activate();
@@ -49,6 +50,7 @@ require GUTENTOR_PATH . 'includes/init.php';
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-gutentor-deactivator.php
  */
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- Required by register_deactivation_hook.
 function deactivate_gutentor() {
 	require_once GUTENTOR_PATH . 'includes/deactivator.php';
 	Gutentor_Deactivator::deactivate();
@@ -91,9 +93,9 @@ add_action( 'rest_api_init', 'gutentor_register_rest_fields' );
  *
  * @since    1.0.0
  */
-if ( ! function_exists( 'run_gutentor' ) ) {
-
-	function run_gutentor() {
+	if ( ! function_exists( 'run_gutentor' ) ) {
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- Legacy bootstrap function, renaming would break compatibility.
+		function run_gutentor() {
 
 		return Gutentor::instance();
 	}

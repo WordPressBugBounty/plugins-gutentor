@@ -47,10 +47,13 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 		/**
 		 * Add Comment data
 		 *
+		 * @param array $data
+		 * @param \WP_Post $post
+		 * @param \WP_REST_Request $request
+		 * @return array
 		 * @static
 		 * @access public
 		 * @since 2.1.9
-		 * @return array
 		 */
 		public function add_post_comment_data( $data, $post, $request ) {
 
@@ -62,10 +65,13 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 		/**
 		 * Add new badge on product
 		 *
+		 * @param string $class
+		 * @param \WP_Post $post
+		 * @param object|bool $product
+		 * @return string
 		 * @static
 		 * @access public
 		 * @since 2.1.9
-		 * @return string
 		 */
 		public function new_badge_product( $class, $post, $product ) {
 
@@ -84,10 +90,13 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 		/**
 		 * Add new badge on download
 		 *
+		 * @param string $class
+		 * @param \WP_Post $post
+		 * @param \WP_Post|bool $download
+		 * @return string
 		 * @static
 		 * @access public
 		 * @since 2.1.9
-		 * @return string
 		 */
 		public function new_badge_download( $class, $post, $download ) {
 
@@ -107,10 +116,11 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 		/**
 		 * Add Review
 		 *
+		 * @param int $id
+		 * @return string
 		 * @static
 		 * @access public
 		 * @since 2.1.9
-		 * @return string
 		 */
 		public function gutentor_edd_review( $id ) {
 			$output = '';
@@ -158,10 +168,13 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 		/**
 		 * Add product data on gutentor rest data
 		 *
+		 * @param array $data
+		 * @param \WP_Post $post
+		 * @param \WP_REST_Request $request
+		 * @return array
 		 * @static
 		 * @access public
 		 * @since 2.1.9
-		 * @return array
 		 */
 		public function add_product_data( $data, $post, $request ) {
 
@@ -177,7 +190,7 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 			$product_fp_new_badge = 'gutentor-pf-wc-new';
 
 			if ( $product->is_on_sale() ) {
-				$data['product_sales_text'] = apply_filters( 'woocommerce_sale_flash', '<span class="onsale">' . esc_html__( 'Sale!', 'gutentor' ) . '</span>', $post, $product );
+				$data['product_sales_text'] = apply_filters( 'woocommerce_sale_flash', '<span class="onsale">' . esc_html__( 'Sale!', 'gutentor' ) . '</span>', $post, $product ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce hook invocation.
 			}
 			$data['product_regular_price']   = $product->get_regular_price();
 			$data['product_sale_price']      = wc_format_sale_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ), wc_get_price_to_display( $product ) ) . $product->get_price_suffix();
@@ -198,10 +211,13 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 		/**
 		 * Add download data on gutentor rest data
 		 *
+		 * @param array $data
+		 * @param \WP_Post $post
+		 * @param \WP_REST_Request $request
+		 * @return array
 		 * @static
 		 * @access public
 		 * @since 2.1.9
-		 * @return array
 		 */
 		public function add_edd_download_data( $data, $post, $request ) {
 
@@ -260,10 +276,13 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 		/**
 		 * Modify cart html if gutentor-attributes set
 		 *
+		 * @param string $output
+		 * @param object $product
+		 * @param array $args
+		 * @return string
 		 * @static
 		 * @access public
 		 * @since 2.1.9
-		 * @return string
 		 */
 		public function alter_cart_link( $output, $product, $args ) {
 			$attributes = isset( $args['gutentor-attributes'] ) ? $args['gutentor-attributes'] : false;

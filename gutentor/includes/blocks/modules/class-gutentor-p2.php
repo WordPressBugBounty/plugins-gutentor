@@ -62,120 +62,6 @@ if ( ! class_exists( 'Gutentor_P2' ) ) {
 		}
 
 		/**
-		 * Returns attributes for this Block
-		 *
-		 * @static
-		 * @access public
-		 * @since 1.0.1
-		 * @return array
-		 */
-		protected function get_attrs() {
-			$blog_post_attr     = array(
-				'gID'                             => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'gName'                           => array(
-					'type'    => 'string',
-					'default' => 'gutentor/p2',
-				),
-				'p2Temp'                          => array(
-					'type'    => 'number',
-					'default' => 1,
-				),
-				'pTaxType'                        => array(
-					'type'    => 'string',
-					'default' => 'category',
-				),
-				'pTaxOperator'                    => array(
-					'type'    => 'string',
-					'default' => 'IN',
-				),
-				'pTaxTerm'                        => array(
-					'type'  => 'array',
-					'items' => array(
-						'type'  => 'object',
-						'label' => array(
-							'type' => 'string',
-						),
-						'value' => array(
-							'type' => 'number',
-						),
-					),
-				),
-				'pPostType'                       => array(
-					'type'    => 'string',
-					'default' => 'post',
-				),
-				'pIncludePosts'                   => array(
-					'type' => 'string',
-				),
-				'pExcludePosts'                   => array(
-					'type' => 'string',
-				),
-				'pOffsetPosts'                    => array(
-					'type' => 'number',
-				),
-				'postsToShow'                     => array(
-					'type'    => 'number',
-					'default' => 6,
-				),
-				'order'                           => array(
-					'type'    => 'string',
-					'default' => 'desc',
-				),
-				'orderBy'                         => array(
-					'type'    => 'string',
-					'default' => 'date',
-				),
-				'categories'                      => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'gutentorBlogPostImageLink'       => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'pReverseContent'                 => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'gutentorBlogPostImageLinkNewTab' => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'p1BgProps'                       => array(
-					'type'    => 'object',
-					'default' => array(
-						'size'       => 'cover',
-						'pos'        => 'center',
-						'repeat'     => 'no-repeat',
-						'attachment' => 'scroll',
-					),
-				),
-				'p1FImageOnHeight'                => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'p1FImageHeight'                  => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'pContentPos'                     => array(
-					'type'    => 'object',
-					'default' => array(
-						'desktop' => 'g-pos-bottom',
-						'tablet'  => 'g-pos-bottom',
-						'mobile'  => 'g-pos-bottom',
-					),
-				),
-			);
-			$blog_partial_attrs = array_merge_recursive( $blog_post_attr, $this->get_module_common_attrs() );
-			return array_merge_recursive( $blog_partial_attrs, $this->get_module_query_elements_common_attrs() );
-		}
-
-
-		/**
 		 * Render Blog Post Data
 		 *
 		 * @since    1.0.1
@@ -187,15 +73,15 @@ if ( ! class_exists( 'Gutentor_P2' ) ) {
 		 */
 		public function render_callback( $attributes, $content ) {
 
-			$blockID = isset( $attributes['pID'] ) ? $attributes['pID'] : $attributes['gID'];
 			$gID     = isset( $attributes['gID'] ) ? $attributes['gID'] : '';
+			$blockID = isset( $attributes['pID'] ) ? $attributes['pID'] : $gID;
 			$output  = '';
 
 			$default_class = gutentor_block_add_default_classes( 'gutentor-p2', $attributes );
 
-			$tag                     = $attributes['mTag'] ? $attributes['mTag'] : 'section';
-			$template                = $attributes['p2Temp'] ? $attributes['p2Temp'] : '';
-			$post_number             = $attributes['postsToShow'] ? $attributes['postsToShow'] : '';
+			$tag                     = isset( $attributes['mTag'] ) ? $attributes['mTag'] : 'section';
+			$template                = isset( $attributes['p2Temp'] ) ? $attributes['p2Temp'] : '';
+			$post_number             = isset( $attributes['postsToShow'] ) ? $attributes['postsToShow'] : 6;
 			$align                   = isset( $attributes['align'] ) ? 'align' . $attributes['align'] : '';
 			$blockComponentAnimation = isset( $attributes['mAnimation'] ) ? $attributes['mAnimation'] : '';
 
@@ -226,7 +112,7 @@ if ( ! class_exists( 'Gutentor_P2' ) ) {
 				isset( $attributes['pTaxTerm'] ) && ! empty( $attributes['pTaxTerm'] ) ) {
 
 				$query_args['taxonomy']    = $attributes['pTaxType'];
-				$query_args['taxOperator'] = $attributes['pTaxOperator'] ? $attributes['pTaxOperator'] : 'IN';
+				$query_args['taxOperator'] = isset( $attributes['pTaxOperator'] ) ? $attributes['pTaxOperator'] : 'IN';
 
 				if ( is_array( $attributes['pTaxTerm'] ) ) {
 					$p2_terms = array();

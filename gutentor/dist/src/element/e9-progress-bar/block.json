@@ -1,0 +1,221 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e9",
+  "title": "Progress Bar",
+  "description": "Show your experience and success with horizontal, or circular animated progress bar.",
+  "category": "gutentor-elements",
+  "keywords": [
+    "Gutentor Progress Bar Horizontal Circular Experience Success Elements"
+  ],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e9"
+    },
+    "gTempName": {
+      "type": "string"
+    },
+    "e9Style": {
+      "type": "string",
+      "default": "circular-progressbar"
+    },
+    "e9TxtPos": {
+      "type": "string",
+      "default": "text-inside"
+    },
+    "e9CStyle": {
+      "type": "string",
+      "default": "round"
+    },
+    "e9HStyle": {
+      "type": "string",
+      "default": "default"
+    },
+    "e9T": {
+      "type": "string",
+      "default": ""
+    },
+    "e9HidePercent": {
+      "type": "boolean",
+      "default": false
+    },
+    "e9Value": {
+      "type": "number",
+      "default": 50
+    },
+    "e9LineWidth": {
+      "type": "number",
+      "default": 4
+    },
+    "e9CAnimate": {
+      "type": "number",
+      "default": 1000
+    },
+    "e9CSize": {
+      "type": "object",
+      "default": {
+        "type": "px",
+        "desktop": "100",
+        "tablet": "100",
+        "mobile": "80"
+      }
+    },
+    "e9CDiameter": {
+      "type": "number",
+      "default": 100
+    },
+    "e9TTypography": {
+      "type": "object"
+    },
+    "e9TColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#fff",
+        "hover": ""
+      }
+    },
+    "e9OnWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "e9Width": {
+      "type": "object"
+    },
+    "e9OnHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "e9Height": {
+      "type": "object"
+    },
+    "e9Padding": {
+      "type": "object"
+    },
+    "e9Margin": {
+      "type": "object"
+    },
+    "e9Align": {
+      "type": "object"
+    },
+    "e9Color": {
+      "type": "object",
+      "default": {
+        "enable": true,
+        "normal": "#275cf6"
+      }
+    },
+    "e9TrackColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#000"
+      }
+    },
+    "e9ScaleColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#000"
+      }
+    },
+    "e9Border": {
+      "type": "object"
+    },
+    "e9BxShadow": {
+      "type": "object"
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

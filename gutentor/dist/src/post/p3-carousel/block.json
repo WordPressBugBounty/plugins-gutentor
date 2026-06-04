@@ -1,0 +1,201 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/p3",
+  "title": "Post (Type) Carousel",
+  "description": "Create a post or post type carousel using post module with added advanced carousel options.",
+  "category": "gutentor-posts",
+  "keywords": [
+    "Gutentor Blog Post Type WooCommerce Products EDD Easy Digital Downloads Carousel Slider Module"
+  ],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/p3"
+    },
+    "mPID": {
+      "type": "string"
+    },
+    "p3Dots": {
+      "type": "boolean",
+      "default": false
+    },
+    "p3DotsT": {
+      "type": "boolean",
+      "default": false
+    },
+    "p3DotsM": {
+      "type": "boolean",
+      "default": false
+    },
+    "p3DotsColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "p3DotsGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "p3DotsBr": {
+      "type": "object"
+    },
+    "p3DotsOnWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "p3DotsWidth": {
+      "type": "object"
+    },
+    "p3DotsOnHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "p3DotsHeight": {
+      "type": "object"
+    },
+    "p3ArrowNextIcon": {
+      "type": "object",
+      "default": {
+        "label": "fa-angle-right",
+        "value": "fas fa-angle-right",
+        "code": "f105"
+      }
+    },
+    "p3ArrowPrevIcon": {
+      "type": "object",
+      "default": {
+        "label": "fa-angle-left",
+        "value": "fas fa-angle-left",
+        "code": "f104"
+      }
+    },
+    "p3ArrowSize": {
+      "type": "object"
+    },
+    "p3ArrowOnWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "p3ArrowWidth": {
+      "type": "object"
+    },
+    "p3ArrowOnHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "p3ArrowHeight": {
+      "type": "object"
+    },
+    "p3ArrowBr": {
+      "type": "object"
+    },
+    "p3ArrowPosition": {
+      "type": "object",
+      "default": {
+        "desktop": "gutentor-slick-a-default",
+        "tablet": "gutentor-slick-a-default",
+        "mobile": "gutentor-slick-a-default"
+      }
+    },
+    "p3Arrows": {
+      "type": "boolean",
+      "default": true
+    },
+    "p3ArrowsT": {
+      "type": "boolean",
+      "default": true
+    },
+    "p3ArrowsM": {
+      "type": "boolean",
+      "default": true
+    },
+    "p3ArrowBgColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "p3ArrowBgGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "p3ArrowTxtColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "p3Infinite": {
+      "type": "boolean",
+      "default": false
+    },
+    "p3AutoPlay": {
+      "type": "boolean",
+      "default": false
+    },
+    "p3AutoPlaySpeed": {
+      "type": "number",
+      "default": 3000
+    },
+    "p3SlideSpeed": {
+      "type": "number",
+      "default": 300
+    },
+    "p3SlideItem": {
+      "type": "object",
+      "default": {
+        "desktop": "3",
+        "tablet": "3",
+        "mobile": "2"
+      }
+    },
+    "p3SlideScroll": {
+      "type": "object",
+      "default": {
+        "desktop": "3",
+        "tablet": "3",
+        "mobile": "2"
+      }
+    },
+    "p3Cm": {
+      "type": "object"
+    },
+    "p3Draggable": {
+      "type": "boolean",
+      "default": true
+    },
+    "p3PauseOnFocus": {
+      "type": "boolean",
+      "default": true
+    },
+    "p3PauseOnHover": {
+      "type": "boolean",
+      "default": true
+    },
+    "p3SIMargin": {
+      "type": "object"
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

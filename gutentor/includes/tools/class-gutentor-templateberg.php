@@ -14,14 +14,14 @@ if ( ! class_exists( 'Gutentor_Templateberg' ) ) {
 		/**
 		 * Rest route namespace.
 		 *
-		 * @var Gutentor_Templateberg
+		 * @var string
 		 */
 		public $namespace = 'gutentor-advanced-import/';
 
 		/**
 		 * Rest route version.
 		 *
-		 * @var Gutentor_Templateberg
+		 * @var string
 		 */
 		public $version = 'v1';
 

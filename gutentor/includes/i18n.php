@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Define the internationalization functionality
@@ -30,7 +33,7 @@ class Gutentor_i18n {
 	 * @since    1.0.0
 	 */
 	public function load_plugin_textdomain() {
-
+		// phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound -- Still needed for non-WP.org distributions.
 		load_plugin_textdomain(
 			'gutentor',
 			false,

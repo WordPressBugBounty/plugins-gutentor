@@ -40,8 +40,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -63,9 +63,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $element
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param array $element
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -108,9 +108,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $element
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param array $element
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -136,8 +136,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -160,8 +160,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -199,8 +199,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -240,8 +240,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -281,8 +281,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -306,8 +306,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -332,8 +332,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -365,8 +365,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -395,8 +395,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -419,8 +419,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -444,8 +444,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -471,8 +471,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -522,8 +522,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -549,8 +549,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -599,8 +599,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -645,8 +645,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -691,8 +691,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -709,8 +709,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -727,8 +727,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -754,8 +754,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -785,7 +785,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Featured Post Categories Data
 		 *
-		 * @param {mix} $post_id
+		 * @param int|false $post_id
+		 * @param string $badge_type
 		 * @return string
 		 */
 		function get_featured_post_module_badge_data( $post_id = false, $badge_type = 'category' ) {
@@ -810,7 +811,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Categories Data
 		 *
-		 * @param {mix} $post_id
+		 * @param int|false $post_id
+		 * @param string $badge_type
 		 * @return string
 		 */
 		function get_post_module_badge_data( $post_id = false, $badge_type = 'category' ) {
@@ -835,7 +837,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Product Data
 		 *
-		 * @param {mix} $post_id
+		 * @param int|false $post_id
+		 * @param string $badge_type
 		 * @return string
 		 */
 		function get_product_module_badge_data( $post_id = false, $badge_type = 'product_cat' ) {
@@ -860,7 +863,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Category Meta
 		 *
-		 * @param {mix} $post_id
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 */
 		function get_featured_post_module_badges_collection( $post, $attributes ) {
@@ -880,7 +884,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Category Meta
 		 *
-		 * @param {mix} $post_id
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 */
 		function get_post_module_badges_collection( $post, $attributes ) {
@@ -902,7 +907,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get post Format Data
 		 *
-		 * @param {mix} $post_id
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 */
 		function get_post_format_data( $post, $attributes ) {
@@ -931,8 +937,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Categories On Image
 		 *
-		 * @param {string} condition
-		 * @return {boolean}
+		 * @param string $condition
+		 * @return bool
 		 */
 		function categories_on_image_condition( $condition ) {
 			if ( ! $condition ) {
@@ -953,8 +959,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Categories On Image
 		 *
-		 * @param {string} condition
-		 * @return {boolean}
+		 * @param string $condition
+		 * @return bool
 		 */
 		function featured_post_categories_on_image_condition( $condition ) {
 			if ( ! $condition ) {
@@ -975,8 +981,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Post Format On Image
 		 *
-		 * @param {string} condition
-		 * @return {boolean}
+		 * @param string $condition
+		 * @return bool
 		 */
 		function post_format_on_image_condition( $condition ) {
 			if ( ! $condition ) {
@@ -997,8 +1003,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Avatar On Image
 		 *
-		 * @param {string} condition
-		 * @return {boolean}
+		 * @param string $condition
+		 * @return bool
 		 */
 		function avatar_on_image_condition( $condition ) {
 			if ( ! $condition ) {
@@ -1019,8 +1025,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Avatar On Image Featured Post
 		 *
-		 * @param {string} condition
-		 * @return {boolean}
+		 * @param string $condition
+		 * @return bool
 		 */
 		function avatar_fp_on_image_condition( $condition ) {
 			if ( ! $condition ) {
@@ -1041,8 +1047,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Avatar On Image
 		 *
-		 * @param {string} condition
-		 * @return {boolean}
+		 * @param string $condition
+		 * @return bool
 		 */
 		function avatar_on_title_condition( $condition ) {
 			if ( ! $condition ) {
@@ -1061,8 +1067,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Post Format On Image
 		 *
-		 * @param {string} condition
-		 * @return {boolean}
+		 * @param string $condition
+		 * @return bool
 		 */
 		function featured_post_format_on_image_condition( $condition ) {
 			if ( ! $condition ) {
@@ -1085,8 +1091,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -1109,8 +1115,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -1134,8 +1140,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -1187,8 +1193,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1212,8 +1218,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1238,8 +1244,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1271,8 +1277,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1301,8 +1307,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1325,8 +1331,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1349,8 +1355,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1375,8 +1381,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1401,8 +1407,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1451,8 +1457,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.5
 		 */
@@ -1501,8 +1507,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -1547,8 +1553,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -1593,8 +1599,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -1611,8 +1617,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -1629,8 +1635,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -1653,7 +1659,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get post Format Data
 		 *
-		 * @param {mix} $post_id
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 */
 		function get_featured_post_format_data( $post, $attributes ) {
@@ -1682,10 +1689,10 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Featured Single item data
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param object $post
+		 * @param array $attributes
+		 * @param int $index
+		 * @return string
 		 */
 		public function p6_featured_single_article( $post, $attributes, $index ) {
 			$output                = $thumb_class = '';
@@ -1895,10 +1902,10 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Single block
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param object $post
+		 * @param array $attributes
+		 * @param int $index
+		 * @return string
 		 */
 		public function p6_single_article( $post, $attributes, $index ) {
 			$output                = $thumb_class = '';
@@ -2020,10 +2027,10 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Woo Single block
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param object $post
+		 * @param array $attributes
+		 * @param int $index
+		 * @return string
 		 */
 		public function p6_woo_single_article( $post, $attributes, $index ) {
 			$output = '';
@@ -2163,10 +2170,10 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Woo Single block
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param object $post
+		 * @param array $attributes
+		 * @param int $index
+		 * @return string
 		 */
 		public function p6_edd_single_article( $post, $attributes, $index ) {
 			if ( ! gutentor_is_edd_active() ) {
@@ -2283,16 +2290,16 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get get_woo_badge
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $product
+		 * @param array $attributes
 		 * @return string
 		 */
 		function get_woo_badge( $post, $product, $attributes ) {
 			$output    = '';
 			$badgeType = ( isset( $attributes['pBadgeType'] ) ) ? $attributes['pBadgeType'] : false;
 			if ( $product->is_on_sale() && $badgeType === 'product-sale' ) {
-				$output = '<div class="post-category gutentor-wc-on-sale-wrap">' . apply_filters( 'woocommerce_sale_flash', '<span class="onsale">' . esc_html__( 'Sale!', 'gutentor' ) . '</span>', $post, $product ) . '</div>';
+				$output = '<div class="post-category gutentor-wc-on-sale-wrap">' . apply_filters( 'woocommerce_sale_flash', '<span class="onsale">' . esc_html__( 'Sale!', 'gutentor' ) . '</span>', $post, $product ) . '</div>'; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce hook invocation.
 			}
 			if ( $badgeType === 'product_type' && $this->get_product_module_badge_data( $post->ID, $badgeType ) ) {
 				$output = '<div class="gutentor-wc-badge-wrap">' . $this->get_product_module_badge_data( $post->ID, $badgeType ) . '</div>';
@@ -2309,16 +2316,16 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get p6 get_woo_badge
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $product
+		 * @param array $attributes
 		 * @return string
 		 */
 		function p6_fp_get_woo_badge( $post, $product, $attributes ) {
 			$output    = '';
 			$badgeType = ( isset( $attributes['pFPBadgeType'] ) ) ? $attributes['pFPBadgeType'] : false;
 			if ( $product->is_on_sale() && $badgeType === 'product-sale' ) {
-				$output = '<div class="post-featured-category gutentor-wc-on-sale-wrap">' . apply_filters( 'woocommerce_sale_flash', '<span class="onsale">' . esc_html__( 'Sale!', 'gutentor' ) . '</span>', $post, $product ) . '</div>';
+				$output = '<div class="post-featured-category gutentor-wc-on-sale-wrap">' . apply_filters( 'woocommerce_sale_flash', '<span class="onsale">' . esc_html__( 'Sale!', 'gutentor' ) . '</span>', $post, $product ) . '</div>'; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce hook invocation.
 			}
 			if ( $badgeType != -1 && $this->get_product_module_badge_data( $post->ID, $badgeType ) ) {
 				$output = '<div class="gutentor-fp-wc-badge-wrap">' . $this->get_product_module_badge_data( $post->ID, $badgeType ) . '</div>';
@@ -2333,9 +2340,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Get updated Woo price
 		 * updated_wc_price
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $product
+		 * @param array $attributes
 		 * @return string
 		 */
 		function updated_wc_price( $post, $product, $attributes ) {
@@ -2364,9 +2371,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Get Featured Woo price
 		 * p6_featured_wc_price
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $product
+		 * @param array $attributes
 		 * @return string
 		 */
 		function p6_featured_wc_price( $post, $product, $attributes ) {
@@ -2394,9 +2401,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get new_badge_product Data
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $product
 		 * @return string
 		 */
 		function new_badge_product( $post, $product ) {
@@ -2415,9 +2421,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get Edd new_badge_product Data
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $download
 		 * @return string
 		 */
 		function edd_new_badge_product( $post, $download ) {
@@ -2436,9 +2441,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get p6 new_badge_product Data
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $product
 		 * @return string
 		 */
 		function p6_fp_new_badge_product( $post, $product ) {
@@ -2457,9 +2461,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get p6 Edd new_badge_product Data
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $download
 		 * @return string
 		 */
 		function p6_fp_edd_new_badge_product( $post, $download ) {
@@ -2480,9 +2483,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $product
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -2516,7 +2519,7 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 				$image_output .= '</div>';
 			}
 			if ( $image_link_enable ) {
-				$link               = apply_filters( 'woocommerce_loop_product_link', get_the_permalink( $post->ID ), $product );
+				$link               = apply_filters( 'woocommerce_loop_product_link', get_the_permalink( $post->ID ), $product ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce hook invocation.
 				$image_without_link = $image_output;
 				$image_output       = '';
 				$image_output      .= '<a href="' . esc_url( $link ) . '" class="gutentor-post-image-link woocommerce-LoopProduct-link woocommerce-loop-product__link ' . esc_attr( gutentor_concat_space( $link_class ) ) . '" ' . gutentor_concat_space( $target, $rel ) . '>';
@@ -2532,9 +2535,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param object $product
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -2566,10 +2569,10 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 				$image_output .= '</div>';
 			}
 			if ( $image_link_enable ) {
-				$link               = apply_filters( 'woocommerce_loop_product_link', get_the_permalink( $post->ID ), $product );
+				$link               = apply_filters( 'woocommerce_loop_product_link', get_the_permalink( $post->ID ), $product ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce hook invocation.
 				$image_without_link = $image_output;
 				$image_output       = '';
-				$image_output      .= '<a href="' . esc_url( $link ) . '" class="gutentor-post-image-link woocommerce-LoopProduct-link woocommerce-loop-product__link ' . gutentor_concat_space( $link_class ) . '" ' . gutentor_concat_space( $target, $rel ) . '>';
+				$image_output      .= '<a href="' . esc_url( $link ) . '" class="gutentor-post-image-link woocommerce-LoopProduct-link woocommerce-loop-product__link ' . esc_attr( gutentor_concat_space( $link_class ) ) . '" ' . gutentor_concat_space( $target, $rel ) . '>';
 				$image_output      .= $image_without_link;
 				$image_output      .= '</a>';
 			}
@@ -2582,8 +2585,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -2638,8 +2641,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Check if term has thumbnail
 		 *
-		 * @param {object} $term
-		 * @return {boolean}
+		 * @param object $term
+		 * @return bool
 		 */
 		public function has_term_thumbnail( $term ) {
 
@@ -2671,8 +2674,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		/**
 		 * Get term thumbnail id
 		 *
-		 * @param {object} $term
-		 * @return {boolean}
+		 * @param object $term
+		 * @return bool
 		 */
 		public function get_term_thumbnail_id( $term ) {
 			if ( ! $term ) {
@@ -2696,8 +2699,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Get Term Featured Image
 		 *
 		 * @access public
-		 * @param {object} $term
-		 * @param {array}  $attributes
+		 * @param object $term
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -2730,8 +2733,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Get Term Title
 		 *
 		 * @access public
-		 * @param {object} $term
-		 * @param {array}  $attributes
+		 * @param object $term
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -2753,8 +2756,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Get Term Count
 		 *
 		 * @access public
-		 * @param {object} $term
-		 * @param {array}  $attributes
+		 * @param object $term
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -2783,8 +2786,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Get Term Title And Count
 		 *
 		 * @access public
-		 * @param {object} $term
-		 * @param {array}  $attributes
+		 * @param object $term
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -2826,9 +2829,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Term Title And Count Updated
 		 *
 		 * @access public
-		 * @param {object} $term
-		 * @param {array}  $attributes
-		 *
+		 * @param object $term
+		 * @param array $attributes
+		 * @param string $sortingItem
 		 * @return string
 		 * @since 3.0.0
 		 */
@@ -2878,8 +2881,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Get Term Description
 		 *
 		 * @access public
-		 * @param {object} $term
-		 * @param {array}  $attributes
+		 * @param object $term
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -2905,8 +2908,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Term Button
 		 *
 		 * @access public
-		 * @param {object} $term
-		 * @param {array}  $attributes
+		 * @param object $term
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -2931,8 +2934,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Edd Add to cart
 		 *
 		 * @access public
-		 * @param {object} $post
-		 * @param {array}  $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -2984,8 +2987,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Edd Wish List
 		 *
 		 * @access public
-		 * @param {object} $post
-		 * @param {array}  $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -3015,8 +3018,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Featured Post Edd Wish List
 		 *
 		 * @access public
-		 * @param {object} $post
-		 * @param {array}  $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -3046,8 +3049,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Featured Edd Add to cart
 		 *
 		 * @access public
-		 * @param {object} $post
-		 * @param {array}  $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 *
 		 * @return string
 		 * @since 3.0.0
@@ -3097,8 +3100,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 *
 		 * @static
 		 * @access public
-		 * @param {array} $post
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 * @since 2.0.1
 		 */
@@ -3151,9 +3154,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Get updated Edd price
 		 * updated_wc_price
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 */
 		function updated_edd_price( $post, $attributes ) {
@@ -3182,9 +3184,8 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		 * Get Featured Edd price
 		 * updated_wc_price
 		 *
-		 * @param {array} $post
-		 * @param {array} $product
-		 * @param {array} $attributes
+		 * @param object $post
+		 * @param array $attributes
 		 * @return string
 		 */
 		function p6_featured_edd_price( $post, $attributes ) {

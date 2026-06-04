@@ -1,0 +1,210 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "gutentor/e19",
+	"title": "Filter Items",
+	"description": "Insert multiple filter items.",
+	"category": "gutentor-elements",
+	"keywords": [],
+	"textdomain": "gutentor",
+	"attributes": {
+		"gID": {
+			"type": "string"
+		},
+		"gName": {
+			"type": "string",
+			"default": "gutentor/e19"
+		},
+		"e19IItmM": {
+			"type": "object",
+			"default": {
+				"type": "px",
+				"mTop": "0",
+				"mRight": "5",
+				"mBottom": "0",
+				"mLeft": "5"
+			}
+		},
+		"e19IItmP": {
+			"type": "object",
+			"default": {
+				"type": "px",
+				"mTop": "0",
+				"mRight": "5",
+				"mBottom": "0",
+				"mLeft": "5"
+			}
+		},
+		"e19IItmTxtTypography": {
+			"type": "object"
+		},
+		"e19IItmTxtC": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"e19IItmBgC": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"e19IItmBgGt": {
+			"type": "object",
+			"default": {
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"e19IItmAlign": {
+			"type": "object"
+		},
+		"e19IItmBr": {
+			"type": "object"
+		},
+		"e19IItmIconSz": {
+			"type": "object"
+		},
+		"e19IItmIconC": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"normal": "",
+				"hover": ""
+			}
+		},
+		"e19IItmIconP": {
+			"type": "object"
+		},
+		"e19IItmIconM": {
+			"type": "object",
+			"default": {
+				"mLeft": "10"
+			}
+		},
+		"e19IItmOnIcon": {
+			"type": "boolean",
+			"default": false
+		},
+		"e19IItmIconPos": {
+			"type": "string",
+			"default": "right"
+		},
+		"e19AllTxtOn": {
+			"type": "boolean",
+			"default": true
+		},
+		"e19AllTxt": {
+			"type": "string",
+			"default": "All",
+			"source": "html",
+			"selector": ".g-fm-title",
+			"role": "content"
+		},
+		"e19AllTxtPos": {
+			"type": "string",
+			"default": "g-first"
+		},
+		"e19AllIcon": {
+			"type": "object",
+			"default": {
+				"label": "fas fa-cog",
+				"value": "fas fa-cog",
+				"code": "f013"
+			}
+		},
+		"eAnimation": {
+			"type": "object"
+		},
+		"eOnPos": {
+			"type": "boolean",
+			"default": false
+		},
+		"ePosTypeD": {
+			"type": "string",
+			"default": "g-pos-d"
+		},
+		"ePosOptD": {
+			"type": "string",
+			"default": "default"
+		},
+		"ePosMarginAutoD": {
+			"type": "boolean",
+			"default": false
+		},
+		"ePosTypeT": {
+			"type": "string",
+			"default": "g-pos-d"
+		},
+		"ePosOptT": {
+			"type": "string",
+			"default": "default"
+		},
+		"ePosMarginAutoT": {
+			"type": "boolean",
+			"default": false
+		},
+		"ePosTypeM": {
+			"type": "string",
+			"default": "g-pos-d"
+		},
+		"ePosOptM": {
+			"type": "string",
+			"default": "default"
+		},
+		"ePosMarginAutoM": {
+			"type": "boolean",
+			"default": false
+		},
+		"ePosD": {
+			"type": "object"
+		},
+		"ePosDWidth": {
+			"type": "object",
+			"default": {
+				"type": "%",
+				"width": ""
+			}
+		},
+		"ePosT": {
+			"type": "object"
+		},
+		"ePosTWidth": {
+			"type": "object",
+			"default": {
+				"type": "%",
+				"width": ""
+			}
+		},
+		"ePosM": {
+			"type": "object"
+		},
+		"ePosMWidth": {
+			"type": "object",
+			"default": {
+				"type": "%",
+				"width": ""
+			}
+		},
+		"eZIndex": {
+			"type": "object"
+		},
+		"eHideMode": {
+			"type": "object"
+		},
+		"eRawCustomCss": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"inserter": false,
+		"reusable": false,
+		"html": false
+	}
+}

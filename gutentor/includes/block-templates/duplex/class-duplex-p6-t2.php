@@ -50,10 +50,10 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T2' ) ) {
 		/**
 		 * Get Featured Single item data
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param object $post
+		 * @param array $attributes
+		 * @param int $index
+		 * @return string
 		 */
 		public function p6_template2_featured_single_article( $post, $attributes, $index ) {
 			$output                = '';
@@ -167,10 +167,10 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T2' ) ) {
 		/**
 		 * Get Featured Woo Single item data
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param object $post
+		 * @param array $attributes
+		 * @param int $index
+		 * @return string
 		 */
 		public function p6_template2_fp_woo_single_article( $post, $attributes, $index ) {
 			$output = '';
@@ -326,10 +326,10 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T2' ) ) {
 		/**
 		 * Get Featured Edd Single item data
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param object $post
+		 * @param array $attributes
+		 * @param int $index
+		 * @return string
 		 */
 		public function p6_template2_fp_edd_single_article( $post, $attributes, $index ) {
 			if ( ! gutentor_is_edd_active() ) {
@@ -443,11 +443,11 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T2' ) ) {
 		/**
 		 * Content On Image Template 1
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @param {array}  $content
-		 * @return {mix}
+		 * @param string $output
+		 * @param WP_Query $the_query
+		 * @param array $attributes
+		 * @param string $content
+		 * @return string
 		 */
 		public function template_data( $output, $the_query, $attributes, $content ) {
 			$template    = $attributes['p6Temp'] ? $attributes['p6Temp'] : '';

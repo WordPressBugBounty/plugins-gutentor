@@ -1,0 +1,345 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/p4",
+  "title": "Advanced Post (Type)",
+  "description": "Combination of multiple blocks like Post Module, Post Header, Post Footer & others which allow you to design content-rich advanced post or post type section.",
+  "category": "gutentor-posts",
+  "keywords": [
+    "Gutentor Blog Post Type WooCommerce Products EDD Easy Digital Downloads Advanced Module"
+  ],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/p4"
+    },
+    "p4PostId": {
+      "type": "string"
+    },
+    "p4LoadAni": {
+      "type": "string",
+      "default": "gp4-animation-1"
+    },
+    "p4InnerBlock": {
+      "type": "string",
+      "default": "gutentor/p1"
+    },
+    "p4MaxPage": {
+      "type": "number",
+      "default": 5
+    },
+    "mAnimation": {
+      "type": "object",
+      "default": {
+        "Animation": "none",
+        "Delay": "",
+        "Speed": "",
+        "IterationType": "1",
+        "Iteration": "1"
+      }
+    },
+    "mBGType": {
+      "type": "string"
+    },
+    "mBGImageSrc": {
+      "type": "string",
+      "default": "self-hosted-local"
+    },
+    "mBGImage": {
+      "type": "object"
+    },
+    "mBGImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mBGImageSizeType": {
+      "type": "string",
+      "default": "full"
+    },
+    "mBGVideo": {
+      "type": "object"
+    },
+    "mBGVideoSrc": {
+      "type": "string",
+      "default": "self-hosted-local"
+    },
+    "mBGVideoUrl": {
+      "type": "string",
+      "default": "https://www.youtube.com/watch?v=bGMi7L78hVk"
+    },
+    "mBGColor": {
+      "type": "string"
+    },
+    "mBGGradient": {
+      "type": "string"
+    },
+    "mBGImgSize": {
+      "type": "string"
+    },
+    "mBGImgPos": {
+      "type": "string"
+    },
+    "mBGImgRepeat": {
+      "type": "string"
+    },
+    "mBGImgAttach": {
+      "type": "string"
+    },
+    "mBGVideoLoop": {
+      "type": "boolean",
+      "default": true
+    },
+    "mBGVideoMute": {
+      "type": "boolean",
+      "default": true
+    },
+    "mOnOverlay": {
+      "type": "boolean",
+      "default": false
+    },
+    "mOverlayColor": {
+      "type": "string"
+    },
+    "mOCGradient": {
+      "type": "string"
+    },
+    "mHideMode": {
+      "type": "object"
+    },
+    "mBxBorder": {
+      "type": "object"
+    },
+    "mMargin": {
+      "type": "object"
+    },
+    "mPadding": {
+      "type": "object"
+    },
+    "mBxShadow": {
+      "type": "object"
+    },
+    "mTag": {
+      "type": "string",
+      "default": "section"
+    },
+    "pID": {
+      "type": "string",
+      "default": ""
+    },
+    "mTShapeOpt": {
+      "type": "string",
+      "default": "gb-svg"
+    },
+    "mTShapeImg": {
+      "type": "object",
+      "default": {}
+    },
+    "mTShapeImgSizeType": {
+      "type": "string",
+      "default": "full"
+    },
+    "mTShapeSVGOpt": {
+      "type": "string",
+      "default": "gb-svg-default"
+    },
+    "mTShapeCustomSVG": {
+      "type": "string",
+      "default": ""
+    },
+    "mTShape": {
+      "type": "string",
+      "default": ""
+    },
+    "mTShapeOnColor": {
+      "type": "boolean",
+      "default": false
+    },
+    "mTShapeVFlip": {
+      "type": "boolean",
+      "default": false
+    },
+    "mTShapeHFlip": {
+      "type": "boolean",
+      "default": false
+    },
+    "mTShapeColor": {
+      "type": "string"
+    },
+    "mTShapeHeight": {
+      "type": "object"
+    },
+    "mTShapeWidth": {
+      "type": "object"
+    },
+    "mTShapePos": {
+      "type": "boolean",
+      "default": false
+    },
+    "mBShapeOpt": {
+      "type": "string",
+      "default": "gb-svg"
+    },
+    "mBShapeImg": {
+      "type": "object",
+      "default": {}
+    },
+    "mBShapeImgSizeType": {
+      "type": "string",
+      "default": "full"
+    },
+    "mBShapeSVGOpt": {
+      "type": "string",
+      "default": "gb-svg-default"
+    },
+    "mBShapeCustomSVG": {
+      "type": "string",
+      "default": ""
+    },
+    "mBShape": {
+      "type": "string",
+      "default": ""
+    },
+    "mBShapeOnColor": {
+      "type": "boolean",
+      "default": false
+    },
+    "mBShapeVFlip": {
+      "type": "boolean",
+      "default": false
+    },
+    "mBShapeHFlip": {
+      "type": "boolean",
+      "default": false
+    },
+    "mBShapeColor": {
+      "type": "string"
+    },
+    "mBShapeHeight": {
+      "type": "object"
+    },
+    "mBShapeWidth": {
+      "type": "object"
+    },
+    "mBShapePos": {
+      "type": "boolean",
+      "default": false
+    },
+    "mOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "mContOnVAlign": {
+      "type": "boolean",
+      "default": false
+    },
+    "mContVAlign": {
+      "type": "string",
+      "default": "g-c-r-valign"
+    },
+    "mContVAlignT": {
+      "type": "string",
+      "default": "g-c-r-valign"
+    },
+    "mContVAlignD": {
+      "type": "string",
+      "default": "g-c-r-valign"
+    },
+    "mPosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "mPosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "mPosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "mPosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "mPosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "mPosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "mPosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "mPosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "mPosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "mPosD": {
+      "type": "object"
+    },
+    "mPosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "mPosT": {
+      "type": "object"
+    },
+    "mPosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "mPosM": {
+      "type": "object"
+    },
+    "mPosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "mZIndex": {
+      "type": "object"
+    },
+    "mOnHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "mHeight": {
+      "type": "object"
+    },
+    "mHideContSpace": {
+      "type": "object"
+    },
+    "mHideRowSpace": {
+      "type": "object"
+    },
+    "mHideColSpace": {
+      "type": "object"
+    },
+    "mRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

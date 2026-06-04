@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * Do things related with Gutentor settings
  *
@@ -122,8 +125,8 @@ if ( ! class_exists( 'Gutentor_Admin_Settings' ) ) {
 				'gutentor_tax_term_color',
 				'gutentor_tax_term_image',
 				'gutentor_dynamic_style_location',
-				'gutentor_color_palatte_options',
-				'gutentor_color_palatte',
+				'gutentor_color_palette_options',
+				'gutentor_color_palette',
 				'gutentor_gt_apply_options',
 			);
 			foreach ( $other_options as $key ) {
@@ -132,8 +135,8 @@ if ( ! class_exists( 'Gutentor_Admin_Settings' ) ) {
 			/*Enabled Disable Blocks*/
 			$gutentor_get_options['_GUTENTOR_BLOCKS'] = gutentor_get_options( '_GUTENTOR_BLOCKS' );
 
-			/*Gutentor color palatte*/
-			$gutentor_get_options['gutentor_color_palatte'] = gutentor_get_options( 'gutentor_color_palatte' );
+			/*Gutentor color palette*/
+			$gutentor_get_options['gutentor_color_palette'] = gutentor_get_options( 'gutentor_color_palette' );
 
 			foreach ( $gutentor_get_options as $key => $value ) {
 				delete_option( $key );
@@ -167,9 +170,9 @@ if ( ! class_exists( 'Gutentor_Admin_Settings' ) ) {
 					$key = 'typo-apply-options';
 				} elseif ( 'gutentor_font_awesome_version' == $key ) {
 					$key = 'fa-version';
-				} elseif ( 'gutentor_color_palatte_options' == $key ) {
+				} elseif ( 'gutentor_color_palette_options' == $key ) {
 					$key = 'color-palette-options';
-				} elseif ( 'gutentor_color_palatte' == $key ) {
+				} elseif ( 'gutentor_color_palette' == $key ) {
 					$key = 'color-palettes';
 				} elseif ( '_GUTENTOR_BLOCKS' == $key ) {
 					$key = 'off-blocks';

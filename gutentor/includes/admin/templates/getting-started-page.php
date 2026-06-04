@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+?>
 <main class="gutentor-get-started-landing-page">
 	<section class="gutentor-plugin-banner gutentor-get-started-header">
 		<div class="container">

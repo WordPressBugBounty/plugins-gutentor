@@ -6,6 +6,8 @@
  *
  * @package Gutentor
  */
+
+defined( 'ABSPATH' ) || exit;
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -16,6 +18,7 @@
 </head>
 <body <?php body_class(); ?>>
 <?php
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WP core hook invocation.
 do_action( 'wp_body_open' );
 /* Start the Loop */
 while ( have_posts() ) :

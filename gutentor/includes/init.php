@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * The file that defines the core plugin class
@@ -164,6 +167,7 @@ class Gutentor {
 		require_once GUTENTOR_PATH . 'includes/functions/sanitize.php';
 
 		require_once GUTENTOR_PATH . 'includes/functions/functions.php';
+		require_once GUTENTOR_PATH . 'includes/block-sanitizer.php';
 		require_once GUTENTOR_PATH . 'includes/hooks.php';
 
 		/* admin */
@@ -191,7 +195,7 @@ class Gutentor {
 
 		/*Elements*/
 		require_once GUTENTOR_PATH . 'includes/blocks/elements/class-gutentor-e2.php';/* ***Do not remove required for PHP BLOCK*/
-		require_once GUTENTOR_PATH . 'includes/blocks/elements/class-gutentor-e3.php';/* ***Do not remove required for Enquee*/
+		require_once GUTENTOR_PATH . 'includes/blocks/elements/class-gutentor-e3.php';/* ***Do not remove required for Enqueue*/
 		require_once GUTENTOR_PATH . 'includes/blocks/elements/class-gutentor-e4.php';/* ***Do not remove required for PHP BLOCK*/
 		require_once GUTENTOR_PATH . 'includes/blocks/elements/class-gutentor-e9.php';/* ***Do not remove required for PHP BLOCK*/
 		require_once GUTENTOR_PATH . 'includes/blocks/elements/class-gutentor-e11.php';/* ***Do not remove required for PHP BLOCK*/
@@ -199,23 +203,23 @@ class Gutentor {
 		/*Widgets*/
 		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-blog-post.php';/* ***Do not remove required for PHP BLOCK*/
 		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-google-map.php';/* ***Do not remove required for PHP BLOCK*/
-		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-counter-box.php';/* ***Do not remove required for Enquee*/
-		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-progress-bar.php';/* ***Do not remove required for Enquee*/
-		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-video-popup.php';/* ***Do not remove required for Enquee*/
-		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-gallery.php';/* ***Do not remove required for Enquee*/
-		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-image-slider.php';/* ***Do not remove required for Enquee*/
+		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-counter-box.php';/* ***Do not remove required for Enqueue*/
+		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-progress-bar.php';/* ***Do not remove required for Enqueue*/
+		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-video-popup.php';/* ***Do not remove required for Enqueue*/
+		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-gallery.php';/* ***Do not remove required for Enqueue*/
+		require_once GUTENTOR_PATH . 'includes/blocks/widgets/class-gutentor-image-slider.php';/* ***Do not remove required for Enqueue*/
 
 		/*Post Modules*/
 		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-p1.php';/* ***Do not remove required for PHP BLOCK*/
 		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-p3.php';/* ***Do not remove required for PHP BLOCK*/
 		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-p2.php';/* ***Do not remove required for PHP BLOCK*/
-		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-p4.php';/* ***Do not remove required for Enquee*/
+		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-p4.php';/* ***Do not remove required for Enqueue*/
 		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-p5.php';/* ***Do not remove required for PHP BLOCK*/
 		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-p6.php';/* ***Do not remove required for PHP BLOCK*/
-		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-m0.php';/* ***Do not remove required for Enquee*/
-		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-m4.php';/* ***Do not remove required for Enquee*/
-		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-m5.php';/* ***Do not remove required for Enquee*/
-		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-m10.php';/* ***Do not remove required for Enquee*/
+		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-m0.php';/* ***Do not remove required for Enqueue*/
+		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-m4.php';/* ***Do not remove required for Enqueue*/
+		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-m5.php';/* ***Do not remove required for Enqueue*/
+		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-m10.php';/* ***Do not remove required for Enqueue*/
 
 		/*Term Modules*/
 		require_once GUTENTOR_PATH . 'includes/blocks/modules/class-gutentor-t1.php';/* ***Do not remove required for PHP BLOCK*/
@@ -226,6 +230,7 @@ class Gutentor {
 		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-self-api-handler.php';
 
 		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-extend-api.php';
+		require_once GUTENTOR_PATH . 'includes/stubs/external-functions.php';
 
 		/*Advanced Import*/
 		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-advanced-import.php';
@@ -273,7 +278,7 @@ class Gutentor {
 		$this->loader->add_action( 'enqueue_block_assets', $plugin_hooks, 'block_assets' );
 
 		/*
-		equal or greater than 20 doesnot work
+		equal or greater than 20 does not work
 		Changed on 3.2.6
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_hooks, 'load_last_scripts', 999 );
 		*/
@@ -283,7 +288,7 @@ class Gutentor {
 		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_hooks, 'block_editor_assets', 999 );
 		$this->loader->add_action( 'customize_preview_init', $plugin_hooks, 'customize_preview_init', 999 );
 
-		/*Hook: Adding Gutentor Color palatte.*/
+		/*Hook: Adding Gutentor Color palette.*/
 		$this->loader->add_action( 'after_setup_theme', $plugin_hooks, 'add_color_palette', 99999 );
 
 		/*Hook Adding Block Categories*/

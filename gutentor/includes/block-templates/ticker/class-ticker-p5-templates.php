@@ -50,10 +50,10 @@ if ( ! class_exists( 'Gutentor_Ticker_P5_Templates' ) ) {
 		/**
 		 * Load Template 1
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_p5_template1( $data, $post, $attributes ) {
 			$output  = '';
@@ -66,10 +66,10 @@ if ( ! class_exists( 'Gutentor_Ticker_P5_Templates' ) ) {
 		/**
 		 * Blog Post Templates
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function load_blog_post_template( $data, $post, $attributes ) {
 			$output   = $data;

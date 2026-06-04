@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * Do things related with admin settings
  *
@@ -61,7 +64,8 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 			if ( get_option( '__gutentor_do_redirect' ) ) {
 				update_option( '__gutentor_do_redirect', false );
 				if ( ! is_multisite() ) {
-					exit( wp_redirect( esc_url( admin_url( 'admin.php?page=' . self::$page_slug ) ) ) );
+				wp_safe_redirect( esc_url( admin_url( 'admin.php?page=' . self::$page_slug ) ) );
+				exit;
 				}
 			}
 		}
@@ -366,7 +370,7 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 
 			check_ajax_referer( 'gutentor-block-nonce', 'nonce' );
 
-			$block_id = sanitize_text_field( $_POST['block_id'] );
+			$block_id = isset( $_POST['block_id'] ) ? sanitize_text_field( wp_unslash( $_POST['block_id'] ) ) : '';
 			$blocks   = self::block_action();
 			if ( ! is_array( $blocks ) ) {
 				$blocks = array();
@@ -386,7 +390,7 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 
 			check_ajax_referer( 'gutentor-block-nonce', 'nonce' );
 
-			$block_id = sanitize_text_field( $_POST['block_id'] );
+			$block_id = isset( $_POST['block_id'] ) ? sanitize_text_field( wp_unslash( $_POST['block_id'] ) ) : '';
 			$blocks   = self::block_action();
 			if ( ! is_array( $blocks ) ) {
 				$blocks = array();
@@ -807,8 +811,10 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 				)
 				||
 				(
-					isset( $_GET['taxonomy'] ) &&
-					is_array( $this->tax_in_color ) && in_array( $_GET['taxonomy'], $this->tax_in_color )
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- $_GET['taxonomy'] used only in UI callback (edit_term_form), not processing form submission.
+				isset( $_GET['taxonomy'] ) &&
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- $_GET['taxonomy'] used only in UI callback (edit_term_form), not processing form submission.
+				is_array( $this->tax_in_color ) && in_array( sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ), $this->tax_in_color )
 				)
 			) {
 				?>
@@ -859,8 +865,10 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 				)
 				||
 				(
-					isset( $_GET['taxonomy'] ) &&
-					is_array( $this->tax_in_image ) && in_array( $_GET['taxonomy'], $this->tax_in_image )
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- $_GET['taxonomy'] used only in UI callback (edit_term_form), not processing form submission.
+				isset( $_GET['taxonomy'] ) &&
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- $_GET['taxonomy'] used only in UI callback (edit_term_form), not processing form submission.
+				is_array( $this->tax_in_image ) && in_array( sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ), $this->tax_in_image )
 				)
 			) {
 				?>
@@ -884,7 +892,7 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 							$output .= "<a href='#' class='button button-primary gutentor-img-uploader-open' data-button-text='" . esc_attr( $button_text ) . "' data-title='" . esc_attr( $upload_title ) . "'>" . esc_html( $upload_title ) . '</a>';
 
 							$output .= '<input type="hidden" value="' . esc_attr( $f_image ) . '" id="gutentor_meta[featured-image]" name="gutentor_meta[featured-image]" />';
-							echo $output;//phpcs:ignore All output is escaped before
+						echo wp_kses_post( $output );
 							?>
 						</div>
 					</td>
@@ -901,12 +909,15 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 			if (
 				isset( $_POST['gutentor_meta'] ) &&
 				is_array( $_POST['gutentor_meta'] ) &&
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce value passed directly to wp_verify_nonce which handles its own sanitization.
 				! empty( $_POST['gutentor_term_meta_nonce'] ) &&
-				wp_verify_nonce( $_POST['gutentor_term_meta_nonce'], 'gutentor_update_term_meta' )
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce value passed to wp_verify_nonce which handles its own sanitization.
+				wp_verify_nonce( wp_unslash( $_POST['gutentor_term_meta_nonce'] ), 'gutentor_update_term_meta' )
 			) {
 
 				$m_value = array();
-				foreach ( $_POST['gutentor_meta'] as $key => $value ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Value unslashed and sanitized per-key in the switch below.
+				foreach ( wp_unslash( $_POST['gutentor_meta'] ) as $key => $value ) {
 					$key = sanitize_key( $key );
 					switch ( $key ) {
 						case 'bg-color':

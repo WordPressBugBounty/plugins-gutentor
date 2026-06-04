@@ -6,6 +6,8 @@
  *
  * @package Gutentor
  */
+
+defined( 'ABSPATH' ) || exit;
 if ( gutentor_is_fse_template() ) {
 	?><!doctype html>
 	<html <?php language_attributes(); ?>>

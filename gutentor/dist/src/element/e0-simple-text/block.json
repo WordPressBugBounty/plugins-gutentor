@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e0",
+  "title": "Simple Text",
+  "description": "Design Heading and Paragraph text with minimal but sufficient options.",
+  "category": "gutentor-elements",
+  "keywords": ["Gutentor Simple Text Heading Paragraph Word Minimal Elements"],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e0"
+    },
+    "e0AT": {
+      "type": "string",
+      "default": "Gutentor Simple Text",
+      "source": "html",
+      "selector": ".gutentor-text",
+      "role": "content"
+    },
+    "e0Tag": {
+      "type": "string",
+      "default": "p"
+    },
+    "e0Align": {
+      "type": "object"
+    },
+    "e0Color": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#000",
+        "hover": ""
+      }
+    },
+    "e0Typography": {
+      "type": "object"
+    },
+    "e0Margin": {
+      "type": "object"
+    },
+    "e0Padding": {
+      "type": "object"
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

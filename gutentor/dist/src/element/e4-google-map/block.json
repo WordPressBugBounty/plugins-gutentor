@@ -1,0 +1,171 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e4",
+  "title": "Google Map",
+  "description": "Display a Google Map on your website with Google Map API.",
+  "category": "gutentor-elements",
+  "keywords": ["Gutentor Google Map Address Location Elements"],
+  "textdomain": "gutentor",
+  "attributes": {
+    "blockID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e4"
+    },
+    "id": {
+      "type": "string"
+    },
+    "gID": {
+      "type": "string"
+    },
+    "e4Loc": {
+      "type": "string",
+      "default": "La Sagrada Familia, Barcelona, Spain"
+    },
+    "e4Lat": {
+      "type": "string",
+      "default": "41.4036299"
+    },
+    "e4Lon": {
+      "type": "string",
+      "default": "2.1743558000000576"
+    },
+    "e4Type": {
+      "type": "string",
+      "default": "roadmap"
+    },
+    "e4Zoom": {
+      "type": "number",
+      "default": 15
+    },
+    "e4Height": {
+      "type": "object",
+      "default": {
+        "type": "px",
+        "desktop": 250,
+        "tablet": 200,
+        "mobile": 150
+      }
+    },
+    "e4Draggable": {
+      "type": "boolean",
+      "default": true
+    },
+    "e4TypeCtrl": {
+      "type": "boolean",
+      "default": true
+    },
+    "e4ZoomCtrl": {
+      "type": "boolean",
+      "default": true
+    },
+    "e4FullScrCtrl": {
+      "type": "boolean",
+      "default": true
+    },
+    "e4StreetViewCtrl": {
+      "type": "boolean",
+      "default": true
+    },
+    "e4Markers": {
+      "type": "array",
+      "default": []
+    },
+    "e4Margin": {
+      "type": "object"
+    },
+    "e4Padding": {
+      "type": "object"
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

@@ -14,14 +14,14 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		/**
 		 * Rest route namespace.
 		 *
-		 * @var Gutentor_Advanced_Import
+		 * @var string
 		 */
 		public $namespace = 'gutentor-advanced-import/';
 
 		/**
 		 * Rest route version.
 		 *
-		 * @var Gutentor_Advanced_Import
+		 * @var string
 		 */
 		public $version = 'v1';
 
@@ -92,9 +92,11 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return bool
 		 */
-		public function sanitize_boolean_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_boolean_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return rest_sanitize_boolean( $value );
 		}
 
@@ -103,9 +105,11 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_boolean_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_boolean_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return rest_is_boolean( $value );
 		}
 
@@ -114,9 +118,11 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return string
 		 */
-		public function sanitize_url_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_url_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return esc_url_raw( (string) $value );
 		}
 
@@ -125,9 +131,11 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		 *
 		 * @since 3.5.6
 		 * @param mixed $value Request value.
+		 * @param ?\WP_REST_Request $request
+		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_import_url_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_import_url_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_string( $value ) || ! gutentor_is_valid_url( $value ) ) {
 				return false;
 			}
@@ -161,6 +169,7 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 
 			/*Delete Block Json Transient*/
 			global $wpdb;
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Hardcoded query with no user input; direct query needed to find transient names for cleanup.
 			$transients = $wpdb->get_col( "SELECT option_name FROM $wpdb->options WHERE option_name LIKE '_transient_gutentor_get_block_json_%'" );
 
 			if ( $transients ) {
@@ -174,6 +183,7 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		/**
 		 * Function to fetch templates.
 		 *
+		 * @param \WP_REST_Request $request
 		 * @return array|bool|\WP_Error
 		 */
 		public function fetch_templates( \WP_REST_Request $request ) {
@@ -239,6 +249,7 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		/**
 		 * Function to fetch template JSON.
 		 *
+		 * @param \WP_REST_Request $request
 		 * @return array|bool|\WP_Error
 		 */
 		public function import_template( $request ) {
@@ -287,9 +298,10 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		 * Add Dynamic template
 		 * Reusable blocks
 		 *
+		 * @param array $templates_list
+		 * @return array
 		 * @access public
 		 * @since 2.1.9
-		 * @return array
 		 */
 		public function add_dynamic_library( $templates_list ) {
 

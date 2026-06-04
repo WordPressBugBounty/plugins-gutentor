@@ -1,0 +1,143 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e10",
+  "title": "Rating",
+  "description": "Insert the rating element to represent the rating from 1-5, 1-10 or custom range of star.",
+  "category": "gutentor-elements",
+  "keywords": ["Gutentor Rating Custom Range Elements Star Elements"],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e10"
+    },
+    "e10Icon": {
+      "type": "string",
+      "default": "<i class='far fa-star'>"
+    },
+    "e10Size": {
+      "type": "object"
+    },
+    "e10Spacing": {
+      "type": "object"
+    },
+    "e10MColor": {
+      "type": "object",
+      "default": {
+        "enable": true,
+        "normal": "#275cf6",
+        "hover": ""
+      }
+    },
+    "e10UnMColor": {
+      "type": "object",
+      "default": {
+        "enable": true,
+        "normal": "#DCDCDC",
+        "hover": ""
+      }
+    },
+    "e10Align": {
+      "type": "object"
+    },
+    "e10Scale": {
+      "type": "number",
+      "default": 5
+    },
+    "e10Val": {
+      "type": "number",
+      "default": 3
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

@@ -1,0 +1,265 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e11",
+  "title": "Video Popup",
+  "description": "Display a video from youtube, Vimeo or media library in a popup.",
+  "category": "gutentor-elements",
+  "keywords": ["Gutentor Youtube Vimeo Popup Video Elements"],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e11"
+    },
+    "e11Src": {
+      "type": "string",
+      "default": "external-url"
+    },
+    "e11Hold": {
+      "type": "string",
+      "default": "icon-holder"
+    },
+    "e11Video": {
+      "type": "object"
+    },
+    "e11ExtUrl": {
+      "type": "string",
+      "default": "https://www.youtube.com/watch?v=bGMi7L78hVk"
+    },
+    "e11HoldI": {
+      "type": "object",
+      "default": {
+        "label": "fa-play",
+        "value": "fas fa-play",
+        "code": "f04b"
+      }
+    },
+    "e11HoldISize": {
+      "type": "object"
+    },
+    "e11HoldIColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": {
+          "hex": "#275cf6",
+          "rgb": {
+            "r": "39",
+            "g": "92",
+            "b": "246",
+            "a": "1"
+          }
+        },
+        "hover": ""
+      }
+    },
+    "e11HoldIBGColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "rgba(39,92,246,1)",
+        "hover": ""
+      }
+    },
+    "e11HoldIBgGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "e11HoldIOnBorder": {
+      "type": "boolean",
+      "default": false
+    },
+    "e11HoldIBorder": {
+      "type": "object"
+    },
+    "e11HoldIBxShadow": {
+      "type": "object"
+    },
+    "e11HoldIPreFix": {
+      "type": "string",
+      "default": ""
+    },
+    "e11HoldIPostFix": {
+      "type": "string",
+      "default": ""
+    },
+    "e11PPColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "e11PPTypography": {
+      "type": "object"
+    },
+    "e11OnBxWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "e11BxWidth": {
+      "type": "object"
+    },
+    "e11OnBxHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "e11BxHeight": {
+      "type": "object"
+    },
+    "e11Align": {
+      "type": "object",
+      "default": {
+        "mobile": "text-align-center"
+      }
+    },
+    "e11OnRipple": {
+      "type": "boolean",
+      "default": false
+    },
+    "e11OnAnimation": {
+      "type": "boolean",
+      "default": false
+    },
+    "e11OnRippleColor": {
+      "type": "boolean",
+      "default": false
+    },
+    "e11RippleColor": {
+      "type": "string"
+    },
+    "e11OnImgWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "e11ImgWidth": {
+      "type": "object"
+    },
+    "e11OnImgHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "e11ImgHeight": {
+      "type": "object"
+    },
+    "e11ImgPadding": {
+      "type": "object"
+    },
+    "e11ImgMargin": {
+      "type": "object"
+    },
+    "e11ImgOverlayColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "e11ImgGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "image": {
+      "type": "object"
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

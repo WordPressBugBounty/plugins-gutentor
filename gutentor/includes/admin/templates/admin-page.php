@@ -1,3 +1,9 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Local template variables, not global scope.
+?>
 <div class="gutentor-plugin-landing-page">
 	<section class="gutentor-plugin-banner">
 			<div class="gutentor-plugin-header">

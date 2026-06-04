@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/m12",
+  "title": "Quote",
+  "description": "Quote is the collection of elements which create a adorable quote design.",
+  "category": "gutentor-modules",
+  "keywords": [],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/m12"
+    },
+    "m12Template": {
+      "type": "string",
+      "default": 1
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}

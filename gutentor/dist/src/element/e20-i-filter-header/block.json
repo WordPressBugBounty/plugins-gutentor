@@ -1,0 +1,180 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e20",
+  "title": "Filter Module Header",
+  "description": "Filter Module Header.",
+  "category": "gutentor-elements",
+  "keywords": [],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e20"
+    },
+    "e20Temp": {
+      "type": "string",
+      "default": 1
+    },
+    "e20Col": {
+      "type": "number",
+      "default": 3
+    },
+    "e20FullWCol": {
+      "type": "boolean",
+      "default": false
+    },
+    "e20EqColH": {
+      "type": "boolean",
+      "default": false
+    },
+    "e20Layout": {
+      "type": "object",
+      "default": {
+        "d": "fiveFiveTwo",
+        "t": "fiveFiveTwo",
+        "m": "fiveFiveTwo"
+      }
+    },
+    "e20ICW": {
+      "type": "object",
+      "default": {
+        "d": [41, 41, 18],
+        "t": [41, 41, 18],
+        "m": [41, 41, 18]
+      }
+    },
+    "e20BgC": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "#eeeeee",
+        "hover": "#275cf6"
+      }
+    },
+    "e20BgGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "e20OnBr": {
+      "type": "boolean",
+      "default": false
+    },
+    "e20Br": {
+      "type": "object"
+    },
+    "e20BxShad": {
+      "type": "object"
+    },
+    "e20M": {
+      "type": "object"
+    },
+    "e20P": {
+      "type": "object"
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    },
+    "eHideContSpace": {
+      "type": "object"
+    },
+    "eHideRowSpace": {
+      "type": "object"
+    },
+    "eHideColSpace": {
+      "type": "object"
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "inserter": false,
+    "reusable": false,
+    "html": false
+  }
+}

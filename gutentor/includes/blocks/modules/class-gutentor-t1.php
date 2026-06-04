@@ -60,131 +60,6 @@ if ( ! class_exists( 'Gutentor_T1' ) ) {
 		}
 
 		/**
-		 * Returns attributes for this Block
-		 *
-		 * @static
-		 * @access public
-		 * @since 1.0.1
-		 * @return array
-		 */
-		protected function get_attrs() {
-			$term_attr = array(
-				'gID'                => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'gName'              => array(
-					'type'    => 'string',
-					'default' => 'gutentor/t1',
-				),
-				'termStyle'          => array(
-					'type'    => 'string',
-					'default' => 'gtf-grid',
-				),
-				/*Query*/
-				't1Temp'             => array(
-					'type'    => 'string',
-					'default' => 'gutentor_t1_template1',
-				),
-				't1Taxonomy'         => array(
-					'type'    => 'string',
-					'default' => 'category',
-				),
-				't1Order'            => array(
-					'type'    => 'string',
-					'default' => 'desc',
-				),
-				't1OrderBy'          => array(
-					'type'    => 'string',
-					'default' => 'date',
-				),
-				't1IncludeTerms'     => array(
-					'type' => 'string',
-				),
-				't1ExcludeTerms'     => array(
-					'type' => 'string',
-				),
-				't1Number'           => array(
-					'type'    => 'number',
-					'default' => 6,
-				),
-				't1HideEmpty'        => array(
-					'type'    => 'boolean',
-					'default' => 'true',
-				),
-				'tRevCont'           => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'tOnCol'             => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				/*global*/
-				't2ContentMargin'    => array(
-					'type' => 'object',
-				),
-				't2ContentPadding'   => array(
-					'type'    => 'object',
-					'default' => array(
-						'type'    => 'px',
-						'mTop'    => '15',
-						'mRight'  => '15',
-						'mBottom' => '15',
-						'mLeft'   => '15',
-					),
-				),
-				't2BgProps'          => array(
-					'type'    => 'object',
-					'default' => array(
-						'size'       => 'cover',
-						'pos'        => 'center',
-						'repeat'     => 'no-repeat',
-						'attachment' => 'scroll',
-					),
-				),
-				'blockSortableItems' => array(
-					'type'    => 'object',
-					'default' => array(
-						array(
-							'itemValue' => 'featured-image',
-							'itemLabel' => __( 'Featured Image', 'gutentor' ),
-						),
-						array(
-							'itemValue' => 'title',
-							'itemLabel' => __( 'Title', 'gutentor' ),
-						),
-						array(
-							'itemValue' => 'count',
-							'itemLabel' => __( 'Count', 'gutentor' ),
-						),
-						array(
-							'itemValue' => 'description',
-							'itemLabel' => __( 'Description/Excerpt', 'gutentor' ),
-						),
-						array(
-							'itemValue' => 'button',
-							'itemLabel' => __( 'Button', 'gutentor' ),
-						),
-					),
-
-				),
-				'tTypeTermQuery'     => array(
-					'type'    => 'string',
-					'default' => 'default',
-				),
-				'tTermQuery'         => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-
-			);
-			$term_partial_attr = array_merge_recursive( $term_attr, $this->get_module_common_attrs() );
-			return array_merge_recursive( $term_partial_attr, $this->get_term_common_attrs() );
-		}
-
-
-		/**
 		 * Render Term Data
 		 *
 		 * @since    1.0.1
@@ -196,17 +71,17 @@ if ( ! class_exists( 'Gutentor_T1' ) ) {
 		 */
 		public function render_callback( $attributes, $content ) {
 
-			$blockID        = isset( $attributes['mID'] ) ? $attributes['mID'] : $attributes['gID'];
 			$gID            = isset( $attributes['gID'] ) ? $attributes['gID'] : '';
+			$blockID        = isset( $attributes['mID'] ) ? $attributes['mID'] : $gID;
 			$tTypeTermQuery = isset( $attributes['tTypeTermQuery'] ) ? $attributes['tTypeTermQuery'] : 'default';
 			$output         = '';
 
 			$default_class = gutentor_block_add_default_classes( 'gutentor-t1', $attributes );
 
-			$tag                     = $attributes['mTag'] ? $attributes['mTag'] : 'section';
-			$template                = $attributes['t1Temp'] ? $attributes['t1Temp'] : '';
-			$termStyle               = $attributes['termStyle'] ? $attributes['termStyle'] : '';
-			$tRevCont                = $attributes['tRevCont'] ? $attributes['tRevCont'] : '';
+			$tag                     = isset( $attributes['mTag'] ) ? $attributes['mTag'] : 'section';
+			$template                = isset( $attributes['t1Temp'] ) ? $attributes['t1Temp'] : '';
+			$termStyle               = isset( $attributes['termStyle'] ) ? $attributes['termStyle'] : '';
+			$tRevCont                = isset( $attributes['tRevCont'] ) ? $attributes['tRevCont'] : false;
 			$tRevContClass           = ( $termStyle === 'gtf-list' && $tRevCont ) ? 'gtf-reverse-list' : '';
 			$tOnImgW                 = isset( $attributes['tOnImgW'] ) && $attributes['tOnImgW'];
 			$tImgW                   = isset( $attributes['tImgW'] ) && $attributes['tImgW'];
@@ -247,7 +122,7 @@ if ( ! class_exists( 'Gutentor_T1' ) ) {
 			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 				$tag = gutentor_get_module_tag( $tag );
 
-				$output .= '<' . esc_attr( $tag ) . ' id="' . esc_attr( $blockID ) . '" class="' . esc_attr( apply_filters( 'gutentor_term_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-module', 'gtf-module', 'gutentor-term-module', 'gutentor-term-module-t1', $align, $termStyle, $tRevContClass, $enabledWidth, $template, $default_class ), $attributes ) ) . '" id="' . esc_attr( $blockID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
+				$output .= '<' . esc_attr( $tag ) . ' id="' . esc_attr( $blockID ) . '" class="' . esc_attr( apply_filters( 'gutentor_term_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-module', 'gtf-module', 'gutentor-term-module', 'gutentor-term-module-t1', $align, $termStyle, $tRevContClass, $enabledWidth, $template, $default_class ), $attributes ) ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 				$output .= apply_filters( 'gutentor_term_module_before_container', '', $attributes );
 				$output .= "<div class='" . esc_attr( apply_filters( 'gutentor_term_module_container_class', 'grid-container', $attributes ) ) . "'>";
 				$output .= apply_filters( 'gutentor_term_module_before_block_items', '', $attributes );

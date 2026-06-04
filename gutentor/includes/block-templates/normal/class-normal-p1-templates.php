@@ -50,10 +50,10 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 		/**
 		 * Load Grid Template 1
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_p1_grid_template1( $data, $post, $attributes ) {
 
@@ -166,10 +166,10 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 		/**
 		 * Load List Template 1
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_p1_list_template1( $data, $post, $attributes ) {
 
@@ -284,10 +284,10 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 		/**
 		 * Load Template 1
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_p1_template1( $data, $post, $attributes ) {
 
@@ -304,10 +304,10 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 		/**
 		 * Load Template 2
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_p1_template2( $data, $post, $attributes ) {
 			$enable_post_format  = isset( $attributes['pOnPostFormatOpt'] ) && $attributes['pOnPostFormatOpt'];
@@ -383,10 +383,10 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 		/**
 		 * add Template 5
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_p1_bg_image_template5( $data, $post, $attributes ) {
 			$output              = '';
@@ -611,10 +611,10 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 		/**
 		 * add Template 5
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_p1_normal_image_template5( $data, $post, $attributes ) {
 			$output              = '';
@@ -846,10 +846,10 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 		/**
 		 * add Template 5
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function gutentor_p1_template5( $data, $post, $attributes ) {
 			$output          = '';
@@ -866,10 +866,10 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Templates' ) ) {
 		/**
 		 * Blog Post Templates
 		 *
-		 * @param {string} $data
-		 * @param {array}  $post
-		 * @param {array}  $attributes
-		 * @return {mix}
+		 * @param string $data
+		 * @param WP_Post $post
+		 * @param array $attributes
+		 * @return string
 		 */
 		public function load_blog_post_template( $data, $post, $attributes ) {
 

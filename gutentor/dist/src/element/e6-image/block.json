@@ -1,0 +1,211 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutentor/e6",
+  "title": "Image",
+  "description": "Insert an image to create extra value on the content.",
+  "category": "gutentor-elements",
+  "keywords": ["Gutentor External Upload Image Link URL Elements"],
+  "textdomain": "gutentor",
+  "attributes": {
+    "gID": {
+      "type": "string"
+    },
+    "gName": {
+      "type": "string",
+      "default": "gutentor/e6"
+    },
+    "pName": {
+      "type": "string"
+    },
+    "e6RetinaImageURL": {
+      "type": "string"
+    },
+    "e6ImgSrcOpt": {
+      "type": "string",
+      "default": "local-image"
+    },
+    "e6Img": {
+      "type": "object",
+      "default": {}
+    },
+    "e6RetinaImg": {
+      "type": "object",
+      "default": {}
+    },
+    "e6OverlayColor": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "normal": "rgba(39,92,246,0.2)",
+        "hover": ""
+      }
+    },
+    "e6OGt": {
+      "type": "object",
+      "default": {
+        "normal": "",
+        "hover": ""
+      }
+    },
+    "e6LinkOpt": {
+      "type": "object",
+      "default": {
+        "openInNewTab": false,
+        "rel": "",
+        "imageLinkEnable": "",
+        "imageLink": "",
+        "noFollow": false
+      }
+    },
+    "e6Style": {
+      "type": "string",
+      "default": "normal-image"
+    },
+    "e6BgProps": {
+      "type": "object",
+      "default": {
+        "size": "cover",
+        "pos": "center",
+        "repeat": "no-repeat",
+        "attachment": "scroll"
+      }
+    },
+    "e6OnWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "e6Size": {
+      "type": "string",
+      "default": "full"
+    },
+    "e6OnWidthHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "e6Width": {
+      "type": "object"
+    },
+    "e6OnHeight": {
+      "type": "boolean",
+      "default": false
+    },
+    "e6Height": {
+      "type": "object"
+    },
+    "e6Padding": {
+      "type": "object"
+    },
+    "e6Margin": {
+      "type": "object"
+    },
+    "e6Align": {
+      "type": "object"
+    },
+    "e6Border": {
+      "type": "object"
+    },
+    "e6BoxShadow": {
+      "type": "object"
+    },
+    "e6OnHover": {
+      "type": "boolean",
+      "default": false
+    },
+    "e6HTemplate": {
+      "type": "string",
+      "default": 1
+    },
+    "e6HStyle": {
+      "type": "string",
+      "default": "g-image-hover-style-d"
+    },
+    "eAnimation": {
+      "type": "object"
+    },
+    "eOnPos": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeD": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptD": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoD": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeT": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptT": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoT": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosTypeM": {
+      "type": "string",
+      "default": "g-pos-d"
+    },
+    "ePosOptM": {
+      "type": "string",
+      "default": "default"
+    },
+    "ePosMarginAutoM": {
+      "type": "boolean",
+      "default": false
+    },
+    "ePosD": {
+      "type": "object"
+    },
+    "ePosDWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosT": {
+      "type": "object"
+    },
+    "ePosTWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "ePosM": {
+      "type": "object"
+    },
+    "ePosMWidth": {
+      "type": "object",
+      "default": {
+        "type": "%",
+        "width": ""
+      }
+    },
+    "eZIndex": {
+      "type": "object"
+    },
+    "eHideMode": {
+      "type": "object"
+    },
+    "eRawCustomCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  }
+}
