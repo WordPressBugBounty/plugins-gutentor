@@ -78,6 +78,9 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 			if ( ! $product ) {
 				global $product;
 			}
+			if ( ! $product ) {
+				return '';
+			}
 			$newness_days = 30;
 			$created      = strtotime( $product->get_date_created() );
 			if ( ( time() - ( 60 * 60 * 24 * $newness_days ) ) < $created ) {
@@ -182,6 +185,9 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 				return $data;
 			}
 			$product              = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $data;
+			}
 			$rating               = $product->get_average_rating();
 			$count                = $product->get_rating_count();
 			$comments_count       = wp_count_comments( $post->ID );
@@ -225,6 +231,9 @@ if ( ! class_exists( 'Gutentor_Extend_Api' ) ) {
 				return $data;
 			}
 			$download              = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return $data;
+			}
 			$comments_count        = wp_count_comments( $post->ID );
 			$author_id             = $post->post_author;
 			$download_new_badge    = 'gutentor-edd-new';

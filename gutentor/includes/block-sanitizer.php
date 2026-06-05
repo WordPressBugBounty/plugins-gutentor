@@ -46,15 +46,17 @@ function gutentor_sanitize_block_attrs( $parsed_block, $source_block, $parent_bl
 
 	$known_rich_text = gutentor_get_known_rich_text_attrs();
 
-	foreach ( $parsed_block['attrs'] as $key => $value ) {
-		$attr_schema = isset( $schema[ $key ] ) ? $schema[ $key ] : array();
-		$parsed_block['attrs'][ $key ] = gutentor_sanitize_attr(
-			$value,
-			$key,
-			$attr_schema,
-			$known_rich_text,
-			$has_block_schema
-		);
+	if ( ! empty( $parsed_block['attrs'] ) ) {
+		foreach ( $parsed_block['attrs'] as $key => $value ) {
+			$attr_schema = isset( $schema[ $key ] ) ? $schema[ $key ] : array();
+			$parsed_block['attrs'][ $key ] = gutentor_sanitize_attr(
+				$value,
+				$key,
+				$attr_schema,
+				$known_rich_text,
+				$has_block_schema
+			);
+		}
 	}
 
 	return $parsed_block;

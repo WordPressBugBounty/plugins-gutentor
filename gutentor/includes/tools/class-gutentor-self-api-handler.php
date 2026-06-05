@@ -967,7 +967,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return string
 		 */
-		public function sanitize_text_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_text_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value ) {
 				return '';
 			}
@@ -984,7 +984,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return array
 		 */
-		public function sanitize_condition_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_condition_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return array();
 			}
@@ -1005,7 +1005,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_positive_int_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_positive_int_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			return is_numeric( $value ) && absint( $value ) > 0;
 		}
 
@@ -1018,7 +1018,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_block_id_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_block_id_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_string( $value ) ) {
 				return false;
 			}
@@ -1035,7 +1035,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_simple_string_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_simple_string_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1052,7 +1052,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_condition_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_condition_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1069,7 +1069,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_settings_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_settings_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			return is_array( $value ) && ! empty( $value );
 		}
 
@@ -1082,7 +1082,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_post_type_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_type_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_string( $value ) || '' === $value ) {
 				return false;
 			}
@@ -1099,7 +1099,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_post_type_param_optional( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_type_param_optional( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1116,7 +1116,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_taxonomy_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_taxonomy_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_string( $value ) || '' === $value ) {
 				return false;
 			}
@@ -1133,7 +1133,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_taxonomy_param_optional( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_taxonomy_param_optional( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1150,7 +1150,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_non_negative_int_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_non_negative_int_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1167,7 +1167,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_csv_ids_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_csv_ids_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1188,7 +1188,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_orderby_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_orderby_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1210,7 +1210,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_order_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_order_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1232,7 +1232,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_term_orderby_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_term_orderby_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1254,7 +1254,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_taxonomies_csv_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_taxonomies_csv_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1288,7 +1288,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_boolean_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_boolean_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1318,7 +1318,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_tax_operator_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_tax_operator_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1341,7 +1341,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_relation_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_relation_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1363,7 +1363,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_post_status_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_status_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1385,7 +1385,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_perm_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_perm_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1406,7 +1406,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string           $param   Optional parameter name.
 		 * @return bool
 		 */
-		public function validate_json_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_json_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -1428,7 +1428,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return array
 		 */
-		public function sanitize_settings_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_settings_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			return is_array( $value ) ? $value : array();
 		}
 
@@ -1441,7 +1441,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return array
 		 */
-		public function sanitize_post_type_args_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_post_type_args_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( is_string( $value ) ) {
 				$decoded = json_decode( $value, true );
 				if ( JSON_ERROR_NONE === json_last_error() ) {
@@ -1497,7 +1497,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_post_type_args_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_type_args_param( $value, \WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}

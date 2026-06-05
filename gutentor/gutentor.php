@@ -14,16 +14,17 @@ if ( ! defined( 'WPINC' ) ) {
  * @wordpress-plugin
  * Plugin Name:       Gutentor - Gutenberg Blocks - Page Builder for Gutenberg Editor
  * Description:       Advanced yet easy, Gutenberg editor page builder blocks. Create a masterpiece, pixel perfect websites using modern WordPress Gutenberg blocks.
- * Version:           4.0.0
+ * Version:           4.0.1
  * Author:            Gutentor
  * Author URI:        https://www.gutentor.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       gutentor
+ * Requires PHP:      7.0
  */
 
 /*Define Constants for this plugin*/
-define( 'GUTENTOR_VERSION', '4.0.0' );
+define( 'GUTENTOR_VERSION', '4.0.1' );
 define( 'GUTENTOR_PLUGIN_NAME', 'gutentor' );
 define( 'GUTENTOR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GUTENTOR_URL', plugin_dir_url( __FILE__ ) );

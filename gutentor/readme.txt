@@ -5,8 +5,8 @@ Donate link: https://www.gutentor.com/
 Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
 Tested up to: 7.0
-Requires PHP: 7.4
-Stable tag: 4.0.0
+Requires PHP: 7.0
+Stable tag: 4.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,13 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 4.0.1 - 2026-06-05 =
+* Fixed: Parse error on PHP 7.0 - removed nullable type hints from REST API parameter handlers.
+* Fixed: "Cannot redeclare WC()" fatal error when WooCommerce or other plugins define the same functions.
+* Fixed: Potential fatal error when WooCommerce product or Easy Digital Downloads download is deleted or unavailable.
+* Fixed: Warning when block attributes are empty during sanitization.
+* Added: Requires PHP header to enforce minimum PHP version.
 
 = 4.0.0 - 2026-06-04 =
 * Added:   Full WordPress 7.0 compatibility.

@@ -63,6 +63,9 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Woo_Templates' ) ) {
 			}
 
 			$product     = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $output;
+			}
 			$rating      = $product->get_average_rating();
 			$count       = $product->get_rating_count();
 			$rating_html = wc_get_rating_html( $rating, $count );
@@ -211,6 +214,9 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Woo_Templates' ) ) {
 				return $data;
 			}
 			$product     = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $data;
+			}
 			$rating      = $product->get_average_rating();
 			$count       = $product->get_rating_count();
 			$rating_html = wc_get_rating_html( $rating, $count );
@@ -380,6 +386,9 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Woo_Templates' ) ) {
 				return $output;
 			}
 			$product     = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $output;
+			}
 			$rating      = $product->get_average_rating();
 			$count       = $product->get_rating_count();
 			$rating_html = wc_get_rating_html( $rating, $count );
@@ -483,6 +492,9 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Woo_Templates' ) ) {
 			}
 
 			$product     = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $output;
+			}
 			$rating      = $product->get_average_rating();
 			$count       = $product->get_rating_count();
 			$rating_html = wc_get_rating_html( $rating, $count );
@@ -764,6 +776,9 @@ if ( ! class_exists( 'Gutentor_Normal_P1_Woo_Templates' ) ) {
 			}
 
 			$product     = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $output;
+			}
 			$rating      = $product->get_average_rating();
 			$count       = $product->get_rating_count();
 			$rating_html = wc_get_rating_html( $rating, $count );

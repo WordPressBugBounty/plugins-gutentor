@@ -230,8 +230,6 @@ class Gutentor {
 		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-self-api-handler.php';
 
 		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-extend-api.php';
-		require_once GUTENTOR_PATH . 'includes/stubs/external-functions.php';
-
 		/*Advanced Import*/
 		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-advanced-import.php';
 

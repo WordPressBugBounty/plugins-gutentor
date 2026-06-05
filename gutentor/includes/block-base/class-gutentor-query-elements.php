@@ -2038,6 +2038,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 				return $output;
 			}
 			$product               = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $output;
+			}
 			$rating                = $product->get_average_rating();
 			$count                 = $product->get_rating_count();
 			$rating_html           = wc_get_rating_html( $rating, $count );
@@ -2179,9 +2182,12 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 			if ( ! gutentor_is_edd_active() ) {
 				return '';
 			}
+			$download              = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return '';
+			}
 			$enable_avatar         = ( isset( $attributes['pOnAvatar'] ) ) ? $attributes['pOnAvatar'] : false;
 			$avatar_pos            = ( isset( $attributes['pAvatarPos'] ) ) ? $attributes['pAvatarPos'] : false;
-			$download              = edd_get_download( $post->ID );
 			$query_sorting         = array_key_exists( 'blockSortableItems', $attributes ) ? $attributes['blockSortableItems'] : false;
 			$enable_featured_image = ( isset( $attributes['pOnFImg'] ) ) ? $attributes['pOnFImg'] : false;
 			$enable_post_format    = ( isset( $attributes['pOnPostFormatOpt'] ) ) ? $attributes['pOnPostFormatOpt'] : false;
@@ -2409,6 +2415,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 			if ( ! $product ) {
 				global $product;
 			}
+			if ( ! $product ) {
+				return '';
+			}
 			$newness_days = 30;
 			$created      = strtotime( $product->get_date_created() );
 			if ( ( time() - ( 60 * 60 * 24 * $newness_days ) ) < $created ) {
@@ -2448,6 +2457,9 @@ if ( ! class_exists( 'Gutentor_Query_Elements' ) ) {
 		function p6_fp_new_badge_product( $post, $product ) {
 			if ( ! $product ) {
 				global $product;
+			}
+			if ( ! $product ) {
+				return '';
 			}
 			$newness_days = 30;
 			$created      = strtotime( $product->get_date_created() );

@@ -62,6 +62,9 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 			}
 
 			$product               = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $output;
+			}
 			$rating                = $product->get_average_rating();
 			$count                 = $product->get_rating_count();
 			$rating_html           = wc_get_rating_html( $rating, $count );
@@ -229,6 +232,9 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 				return '';
 			}
 			$download              = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return '';
+			}
 			$output                = '';
 			$query_sorting         = array_key_exists( 'blockFPSortableItems', $attributes ) ? $attributes['blockFPSortableItems'] : false;
 			$enable_featured_image = ( isset( $attributes['pOnFPFImg'] ) ) ? $attributes['pOnFPFImg'] : false;

@@ -179,6 +179,9 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T2' ) ) {
 			}
 
 			$product               = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $output;
+			}
 			$rating                = $product->get_average_rating();
 			$count                 = $product->get_rating_count();
 			$rating_html           = wc_get_rating_html( $rating, $count );
@@ -336,6 +339,9 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T2' ) ) {
 				return '';
 			}
 			$download = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return '';
+			}
 
 			$output                = '';
 			$enable_avatar         = isset( $attributes['pFPOnAvatar'] ) && $attributes['pFPOnAvatar'];

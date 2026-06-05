@@ -60,6 +60,9 @@ if ( ! class_exists( 'Gutentor_Normal_P1_EDD_Templates' ) ) {
 				return $data;
 			}
 			$download            = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return $data;
+			}
 			$query_sorting       = array_key_exists( 'blockSortableItems', $attributes ) ? $attributes['blockSortableItems'] : false;
 			$enable_post_format  = isset( $attributes['pOnPostFormatOpt'] ) && $attributes['pOnPostFormatOpt'];
 			$post_format_pos     = ( isset( $attributes['pPostFormatPos'] ) ) ? $attributes['pPostFormatPos'] : false;
@@ -196,6 +199,9 @@ if ( ! class_exists( 'Gutentor_Normal_P1_EDD_Templates' ) ) {
 				return $data;
 			}
 			$download            = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return $data;
+			}
 			$query_sorting       = array_key_exists( 'blockSortableItems', $attributes ) ? $attributes['blockSortableItems'] : false;
 			$enable_post_format  = isset( $attributes['pOnPostFormatOpt'] ) && $attributes['pOnPostFormatOpt'];
 			$post_format_pos     = ( isset( $attributes['pPostFormatPos'] ) ) ? $attributes['pPostFormatPos'] : false;
@@ -351,6 +357,9 @@ if ( ! class_exists( 'Gutentor_Normal_P1_EDD_Templates' ) ) {
 				return $data;
 			}
 			$download = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return $data;
+			}
 
 			$enable_post_format  = ( isset( $attributes['pOnPostFormatOpt'] ) ) ? $attributes['pOnPostFormatOpt'] : false;
 			$post_format_pos     = ( isset( $attributes['pPostFormatPos'] ) ) ? $attributes['pPostFormatPos'] : false;
@@ -444,6 +453,9 @@ if ( ! class_exists( 'Gutentor_Normal_P1_EDD_Templates' ) ) {
 				return $data;
 			}
 			$download            = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return $data;
+			}
 			$enable_post_format  = isset( $attributes['pOnPostFormatOpt'] ) && $attributes['pOnPostFormatOpt'];
 			$post_format_pos     = ( isset( $attributes['pPostFormatPos'] ) ) ? $attributes['pPostFormatPos'] : false;
 			$enable_featured_img = isset( $attributes['pOnFImg'] ) && $attributes['pOnFImg'];
@@ -538,8 +550,11 @@ if ( ! class_exists( 'Gutentor_Normal_P1_EDD_Templates' ) ) {
 				return $data;
 			}
 
-			$output              = '';
 			$download            = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return $data;
+			}
+			$output              = '';
 			$query_sorting       = array_key_exists( 'blockSortableItems', $attributes ) ? $attributes['blockSortableItems'] : false;
 			$enable_post_format  = isset( $attributes['pOnPostFormatOpt'] ) && $attributes['pOnPostFormatOpt'];
 			$post_format_pos     = ( isset( $attributes['pPostFormatPos'] ) ) ? $attributes['pPostFormatPos'] : false;
@@ -805,8 +820,11 @@ if ( ! class_exists( 'Gutentor_Normal_P1_EDD_Templates' ) ) {
 				return $data;
 			}
 
-			$output              = '';
 			$download            = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return $data;
+			}
+			$output              = '';
 			$query_sorting       = array_key_exists( 'blockSortableItems', $attributes ) ? $attributes['blockSortableItems'] : false;
 			$enable_post_format  = isset( $attributes['pOnPostFormatOpt'] ) && $attributes['pOnPostFormatOpt'];
 			$post_format_pos     = ( isset( $attributes['pPostFormatPos'] ) ) ? $attributes['pPostFormatPos'] : false;

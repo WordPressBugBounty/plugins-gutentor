@@ -330,13 +330,16 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 	 * @param int $index
 	 * @return string
 	 */
-	public function p2_woo_single_article( $post, $attributes, $index ) {
+		public function p2_woo_single_article( $post, $attributes, $index ) {
 
 			$output = '';
 			if ( ! gutentor_is_woocommerce_active() ) {
 				return $output;
 			}
 			$product     = wc_get_product( $post->ID );
+			if ( ! $product ) {
+				return $output;
+			}
 			$rating      = $product->get_average_rating();
 			$count       = $product->get_rating_count();
 			$rating_html = wc_get_rating_html( $rating, $count );
@@ -432,6 +435,9 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 				return '';
 			}
 			$download            = edd_get_download( $post->ID );
+			if ( ! $download ) {
+				return '';
+			}
 			$output              = '';
 			$enable_avatar       = isset( $attributes['pOnAvatar'] ) && $attributes['pOnAvatar'];
 			$avatar_pos          = ( isset( $attributes['pAvatarPos'] ) ) ? $attributes['pAvatarPos'] : false;

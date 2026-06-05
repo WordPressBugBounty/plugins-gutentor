@@ -382,7 +382,7 @@ class Gutentor_Hooks {
 			'magnific-popup', // Handle.
 			GUTENTOR_URL . 'assets/library/magnific-popup/jquery.magnific-popup.min.js',
 			array( 'jquery' ), // Dependencies, defined above.
-			'1.1.0', // Version: File modification time.
+			'1.8.0', // Version: File modification time.
 			true // Enqueue the script in the footer.
 		);
 
@@ -408,7 +408,7 @@ class Gutentor_Hooks {
 			'theia-sticky-sidebar', // Handle.
 			GUTENTOR_URL . 'assets/library/theia-sticky-sidebar/theia-sticky-sidebar.min.js',
 			array( 'jquery' ), // Dependencies
-			'4.0.1', // Version
+			'1.7.0', // Version
 			true // Enqueue the script in the footer.
 		);
 

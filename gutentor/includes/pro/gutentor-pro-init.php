@@ -263,8 +263,7 @@ class Gutentor_Pro_License_Init {
 	}
 
 	public function can_show_notice() {
-		global $current_user;
-		$user_id                  = $current_user->ID;
+		$user_id                  = get_current_user_id();
 		$ignored_notice           = get_user_meta( $user_id, $this->slug . '_upgrade_to_pro_notice', true );
 		$ignored_notice_partially = get_user_meta( $user_id, $this->slug . '_upgrade_to_pro_notice_partially', true );
 
@@ -289,8 +288,7 @@ class Gutentor_Pro_License_Init {
 	 */
 	public function upgrade_to_pro_notice() {
 
-		global $current_user;
-		$user_id = $current_user->ID;
+		$user_id = get_current_user_id();
 
 		/* If user clicks to ignore the notice, add info to user meta */
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin notice dismissal via URL param, not processing form submission.
