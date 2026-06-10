@@ -11,6 +11,17 @@
     "gID": {
       "type": "string"
     },
+    "m7ItemPId": {
+      "type": "string"
+    },
+    "m7TabI": {
+      "type": "number",
+      "default": 1
+    },
+    "m7ActiveTabI": {
+      "type": "number",
+      "default": 0
+    },
     "gName": {
       "type": "string",
       "default": "gutentor/m7-tab"

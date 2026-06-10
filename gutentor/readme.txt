@@ -5,8 +5,8 @@ Donate link: https://www.gutentor.com/
 Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
 Tested up to: 7.0
-Requires PHP: 7.0
-Stable tag: 4.0.1
+Requires PHP: 7.4
+Stable tag: 4.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,14 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 4.0.2 - 2026-06-10 =
+* Fixed: Button `<a>` tag renders without `href` attribute when link is empty.
+* Fixed: Tabs Module (m7) not showing/hiding tab content properly due to missing child block attributes.
+* Fixed: Copied/duplicated blocks retain the same ID, causing shared CSS issues.
+* Fixed: Deprecated nullable parameter notices in PHP 8.4+ — added explicit `?` type hints.
+* Fixed: Iframe-aware document resolution for block editor (apiVersion 3) — dynamic content click listener, global CSS lookup, and duplicate ID detection now query the correct document context.
+* Updated: Minimum PHP version raised from 7.0 to 7.4.
 
 = 4.0.1 - 2026-06-05 =
 * Fixed: Parse error on PHP 7.0 - removed nullable type hints from REST API parameter handlers.
