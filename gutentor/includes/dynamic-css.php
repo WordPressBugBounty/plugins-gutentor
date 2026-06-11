@@ -510,7 +510,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param \WP_REST_Request $request Request object.
 		 * @return bool
 		 */
-		public function validate_post_id_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_post_id_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -530,7 +530,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return bool
 		 */
-		public function validate_dynamic_css_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_dynamic_css_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return is_array( $value ) && isset( $value['css'] );
 		}
 
@@ -541,7 +541,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return array
 		 */
-		public function sanitize_dynamic_css_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_dynamic_css_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) ) {
 				return array(
 					'css'    => '',
@@ -562,7 +562,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return bool
 		 */
-		public function validate_blocks_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_blocks_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return is_array( $value );
 		}
 
@@ -573,7 +573,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return array
 		 */
-		public function sanitize_blocks_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_blocks_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) ) {
 				return array();
 			}
@@ -588,7 +588,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return bool
 		 */
-		public function validate_widgets_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_widgets_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( null === $value || '' === $value ) {
 				return true;
 			}
@@ -603,7 +603,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return array
 		 */
-		public function sanitize_widgets_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_widgets_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) ) {
 				return array();
 			}
@@ -622,7 +622,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return bool
 		 */
-		public function validate_tax_terms_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_tax_terms_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) || empty( $value ) ) {
 				return false;
 			}
@@ -643,7 +643,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		 * @param mixed $value Request value.
 		 * @return array
 		 */
-		public function sanitize_tax_terms_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_tax_terms_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_array( $value ) ) {
 				return array();
 			}

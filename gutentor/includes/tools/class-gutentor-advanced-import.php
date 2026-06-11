@@ -96,7 +96,7 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		 * @param string $param
 		 * @return bool
 		 */
-		public function sanitize_boolean_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_boolean_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return rest_sanitize_boolean( $value );
 		}
 
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_boolean_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_boolean_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return rest_is_boolean( $value );
 		}
 
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		 * @param string $param
 		 * @return string
 		 */
-		public function sanitize_url_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function sanitize_url_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			return esc_url_raw( (string) $value );
 		}
 
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 		 * @param string $param
 		 * @return bool
 		 */
-		public function validate_import_url_param( $value, \WP_REST_Request $request = null, $param = '' ) {
+		public function validate_import_url_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
 			if ( ! is_string( $value ) || ! gutentor_is_valid_url( $value ) ) {
 				return false;
 			}

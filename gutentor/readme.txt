@@ -6,7 +6,7 @@ Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,12 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 4.0.3 - 2026-06-12 =
+* Fixed: Button and icon links not being saved correctly when updating an existing page.
+* Fixed: Missing styling and layout options for the Simple Single Column block used inside Columns, Carousel, Slider, and other modules.
+* Fixed: Missing inspector panel controls for the Term (Category) block.
+* Improved: Internal code cleanup — removed leftover debug output and restored filter callbacks for Button, Advanced Text, Icon, Image, Advanced List, and Post read-more links.
 
 = 4.0.2 - 2026-06-10 =
 * Fixed: Button `<a>` tag renders without `href` attribute when link is empty.
