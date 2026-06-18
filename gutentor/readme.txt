@@ -6,7 +6,7 @@ Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.0.3
+Stable tag: 4.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,13 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 4.0.4 - 2026-06-18 =
+* Fixed: Media picker button not showing on Image, List, Featured, Author Profile, and Video Popup blocks.
+* Fixed: Background images missing on Container/Cover, Module blocks, and other blocks using WordPress 7.0 template editor.
+* Fixed: Template Library import button not visible in the WordPress 7.0 post editor toolbar.
+* Fixed: Item action buttons (gear icon) not clickable in the block editor on WordPress 7.0.
+* Improved: Faster block recovery from validation errors.
 
 = 4.0.3 - 2026-06-12 =
 * Fixed: Button and icon links not being saved correctly when updating an existing page.

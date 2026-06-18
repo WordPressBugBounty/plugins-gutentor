@@ -398,25 +398,59 @@ function EditorReady($, iframes = undefined) {
 }
 
 (function ($) {
-	function preEditor() {
-		if (window.location.href.indexOf('site-editor.php') > -1) {
-			let blockLoaded = false;
-			let blockLoadedInterval = setInterval(function () {
-				let iframes = $('iframe[name="editor-canvas"]');
-				if (iframes.length) {
-					/*post-title-0 is ID of Post Title Textarea*/
-					//Actual functions goes here
-					EditorReady($, iframes);
+	/*Track a single polling instance so re-invocations don't leak
+	 intervals. Each call to preEditor() reuses / cancels the previous one.*/
+	let gutentorIframePollTimer = null;
+	let gutentorIframePollDeadline = null;
 
-					blockLoaded = true;
-				}
-				if (blockLoaded) {
-					clearInterval(blockLoadedInterval);
-				}
-			}, 500);
-		} else {
-			EditorReady($);
+	function preEditor() {
+		/*Cancel any previous polling loop before starting a new one.*/
+		if (gutentorIframePollTimer) {
+			clearInterval(gutentorIframePollTimer);
+			gutentorIframePollTimer = null;
 		}
+		if (gutentorIframePollDeadline) {
+			clearTimeout(gutentorIframePollDeadline);
+			gutentorIframePollDeadline = null;
+		}
+
+		/*WP 7.0+ renders apiVersion 3 blocks (including all Gutentor blocks) inside
+		 iframe[name="editor-canvas"] for both the post editor and Site Editor.
+		 We must bind click handlers to the iframe contents — not the parent document —
+		 otherwise clicks inside the iframe never reach the listener.*/
+		const iframe = document.querySelector('iframe[name="editor-canvas"]');
+		if (iframe && iframe.contentDocument) {
+			EditorReady($, $(iframe));
+			return;
+		}
+
+		/*Iframe not ready yet — poll for up to 10s, then fall back to parent doc.*/
+		const startedAt = Date.now();
+		gutentorIframePollTimer = setInterval(function () {
+			if (gutentorIframePollTimer === null) {
+				/*Cancelled mid-flight; do nothing.*/
+				return;
+			}
+			const ifr = document.querySelector('iframe[name="editor-canvas"]');
+			if (ifr && ifr.contentDocument) {
+				clearInterval(gutentorIframePollTimer);
+				gutentorIframePollTimer = null;
+				if (gutentorIframePollDeadline) {
+					clearTimeout(gutentorIframePollDeadline);
+					gutentorIframePollDeadline = null;
+				}
+				EditorReady($, $(ifr));
+			} else if (Date.now() - startedAt > 10000) {
+				/*Fallback to parent document if the iframe never appears
+				 (e.g. widgets screen, very old WP). Run EditorReady to bind
+				 click handlers on any editor page that doesn't use an iframe.*/
+				clearInterval(gutentorIframePollTimer);
+				gutentorIframePollTimer = null;
+				if (document.body) {
+					EditorReady($);
+				}
+			}
+		}, 250);
 	}
 	preEditor();
 
