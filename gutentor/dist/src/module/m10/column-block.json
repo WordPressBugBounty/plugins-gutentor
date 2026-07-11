@@ -141,7 +141,7 @@
       "default": "https://www.youtube.com/watch?v=bGMi7L78hVk"
     },
     "mBGColor": {
-      "type": "string"
+      "type": "object"
     },
     "mBGGradient": {
       "type": "string"
@@ -171,7 +171,7 @@
       "default": false
     },
     "mOverlayColor": {
-      "type": "string"
+      "type": "object"
     },
     "mOCGradient": {
       "type": "string"

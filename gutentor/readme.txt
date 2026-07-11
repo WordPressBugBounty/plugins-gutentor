@@ -6,7 +6,7 @@ Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.0.4
+Stable tag: 4.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,14 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 4.0.5 - 2026-07-11 =
+* Fixed: Semi-transparent overlay and background colors on Advanced Columns and other module blocks were being lost after reloading or autosaving — they now save and display correctly.
+* Fixed: Unnecessary empty shape markup and block shape styles were always added even when no block shape was selected; image shapes now only appear when a shape image is chosen.
+* Fixed: M5 Slider slides appeared collapsed with no height and the slider did not show on previously created sliders — slides now render with a proper default height.
+* Fixed: The Google Map block's overlay color was not being applied — it now displays correctly. (Also added support for the block's border style and border color options.)
+* Fixed a latent attribute-name mismatch in the Timeline block's template hook for code consistency.
+* Fixed: Security — prevented a stored cross-site scripting (XSS) issue in the Countdown block's expired-message text within the editor.
 
 = 4.0.4 - 2026-06-18 =
 * Fixed: Media picker button not showing on Image, List, Featured, Author Profile, and Video Popup blocks.

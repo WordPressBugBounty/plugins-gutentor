@@ -307,11 +307,11 @@
     "mZIndex": {
       "type": "object"
     },
-    "mOnHeight": {
+    "m5OnHeight": {
       "type": "boolean",
       "default": false
     },
-    "mHeight": {
+    "m5Height": {
       "type": "object"
     },
     "mHideContSpace": {

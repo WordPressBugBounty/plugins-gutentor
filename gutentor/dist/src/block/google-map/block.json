@@ -298,6 +298,12 @@
     "blockComponentOverlayColor": {
       "type": "object"
     },
+    "blockComponentBorderStyle": {
+      "type": "string"
+    },
+    "blockComponentBorderColor": {
+      "type": "object"
+    },
     "mOCGradient": {
       "type": "string"
     },

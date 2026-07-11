@@ -62,7 +62,7 @@
       "default": "https://www.youtube.com/watch?v=bGMi7L78hVk"
     },
     "mBGColor": {
-      "type": "string"
+      "type": "object"
     },
     "mBGGradient": {
       "type": "string"
@@ -92,7 +92,7 @@
       "default": false
     },
     "mOverlayColor": {
-      "type": "string"
+      "type": "object"
     },
     "mOCGradient": {
       "type": "string"
@@ -307,11 +307,11 @@
     "mZIndex": {
       "type": "object"
     },
-    "mOnHeight": {
+    "m5OnHeight": {
       "type": "boolean",
       "default": false
     },
-    "mHeight": {
+    "m5Height": {
       "type": "object"
     },
     "mHideContSpace": {

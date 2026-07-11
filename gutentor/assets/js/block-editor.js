@@ -215,9 +215,11 @@ function EditorReady($, iframes = undefined) {
 		var gutentor_event_date = gutentor_this.attr('data-eventdate');
 		if (gutentor_event_date === undefined || gutentor_event_date === null) {
 			if (!gutentor_this.children('.gutentor-count-down-invalid-msg').length) {
-				gutentor_this.append(
-					"<span class='gutentor-count-down-invalid-msg'>Please set validate Date and time for countdown </span>"
-				);
+				const invalidMsgSpan = document.createElement('span');
+				invalidMsgSpan.className = 'gutentor-count-down-invalid-msg';
+				invalidMsgSpan.textContent =
+					'Please set validate Date and time for countdown ';
+				gutentor_this.append(invalidMsgSpan);
 			}
 			gutentor_this.children().addClass('hidden');
 			gutentor_this
@@ -291,9 +293,10 @@ function EditorReady($, iframes = undefined) {
 			if (distance < 0) {
 				clearInterval(setCountdownInterval);
 				gutentor_this.children().addClass('hidden');
-				gutentor_this.append(
-					"<span class='gutentor-count-down-expire'>" + expired_text + '</span>'
-				);
+				const expireSpan = document.createElement('span');
+				expireSpan.className = 'gutentor-count-down-expire';
+				expireSpan.textContent = expired_text;
+				gutentor_this.append(expireSpan);
 			} else {
 				gutentor_this.children().removeClass('hidden');
 				gutentor_this.children('.gutentor-count-down-expire').remove();
