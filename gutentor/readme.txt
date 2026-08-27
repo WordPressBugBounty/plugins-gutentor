@@ -4,9 +4,9 @@ Contributors: gutentor, acmeit, addonspress, codersantosh
 Donate link: https://www.gutentor.com/
 Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.0.5
+Stable tag: 4.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,11 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 4.0.6 - 2026-08-27 =
+* Security: Hardened REST API permission checks on post queries. Thanks to Ezekiel Victor for responsible disclosure.
+* Security: Hardened slider data endpoint to prevent unauthorized access to draft content.
+* Fixed: Slider (m5) bottom spacing regression after 4.0.5 when height was disabled — height now only applied when "Enable Height" is on. Fixes https://wordpress.org/support/topic/sliders-have-an-unwanted-bottom-spacing-since-the-latest-update/
 
 = 4.0.5 - 2026-07-11 =
 * Fixed: Semi-transparent overlay and background colors on Advanced Columns and other module blocks were being lost after reloading or autosaving — they now save and display correctly.

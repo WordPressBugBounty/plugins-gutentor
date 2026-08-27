@@ -571,18 +571,6 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 								'sanitize_callback' => array( $this, 'sanitize_text_param' ),
 								'validate_callback' => array( $this, 'validate_perm_param' ),
 							),
-							'post_password'          => array(
-								'type'              => 'string',
-								'required'          => false,
-								'sanitize_callback' => array( $this, 'sanitize_text_param' ),
-								'validate_callback' => array( $this, 'validate_simple_string_param' ),
-							),
-							'has_password'           => array(
-								'type'              => 'string',
-								'required'          => false,
-								'sanitize_callback' => array( $this, 'sanitize_text_param' ),
-								'validate_callback' => array( $this, 'validate_boolean_param' ),
-							),
 							'post_mime_type'         => array(
 								'type'              => 'string',
 								'required'          => false,
@@ -1615,6 +1603,15 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			if ( $paged ) {
 				$post = get_post( $postId );
 				if ( $post ) {
+					$status_obj = get_post_status_object( $post->post_status );
+					$is_public  = $status_obj && $status_obj->public;
+					if ( ! $is_public && ! current_user_can( 'read_post', $post->ID ) ) {
+						return new WP_Error(
+							'rest_forbidden',
+							__( 'Sorry, you are not allowed to do that.', 'gutentor' ),
+							array( 'status' => rest_authorization_required_code() )
+						);
+					}
 					$content = $post->post_content;
 				} else {
 					/*For Widgets*/
@@ -2032,7 +2029,13 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 					break;
 
 				case 'publish':
-					// No additional checks needed beyond basic 'read' capability.
+					if ( ! current_user_can( $post_type_obj->cap->edit_posts ) ) {
+						return new WP_Error(
+							'rest_cannot_read',
+							__( 'Sorry, you are not allowed to read posts in this post type.', 'gutentor' ),
+							array( 'status' => rest_authorization_required_code() )
+						);
+					}
 					break;
 
 				default:
@@ -2251,8 +2254,10 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			}
 			$data['modified_gmt'] = $this->prepare_date_response( $post_modified_gmt );
 
-			/*Password*/
-			$data['password'] = $post->post_password;
+			/*Password - restricted to edit context with edit_post capability to prevent disclosure*/
+			if ( 'edit' === $request['context'] && current_user_can( 'edit_post', $post->ID ) ) {
+				$data['password'] = $post->post_password;
+			}
 
 			/*Slug*/
 			$data['slug'] = $post->post_name;
@@ -2623,14 +2628,6 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			}
 			if ( $request->get_param( 'post_parent__in' ) ) {
 				$query_args['post_parent__in'] = $request->get_param( 'post_parent__in' );
-			}
-
-			/*permission*/
-			if ( $request->get_param( 'has_password' ) ) {
-				$query_args['has_password'] = $request->get_param( 'has_password' );
-			}
-			if ( $request->get_param( 'post_password' ) ) {
-				$query_args['post_password'] = $request->get_param( 'post_password' );
 			}
 
 			/*comment*/
