@@ -344,6 +344,11 @@ class Gutentor_Pro_License_Init {
 					-ms-flex-align: center!important;
 					align-items: center!important;
 				}
+				/*WP core gives buttons a tall line-height, which offsets the 20px dashicons from the label.*/
+				.<?php echo esc_attr( $this->slug ); ?>-review-notice .links a .dashicons{
+					line-height: 1!important;
+					vertical-align: middle;
+				}
 			</style>
 
 			<div class="links">

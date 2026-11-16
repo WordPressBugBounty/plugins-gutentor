@@ -231,6 +231,7 @@ class Gutentor {
 
 		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-extend-api.php';
 		/*Advanced Import*/
+		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-import-media.php';
 		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-advanced-import.php';
 
 		/*Tb Notice*/

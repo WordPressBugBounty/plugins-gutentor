@@ -185,7 +185,9 @@ if ( ! class_exists( 'Gutentor_P1' ) ) {
 			if ( $pTypeWpQuery === 'custom' ) {
 				$pWpQueryJson = isset( $attributes['pWpQuery'] ) ? $attributes['pWpQuery'] : false;
 				$pWpQueryData = json_decode( $pWpQueryJson, true );
-				$query_args   = array_merge( $query_args, $pWpQueryData );
+				if ( is_array( $pWpQueryData ) ) {
+					$query_args = array_merge( $query_args, $pWpQueryData );
+				}
 			}
 
 			$the_query = new WP_Query( gutentor_get_query( $query_args ) );

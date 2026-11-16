@@ -697,6 +697,15 @@ if ( ! class_exists( 'Gutentor_Block_Hooks' ) ) {
 			if ( $relOptions ) {
 				$rel = ( $buttonLinkOptions['rel'] ) ? $buttonLinkOptions['rel'] : '';
 			}
+			/*New-tab links always carry noopener noreferrer, without duplicating tokens a user already set.*/
+			if ( $target ) {
+				$rel_tokens = preg_split( '/\s+/', strtolower( trim( $rel ) ), -1, PREG_SPLIT_NO_EMPTY );
+				if ( ! in_array( 'noopener', $rel_tokens, true ) ) {
+					$rel = gutentor_concat_space( 'noopener noreferrer', $rel );
+				} elseif ( ! in_array( 'noreferrer', $rel_tokens, true ) ) {
+					$rel = gutentor_concat_space( $rel, 'noreferrer' );
+				}
+			}
 			$a_href     = ( $buttonLink ) ? 'href="' . esc_url( $buttonLink ) . '"' : '';
 			$a_target   = ( $target ) ? 'target="' . esc_attr( $target ) . '" ' : '';
 			$local_data = gutentor_concat_space( $a_href, $a_target );

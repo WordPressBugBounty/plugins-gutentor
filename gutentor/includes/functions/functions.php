@@ -1320,8 +1320,29 @@ function gutentor_get_query( $attr ) {
 	if ( isset( $attr['post_status'] ) && $attr['post_status'] ) {
 		$query_args['post_status'] = $attr['post_status'];
 	}
-	if ( isset( $attr['offset'] ) && $attr['offset'] && ! ( $query_args['paged'] > 1 ) ) {
-		$query_args['offset'] = $attr['offset'];
+	if ( isset( $attr['offset'] ) && $attr['offset'] ) {
+		$user_offset = (int) $attr['offset'];
+		$paged_now   = isset( $query_args['paged'] ) ? (int) $query_args['paged'] : 1;
+		$per_page    = isset( $query_args['posts_per_page'] ) ? (int) $query_args['posts_per_page'] : 0;
+		/*
+		 * An explicit offset replaces the paged calculation in WP_Query rather than
+		 * adding to it, so a bare offset would freeze page 2+ at page 1's results.
+		 * Collapse paging into an absolute offset. paged is left untouched: it is
+		 * ignored for the LIMIT once offset is set, and downstream consumers still
+		 * need the real page number.
+		 */
+		if ( $paged_now > 1 && $per_page > 0 ) {
+			$query_args['offset'] = $user_offset + ( ( $paged_now - 1 ) * $per_page );
+		} else {
+			$query_args['offset'] = $user_offset;
+		}
+		/*
+		 * found_posts comes from SELECT FOUND_ROWS(), which does not account for the
+		 * offset, so max_num_pages would count one extra page. Carry the user offset
+		 * (not the per-page absolute one) so the page count stays constant across
+		 * pages, and let gutentor_offset_found_posts() adjust it.
+		 */
+		$query_args['gutentor_offset_posts'] = $user_offset;
 	}
 	if ( isset( $attr['post__in'] ) && $attr['post__in'] ) {
 		if ( is_string( $attr['post__in'] ) ) {
@@ -1347,6 +1368,9 @@ function gutentor_get_query( $attr ) {
 	} else {
 		$query_args['orderby'] = isset( $attr['orderby'] ) ? $attr['orderby'] : 'date';
 		$query_args['order']   = isset( $attr['order'] ) ? $attr['order'] : 'desc';
+	}
+	if ( isset( $attr['meta_key_order_by'] ) && $attr['meta_key_order_by'] ) {
+		$query_args['meta_key'] = $attr['meta_key_order_by'];
 	}
 	if ( isset( $attr['taxonomy'] ) && $attr['taxonomy'] &&
 		isset( $attr['term'] ) && $attr['term'] && $attr['term'] !== 'gAll' ) {
@@ -1576,6 +1600,31 @@ function gutentor_get_query( $attr ) {
 
 	return apply_filters( 'gutentor_get_query', $query_args );
 }
+
+/**
+ * Adjust found_posts for queries that run with an offset.
+ *
+ * found_posts comes from SELECT FOUND_ROWS(), which does not account for the offset,
+ * so max_num_pages would overcount and Load More would offer an empty last page.
+ * WP_Query applies this filter before computing max_num_pages. Scoped by the
+ * gutentor_offset_posts query var so only Gutentor offset queries are touched.
+ *
+ * @param int      $found_posts Number of posts found.
+ * @param WP_Query $query The query instance.
+ * @return int
+ */
+function gutentor_offset_found_posts( $found_posts, $query ) {
+	if ( ! is_object( $query ) || ! is_a( $query, 'WP_Query' ) ) {
+		return $found_posts;
+	}
+	$user_offset = $query->get( 'gutentor_offset_posts' );
+	if ( ! $user_offset ) {
+		return $found_posts;
+	}
+
+	return max( 0, (int) $found_posts - (int) $user_offset );
+}
+add_filter( 'found_posts', 'gutentor_offset_found_posts', 10, 2 );
 
 /**
  * Function to create terms query args

@@ -143,7 +143,6 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 			$this->add_filter( 'gutentor_post_module_t5_item_height', $this, 'add_p1_template5_content_pos_class', 10, 2 );
 			$this->add_filter( 'gutentor_post_module_post_item_height', $this, 'add_p2_content_pos_class', 10, 2 );
 			$this->add_filter( 'gutentor_term_module_t1_template2_item_height', $this, 'add_t1_template2_content_pos_class', 10, 2 );
-			$this->add_filter( 'gutentor_save_link_attr', $this, 'addButtonLinkAttr', 10, 3 );
 			$this->add_filter( 'gutentor_post_module_main_wrap_class', $this, 'addingBlogStyleOptionsClass', 15, 2 );
 			$this->add_filter( 'gutentor_post_module_main_wrap_class', $this, 'adding_reverse_class', 15, 2 );
 			$this->add_filter( 'gutentor_post_and_term_module_enable_column', $this, 'remove_column_class_blog_post', 8, 2 );
@@ -1054,29 +1053,6 @@ if ( ! class_exists( 'Gutentor_Post_Modules_Hooks' ) ) {
 				$local_data    = gutentor_concat_space( $local_data, $align_d_class );
 			}
 			/*Checked: escaped last*/
-			return gutentor_concat_space( $output, $local_data );
-		}
-
-
-		/**
-		 * Add Button Attributes
-		 *
-		 * @param string $output
-		 * @param string $buttonLink
-		 * @param object $buttonLinkOptions
-		 * @return object
-		 */
-		public function addButtonLinkAttr( $output, $buttonLink, $buttonLinkOptions ) {
-			$target     = $buttonLinkOptions['openInNewTab'] ? '_blank' : '';
-			$rel        = ( $buttonLinkOptions['rel'] ) ? $buttonLinkOptions['rel'] : '';
-			$a_href     = ( $buttonLink ) ? 'href="' . esc_url( $buttonLink ) . '"' : '';
-			$a_target   = ( $target ) ? 'target="' . esc_attr( $target ) . '" ' : '';
-			$local_data = gutentor_concat_space( $a_href, $a_target );
-			$rel        = ( $target ) ? gutentor_concat_space( 'noopener noreferrer', $rel ) : $rel;
-			$a_rel      = ( $rel ) ? 'rel="' . esc_attr( $rel ) . '" ' : '';
-			$local_data = gutentor_concat_space( $local_data, $a_rel );
-
-			/*Checked: escaped*/
 			return gutentor_concat_space( $output, $local_data );
 		}
 

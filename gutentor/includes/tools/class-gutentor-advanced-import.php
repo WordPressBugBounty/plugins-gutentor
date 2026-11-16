@@ -81,8 +81,74 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 								'sanitize_callback' => array( $this, 'sanitize_url_param' ),
 								'validate_callback' => array( $this, 'validate_import_url_param' ),
 							),
+							'import_request' => array(
+								'type'              => 'string',
+								'required'          => false,
+								'description'       => __( 'Correlation id for this import request.', 'gutentor' ),
+								'sanitize_callback' => array( 'Gutentor_Import_Media', 'sanitize_request_id' ),
+							),
 						),
 					),
+				)
+			);
+
+			/*
+			 * Additive companion to /import_template. The primary response keeps
+			 * its existing shape so current consumers are unaffected; the editor
+			 * asks here for the outcome of the import it just performed.
+			 */
+			register_rest_route(
+				$namespace,
+				'/import_media_report',
+				array(
+					array(
+						'methods'             => \WP_REST_Server::READABLE,
+						'callback'            => array( $this, 'import_media_report' ),
+						'permission_callback' => function () {
+							return current_user_can( 'edit_posts' );
+						},
+						'args'                => array(
+							'import_request' => array(
+								'type'              => 'string',
+								'required'          => true,
+								'description'       => __( 'Correlation id for this import request.', 'gutentor' ),
+								'sanitize_callback' => array( 'Gutentor_Import_Media', 'sanitize_request_id' ),
+							),
+						),
+					),
+				)
+			);
+		}
+
+		/**
+		 * Return the media-localization outcome for one import request.
+		 *
+		 * @param \WP_REST_Request $request Request.
+		 * @return \WP_REST_Response
+		 */
+		public function import_media_report( \WP_REST_Request $request ) {
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				return rest_ensure_response( false );
+			}
+
+			$report = Gutentor_Import_Media::take_request_report( $request->get_param( 'import_request' ) );
+			$images = array();
+			if ( ! empty( $report['failed'] ) ) {
+				foreach ( $report['failed'] as $failure ) {
+					$images[] = array(
+						'url'     => isset( $failure['url'] ) ? $failure['url'] : '',
+						'message' => isset( $failure['message'] ) ? $failure['message'] : '',
+					);
+				}
+			}
+
+			return rest_ensure_response(
+				array(
+					'failed'    => count( $images ),
+					'images'    => $images,
+					'reused'    => isset( $report['reused'] ) ? (int) $report['reused'] : 0,
+					'localized' => isset( $report['localized'] ) ? (int) $report['localized'] : 0,
+					'status'    => empty( $images ) ? 'clean' : 'partial',
 				)
 			);
 		}
@@ -289,7 +355,11 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 				}
 			}
 			if ( $block_json ) {
-				return rest_ensure_response( $block_json );
+				/*Images must be local before the editor inserts these blocks.*/
+				$localized = Gutentor_Import_Media::localize( $block_json );
+				Gutentor_Import_Media::report( $localized['report'], $request->get_param( 'import_request' ) );
+
+				return rest_ensure_response( $localized['data'] );
 			}
 			return false;
 		}

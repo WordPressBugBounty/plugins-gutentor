@@ -355,6 +355,12 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 								'sanitize_callback' => array( $this, 'sanitize_text_param' ),
 								'validate_callback' => array( $this, 'validate_orderby_param' ),
 							),
+							'meta_key_order_by'      => array(
+								'type'              => 'string',
+								'required'          => false,
+								'sanitize_callback' => 'sanitize_text_field',
+								'validate_callback' => array( $this, 'validate_meta_key_param' ),
+							),
 							'order'                  => array(
 								'type'              => 'string',
 								'required'          => false,
@@ -1185,8 +1191,33 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 				return false;
 			}
 
-			$allowed = array( 'date', 'title', 'modified', 'ID', 'author', 'name', 'rand', 'menu_order' );
+			$allowed = array( 'date', 'title', 'modified', 'ID', 'author', 'name', 'rand', 'menu_order', 'comment_count', 'meta_value_num', 'meta_value' );
 			return in_array( $value, $allowed, true );
+		}
+
+		/**
+		 * Validate the meta key used for meta_value ordering.
+		 *
+		 * Uses sanitize_text_field rather than sanitize_key because meta keys may
+		 * legitimately contain uppercase characters and punctuation.
+		 *
+		 * @since 4.0.7
+		 * @param mixed            $value   Request value.
+		 * @param \WP_REST_Request $request Optional request object.
+		 * @param string           $param   Optional parameter name.
+		 * @return bool
+		 */
+		public function validate_meta_key_param( $value, ?\WP_REST_Request $request = null, $param = '' ) {
+			if ( null === $value || '' === $value ) {
+				return true;
+			}
+
+			if ( ! is_string( $value ) ) {
+				return false;
+			}
+
+			/*Reject protected meta so ordering cannot be used to probe internal keys.*/
+			return ! is_protected_meta( $value, 'post' );
 		}
 
 		/**
@@ -1674,8 +1705,9 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 						'post_status'         => 'publish',
 					);
 
-					if ( isset( $final_attrs['offset'] ) ) {
-						$query_args['offset'] = $final_attrs['offset'];
+					/*The block stores the user offset as pOffsetPosts; gutentor_get_query() derives the absolute one and marks it for the found_posts filter.*/
+					if ( isset( $final_attrs['pOffsetPosts'] ) && $final_attrs['pOffsetPosts'] ) {
+						$query_args['offset'] = $final_attrs['pOffsetPosts'];
 					}
 					if ( isset( $final_attrs['pIncludePosts'] ) && ! empty( $final_attrs['pIncludePosts'] ) ) {
 						$query_args['post__in'] = $final_attrs['pIncludePosts'];
@@ -1922,7 +1954,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			if ( $request->get_param( 'meta_query' ) ) {
 				$meta_query = $request->get_param( 'meta_query' ) ? $request->get_param( 'meta_query' ) : false;
 				$meta_query = json_decode( $meta_query, true );
-				if ( is_array( $meta_query['meta_query'] ) ) {
+				if ( is_array( $meta_query ) && isset( $meta_query['meta_query'] ) && is_array( $meta_query['meta_query'] ) ) {
 					$term_args['meta_query'] = $meta_query['meta_query'];
 				}
 			}
@@ -2545,6 +2577,9 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 				$query_args['orderby'] = $request->get_param( 'orderby' ) ? $request->get_param( 'orderby' ) : 'date';
 				$query_args['order']   = $request->get_param( 'order' ) ? $request->get_param( 'order' ) : 'desc';
 			}
+			if ( $request->get_param( 'meta_key_order_by' ) ) {
+				$query_args['meta_key'] = $request->get_param( 'meta_key_order_by' );
+			}
 			if ( $request->get_param( 'taxonomy' ) &&
 				$request->get_param( 'term' ) ) {
 				$query_args['tax_query'] = array(
@@ -2673,7 +2708,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			if ( $request->get_param( 'tax_query' ) ) {
 				$tax_query = $request->get_param( 'tax_query' ) ? $request->get_param( 'tax_query' ) : false;
 				$tax_query = json_decode( $tax_query, true );
-				if ( is_array( $tax_query['tax_query'] ) ) {
+				if ( is_array( $tax_query ) && isset( $tax_query['tax_query'] ) && is_array( $tax_query['tax_query'] ) ) {
 					$query_args['tax_query'] = $tax_query['tax_query'];
 					foreach ( $tax_query['tax_query'] as $number => $number_array ) {
 						foreach ( $number_array as $data => $data_val ) {
@@ -2694,7 +2729,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			if ( $request->get_param( 'meta_query' ) ) {
 				$meta_query = $request->get_param( 'meta_query' ) ? $request->get_param( 'meta_query' ) : false;
 				$meta_query = json_decode( $meta_query, true );
-				if ( is_array( $meta_query['meta_query'] ) ) {
+				if ( is_array( $meta_query ) && isset( $meta_query['meta_query'] ) && is_array( $meta_query['meta_query'] ) ) {
 					$query_args['meta_query'] = $meta_query['meta_query'];
 				}
 			}
@@ -2708,7 +2743,7 @@ if ( ! class_exists( 'Gutentor_Self_Api_Handler' ) ) {
 			if ( $request->get_param( 'date_query' ) ) {
 				$date_query = $request->get_param( 'date_query' ) ? $request->get_param( 'date_query' ) : false;
 				$date_query = json_decode( $date_query, true );
-				if ( is_array( $date_query['date_query'] ) ) {
+				if ( is_array( $date_query ) && isset( $date_query['date_query'] ) && is_array( $date_query['date_query'] ) ) {
 					$query_args['date_query'] = $date_query['date_query'];
 				}
 			}

@@ -6,7 +6,7 @@ Tags: blocks, gutenberg blocks, page-builder, gutenberg editor, WordPress blocks
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.0.6
+Stable tag: 4.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,21 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 4.0.7 - 2026-11-16 =
+* Added: Images in imported Template Library blocks and templates are downloaded into the Media Library, so imported layouts no longer load images from the template site.
+* Added: Re-importing a template reuses the images it already imported instead of creating duplicates.
+* Added: The import dialog now reports how many images could not be downloaded, with the affected URLs, instead of finishing silently.
+* Fixed: Template images could keep the template site's attachment IDs, which pointed at unrelated media on the site doing the import.
+* Fixed: Only users allowed to upload media can now trigger image downloads during a template import.
+* Fixed: Blog and post grid pagination could repeat posts and offer an extra empty page when an offset value was used together with pagination or Load More.
+* Fixed: The Comment Count and Meta Value Number sort options made the editor preview fail to load; both now work.
+* Fixed: Custom meta sorting was ignored and silently fell back to date order.
+* Fixed: Buttons could output duplicated link and target attributes, producing invalid markup.
+* Fixed: PHP 8 compatibility — resolved a fatal error when a button had no saved link settings, and warnings raised during post queries.
+* Fixed: An admin notice could raise PHP warnings about an undefined variable.
+* Fixed: The Advanced List block no longer updates its own state while rendering, which could cause editor warnings.
+* Fixed: The admin notice buttons icon and label are now vertically aligned.
 
 = 4.0.6 - 2026-08-27 =
 * Security: Hardened REST API permission checks on post queries. Thanks to Ezekiel Victor for responsible disclosure.
